@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PIT Navigator | PoslovnaInformatika#EKOF</title>
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="pit-navigator.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<p>&nbsp;</p>
+
+<div class="wrapper row0">
+  <div id="topbar" class="clear">
+    <div class="fl_left">
+      <ul class="nospace linklist">
+        <li><a href="#"></a></li>
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace linklist">
+        <li>informatika@ekof.bg.ac.rs</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper row1">
+  <header id="header" class="clear">
+    <div id="logo" class="fl_left">
+      <h1><a href="index.html"></a>POSLOVNA INFORMATIKA</h1>
+    </div>
+    <nav id="mainav" class="fl_right">
+      <ul class="clear">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="drop" href="#">Predavanja</a>
+          <ul>
+            <li><a href="materijal/PIN-uvodne informacije26.pdf">Uvodne informacije</a></li>
+            <li><a href="#">SQL &gt;&gt;</a></li>
+            <li><a href="#">Java &gt;&gt;</a></li>
+            <li><a href="#">Teorijski deo &gt;&gt;</a></li>
+          </ul>
+        </li>
+        <li><a class="drop" href="#">Vežbe</a>
+          <ul>
+            <li><a href="#">vežbe - SQL &gt;&gt;</a></li>
+            <li><a href="#">vežbe - Power BI &gt;&gt;</a></li>
+            <li><a href="#">vežbe - Java &gt;&gt;</a></li>
+          </ul>
+        </li>
+        <li><a href="materijal/plan_PIN_2026.pdf">Informacioni paket</a></li>
+        <li><a class="drop" href="http://ns.ekof.bg.ac.rs/~pin/aktivnosti/index.php">Aktivnosti studenata</a></li>
+        <li><a class="drop" href="#">Pripremna nastava</a>
+          <ul>
+            <li><a href="pripremna/2026/prijemni_inf_26.pdf">Osnovne informacije</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="pit-navigator.html">PIT Navigator</a></li>
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<div class="wrapper row3">
+  <main class="container clear">
+    <div class="pit-chat-shell">
+      <section class="pit-heading">
+        <h1>PIT Navigator</h1>
+        <p>AI asistent za pitanja o modulu Poslovne informacione tehnologije, predmetima, izbornim korpama i karijernim putanjama.</p>
+      </section>
+
+      <section class="pit-info-grid" aria-label="Informacije o PIT Navigatoru">
+        <div class="pit-info-box">
+          <h2>Mogu da pomognem sa:</h2>
+          <ul>
+            <li>predmetima na PIT modulu</li>
+            <li>razlikom između PIN 2020 i PIT 2027</li>
+            <li>izbornim predmetima i tematskim korpama</li>
+            <li>karijernim putanjama kao BI, AI, ERP/SAP i data</li>
+          </ul>
+        </div>
+        <div class="pit-info-box">
+          <h2>Ne mogu da pomognem sa:</h2>
+          <ul>
+            <li>rasporedima ispita i administracijom</li>
+            <li>cenom školarine</li>
+            <li>konkretnim nastavnicima i njihovim metodama</li>
+            <li>pitanjima izvan modula PIT</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="pit-examples" aria-label="Primer pitanja">
+        <button class="pit-chip" type="button">Šta je PIT i po čemu se razlikuje od PIN-a?</button>
+        <button class="pit-chip" type="button">Šta da izaberem ako me zanima AI?</button>
+        <button class="pit-chip" type="button">Šta da izaberem ako želim business analyst putanju?</button>
+        <button class="pit-chip" type="button">Da li je ERP dobar za SAP karijeru?</button>
+        <button class="pit-chip" type="button">Kako da spojim programiranje i analitiku?</button>
+        <button class="pit-chip" type="button">Koji predmeti su korisni za data/BI karijeru?</button>
+      </section>
+
+      <section class="pit-chat-panel" aria-label="PIT Navigator chat">
+        <div class="pit-chat-top">
+          <h2>Razgovor</h2>
+          <div id="pitStatus" class="pit-status" aria-live="polite"></div>
+        </div>
+        <div id="pitMessages" class="pit-messages" aria-live="polite"></div>
+        <div class="pit-composer">
+          <textarea id="pitQuestion" rows="2" placeholder="Unesite pitanje o PIT modulu..."></textarea>
+          <button id="pitSend" class="pit-action" type="button">Pošalji</button>
+          <button id="pitNew" class="pit-action secondary" type="button">Novi razgovor</button>
+        </div>
+        <p class="pit-disclaimer">PIT Navigator je u beta fazi. Odgovori se generišu pomoću AI-a i mogu sadržati netačnosti. Za zvanične informacije konsultujte fakultetske resurse.</p>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="wrapper row5">
+  <footer id="footer" class="clear">
+    <div class="one_half first">
+      <h6 class="title">UNIVERZITET U BEOGRADU</h6>
+      <p class="nospace btmspace-30">EKONOMSKI FAKULTET</p>
+    </div>
+    <div class="one_quarter">
+      <h6 class="title">BRZI LINKOVI</h6>
+      <ul class="nospace linklist">
+        <li><a href="index.html">Home Page</a></li>
+        <li>Predavanja</li>
+        <li>Vežbe</li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="pit-navigator.html">PIT Navigator</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
+<div class="wrapper row6">
+  <div id="copyright" class="clear">
+    <p class="fl_left"> |PoslovnaInformatika | 2019</p>
+  </div>
+</div>
+
+<script>
+  // U produkciji API_URL zameniti produkcionim PIT Navigator API endpoint-om.
+  window.PIT_CONFIG = window.PIT_CONFIG || {
+    API_URL: "http://127.0.0.1:8000/chat"
+  };
+</script>
+<script src="pit-navigator.js"></script>
+</body>
+</html>

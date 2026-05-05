@@ -4,6 +4,7 @@ markdown
 numpy
 scikit-learn
 sentence-transformers
+torch
 rich
 typer
 python-dotenv

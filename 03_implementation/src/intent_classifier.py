@@ -17,6 +17,20 @@ INTENTS = [
 ]
 
 
+PROGRAM_NAME_QUERY_TERMS = [
+    "kako se zove smer",
+    "kako se zove modul",
+    "naziv smera",
+    "naziv modula",
+    "sta znaci pit",
+    "šta znači pit",
+    "sta je pit",
+    "šta je pit",
+    "sta je pin",
+    "šta je pin",
+]
+
+
 COURSE_PATTERNS: dict[str, list[str]] = {
     "ERP softver": ["erp", "sap"],
     "Razvoj softvera": ["razvoj softvera", "flask", "php"],
@@ -111,6 +125,10 @@ def classify(question: str) -> Classification:
     intents: list[str] = []
     course_names = detect_course_names(question)
 
+    if _contains_any(text, PROGRAM_NAME_QUERY_TERMS):
+        intents.append("PROGRAM_OVERVIEW")
+        if _contains_any(text, ["pin", "pit"]):
+            intents.append("ACCREDITATION_COMPARISON")
     if _contains_any(text, ["pit", "smer", "program", "šta se tu uči", "sta se tu uci"]):
         intents.append("PROGRAM_OVERVIEW")
     if _contains_any(
@@ -197,17 +215,36 @@ def classify(question: str) -> Classification:
             "finansijski analitičar",
             "finansijski analiticar",
             "business analyst",
+            "bi analyst",
+            "ai analyst",
+            "ai alati",
             "hoću da budem",
             "hocu da budem",
             "želim da budem",
             "zelim da budem",
             "karijera",
+            "uloge",
+            "posle ovog smera",
         ],
     ):
         intents.append("CAREER_RECOMMENDATION")
     if _contains_any(
         text,
-        ["posao", "zapošljavanje", "zaposljavanje", "tržište", "trziste", "ai će pojesti", "ai ce pojesti", "plata"],
+        [
+            "posao",
+            "poslovi",
+            "poslove",
+            "radim",
+            "zapošljavanje",
+            "zaposljavanje",
+            "tržište",
+            "trziste",
+            "koristi ai",
+            "koriste ai",
+            "ai će pojesti",
+            "ai ce pojesti",
+            "plata",
+        ],
     ):
         intents.append("JOB_MARKET")
     if _contains_any(

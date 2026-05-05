@@ -554,6 +554,21 @@ openai
 
 Za prvu retrieval-only verziju može se krenuti bez OpenAI API-ja.
 
+Instalacija dependency-ja:
+
+```bash
+pip install -r requirements.txt
+```
+
+Napomena:
+
+- Ako se koristi Gemini, potreban je `google-genai` paket i `GEMINI_API_KEY` u lokalnom `.env`.
+- Ako se koristi FastAPI backend, pokreće se:
+
+```bash
+python -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
+```
+
 ## 20. Predloženi embedding model
 
 Za lokalni prototip:
