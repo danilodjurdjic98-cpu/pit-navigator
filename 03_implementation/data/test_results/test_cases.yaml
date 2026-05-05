@@ -1,0 +1,65 @@
+- id: COURSE_PLAN_FLASK
+  question: "Da li se na Razvoju softvera sada radi Flask?"
+  expected_intents:
+    - COURSE_PLAN_CURRENT
+  expected_course_names:
+    - Razvoj softvera
+  expected_paths:
+    - "03_course_plans/2025_2026/razvoj_softvera.md"
+
+- id: FALLBACK_TEACHER_NIT
+  question: "Ko drži Nove informacione tehnologije i da li je profesor dobar?"
+  expected_intents:
+    - FALLBACK
+  expected_course_names:
+    - Nove informacione tehnologije
+  expected_paths:
+    - "06_policy/pit_navigator_answering_policy.md"
+    - "04_baskets/2027/pit_minor_electives_reference.md"
+
+- id: FALLBACK_ECONOMETRIJA
+  question: "Šta se tačno radi na Ekonometriji?"
+  expected_intents:
+    - FALLBACK
+  expected_course_names:
+    - Ekonometrija
+  expected_paths:
+    - "04_baskets/2027/pit_minor_electives_reference.md"
+
+- id: ELECTIVE_AI
+  question: "Šta da izaberem ako me zanima AI?"
+  expected_intents:
+    - ELECTIVE_RECOMMENDATION
+  expected_paths:
+    - "04_baskets/2027/pit_data_ai_bi_korpa.md"
+    - "04_baskets/2027/pit_izborne_korpe_overview.md"
+
+- id: COMPARISON_PIN_PIT
+  question: "Koja je razlika između PIN 2020 i PIT 2027?"
+  expected_intents:
+    - ACCREDITATION_COMPARISON
+  expected_paths:
+    - "00_overview/pin_2020_vs_pit_2027.md"
+
+- id: CAREER_ERP_SAP
+  question: "Koji predmeti su dobri za ERP/SAP konsultanta?"
+  expected_intents:
+    - CAREER_RECOMMENDATION
+  expected_course_names:
+    - ERP softver
+  expected_paths:
+    - "04_baskets/2027/pit_software_erp_digital_korpa.md"
+    - "03_course_plans/2025_2026/erp_softver.md"
+
+- id: ELECTIVE_ECOMMERCE_EPS_NIT
+  question: "Da li da izaberem Elektronsku trgovinu, Elektronske platne sisteme ili Nove informacione tehnologije?"
+  expected_intents:
+    - ELECTIVE_RECOMMENDATION
+  expected_course_names:
+    - Elektronska trgovina
+    - Elektronski platni sistemi
+    - Nove informacione tehnologije
+  expected_paths:
+    - "04_baskets/2027/pit_minor_electives_reference.md"
+    - "04_baskets/2027/pit_software_erp_digital_korpa.md"
+    - "04_baskets/2027/pit_izborne_korpe_overview.md"

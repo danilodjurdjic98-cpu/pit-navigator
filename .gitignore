@@ -1,0 +1,26 @@
+# Secrets
+.env
+*.env
+03_implementation/.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Logs
+logs/
+03_implementation/logs/
+
+# Local/cache files
+.DS_Store
+Thumbs.db
+
+# Generated index files
+03_implementation/data/index/
+
+# Optional local temp files
+*.tmp
+*.bak

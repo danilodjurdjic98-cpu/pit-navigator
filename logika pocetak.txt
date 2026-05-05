@@ -1,0 +1,9 @@
+Student pita
+      ↓
+Proverimo da li je pitanje relevantno
+      ↓
+Pronađemo najrelevantnije delove iz dokumenata
+      ↓
+Pošaljemo Geminiju pitanje + pronađeni kontekst
+      ↓
+Vratimo kratak, koristan odgovor

@@ -1,0 +1,10 @@
+Definišemo šta tačno bot sme i treba da radi
+Definišemo korisnike i tipove pitanja
+Definišemo strukturu baze znanja
+Definišemo dokumente za akreditaciju 2020 i 2027
+Definišemo matricu karijera, predmeta i izbornih korpi
+Definišemo RAG logiku, šta se traži i kojim redom
+Definišemo pravila odgovaranja bota
+Definišemo ograničenja, kvote i zaštitu od zloupotrebe
+Definišemo tehničku arhitekturu
+Tek onda prelazimo na kod

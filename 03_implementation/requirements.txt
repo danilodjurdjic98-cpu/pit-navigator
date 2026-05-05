@@ -1,0 +1,11 @@
+pyyaml
+python-frontmatter
+markdown
+numpy
+scikit-learn
+sentence-transformers
+rich
+typer
+python-dotenv
+google-genai
+openai
