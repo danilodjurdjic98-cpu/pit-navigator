@@ -121,6 +121,13 @@ def build_user_prompt(
     retrieved_context = format_retrieved_context(retrieved_chunks)
     source_paths = collect_source_paths(retrieved_chunks)
     source_hint = "\n".join(f"- {path}" for path in source_paths) or "- nema izvora"
+    career_rule = ""
+    if any(intent in detected_intents for intent in ["CAREER_RECOMMENDATION", "JOB_MARKET"]):
+        career_rule = (
+            "\n- Za karijerna pitanja eksplicitno navedi da predmeti i modul mogu dati "
+            "osnovu i orijentaciju, ali ne garantuju posao, praksu, platu, sertifikat "
+            "ili zaposlenje."
+        )
 
     return f"""Korisničko pitanje:
 {question}
@@ -145,7 +152,7 @@ Pravila odgovora:
 - Ako je pitanje o formalnom PIT 2027 opisu, koristi course kao primarni izvor.
 - Ako je pitanje o izboru predmeta, objasni da je preporuka po interesovanju, ne zvanično rangiranje.
 - Ako je pitanje o nastavniku, ne komentariši nastavnika.
-- Ako je pitanje o poslu, ne garantuj posao.
+- Ako je pitanje o poslu, ne garantuj posao.{career_rule}
 - Na kraju dodaj sekciju "Korišćeni izvori:" sa path vrednostima korišćenih dokumenata.
 
 Kandidati za korišćene izvore:

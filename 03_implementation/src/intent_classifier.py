@@ -115,12 +115,31 @@ def classify(question: str) -> Classification:
         intents.append("PROGRAM_OVERVIEW")
     if _contains_any(
         text,
-        ["trenutno", "sada", "ove godine", "2025/26", "2025/2026", "kako se polaže", "kako se polaze", "kolokvijum", "ispit", "vežbe", "vezbe", "plan rada", "projekat", "predispitne", "koji alati"],
+        ["trenutno", "sada", "ove godine", "2025/26", "2025/2026", "kako se polaže", "kako se polaze", "ocenjuje", "ocenjivanje", "ocena", "poeni", "predispitne obaveze", "završni test", "zavrsni test", "kolokvijum", "ispit", "vežbe", "vezbe", "plan rada", "projekat", "predispitne", "koji alati"],
     ):
         intents.append("COURSE_PLAN_CURRENT")
     if _contains_any(
         text,
-        ["šta je", "sta je", "šta se radi", "sta se radi", "čemu služi", "cemu sluzi", "koje teme", "da li je obavezan", "koliko je važan", "koliko je vazan"],
+        [
+            "šta je",
+            "sta je",
+            "šta se radi",
+            "sta se radi",
+            "čemu služi",
+            "cemu sluzi",
+            "koje teme",
+            "da li je obavezan",
+            "da li je obavezno",
+            "obavezno",
+            "obavezan",
+            "obavezna",
+            "izborno",
+            "izborni",
+            "izborna",
+            "status predmeta",
+            "koliko je važan",
+            "koliko je vazan",
+        ],
     ):
         intents.append("COURSE_EXPLANATION")
     if _contains_any(
@@ -157,7 +176,33 @@ def classify(question: str) -> Classification:
         intents.append("INTEREST_BASED_RECOMMENDATION")
     if _contains_any(
         text,
-        ["data analyst", "bi analitičar", "bi analiticar", "erp konsultant", "sap konsultant", "developer", "ai konsultant", "finansijski analitičar", "finansijski analiticar", "business analyst", "karijera"],
+        [
+            "data analyst",
+            "data engineer",
+            "data inženjer",
+            "data inzenjer",
+            "data engineering",
+            "inženjer podataka",
+            "inzenjer podataka",
+            "bi analitičar",
+            "bi analiticar",
+            "erp konsultant",
+            "sap konsultant",
+            "sap karijera",
+            "erp karijera",
+            "dobar za sap karijeru",
+            "dobar za erp karijeru",
+            "developer",
+            "ai konsultant",
+            "finansijski analitičar",
+            "finansijski analiticar",
+            "business analyst",
+            "hoću da budem",
+            "hocu da budem",
+            "želim da budem",
+            "zelim da budem",
+            "karijera",
+        ],
     ):
         intents.append("CAREER_RECOMMENDATION")
     if _contains_any(

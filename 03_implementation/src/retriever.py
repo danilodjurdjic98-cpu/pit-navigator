@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -68,6 +69,57 @@ INSTRUCTOR_TERMS = [
     "ko drži",
     "ko drzi",
     "predaje",
+]
+
+ASSESSMENT_QUERY_TERMS = [
+    "polaže",
+    "polaze",
+    "ocenjuje",
+    "ocenjivanje",
+    "poeni",
+    "predispitne",
+]
+
+ASSESSMENT_CHUNK_TERMS = [
+    "način ocenjivanja",
+    "nacin ocenjivanja",
+    "predispitne obaveze",
+    "završni test",
+    "zavrsni test",
+    "poena",
+]
+
+FORMAL_PIT_2027_TERMS = [
+    "pit 2027",
+    "u pit 2027",
+]
+
+COMPARISON_QUERY_TERMS = [
+    "razlika",
+    "pin",
+    "2020",
+    "vs",
+    "bolji",
+    "zastareo",
+]
+
+STATUS_QUERY_TERMS = [
+    "obavezno",
+    "obavezan",
+    "obavezna",
+    "izborno",
+    "izborni",
+    "izborna",
+    "status predmeta",
+]
+
+DATA_ENGINEER_QUERY_TERMS = [
+    "data engineer",
+    "data inženjer",
+    "data inzenjer",
+    "data engineering",
+    "inženjer podataka",
+    "inzenjer podataka",
 ]
 
 EXACT_BOOST_TERMS = {
@@ -207,9 +259,32 @@ class Retriever:
 
         if "COURSE_PLAN_CURRENT" in intents and document_type == "course_plan":
             boost += 0.20
+        if (
+            document_type == "course_plan"
+            and any(term in question_text for term in ASSESSMENT_QUERY_TERMS)
+            and any(term in section_text or term in chunk_text for term in ASSESSMENT_CHUNK_TERMS)
+        ):
+            boost += 0.65
         boost += Retriever._exact_query_term_boost(question_text, section_text, chunk_text)
         if "COURSE_EXPLANATION" in intents and document_type == "course":
             boost += 0.15
+        if (
+            document_type == "course"
+            and path.startswith("01_courses/2027/")
+            and course_names
+            and any(term in question_text for term in FORMAL_PIT_2027_TERMS)
+            and not any(term in question_text for term in COMPARISON_QUERY_TERMS)
+            and Retriever._matches_detected_course(chunk, course_names)
+        ):
+            boost += 0.45
+        if (
+            document_type == "course"
+            and path.startswith("01_courses/2027/")
+            and course_names
+            and any(term in question_text for term in STATUS_QUERY_TERMS)
+            and Retriever._matches_detected_course(chunk, course_names)
+        ):
+            boost += 0.50
         if "ELECTIVE_RECOMMENDATION" in intents and document_type in {
             "basket_overview",
             "thematic_basket",
@@ -229,6 +304,12 @@ class Retriever:
             "CAREER_RECOMMENDATION" in intents
             and ("ERP softver" in course_names or "erp" in question_text or "sap" in question_text)
             and "04_baskets/2027/pit_software_erp_digital_korpa.md" in path
+        ):
+            boost += 0.55
+        if (
+            "CAREER_RECOMMENDATION" in intents
+            and any(term in question_text for term in DATA_ENGINEER_QUERY_TERMS)
+            and "04_baskets/2027/pit_data_ai_bi_korpa.md" in path
         ):
             boost += 0.55
         if "ACCREDITATION_COMPARISON" in intents and "pin_2020_vs_pit_2027.md" in path:
@@ -266,6 +347,22 @@ class Retriever:
             boost += 0.45
 
         return boost
+
+    @staticmethod
+    def _normalize_for_match(value: str) -> str:
+        normalized = unicodedata.normalize("NFKD", value.casefold())
+        ascii_text = "".join(char for char in normalized if not unicodedata.combining(char))
+        return re.sub(r"[^a-z0-9]+", " ", ascii_text).strip()
+
+    @staticmethod
+    def _matches_detected_course(chunk: dict[str, Any], course_names: list[str]) -> bool:
+        title = Retriever._normalize_for_match(str(chunk.get("title") or ""))
+        path = Retriever._normalize_for_match(str(chunk.get("path") or ""))
+        for course_name in course_names:
+            normalized_course = Retriever._normalize_for_match(course_name)
+            if normalized_course and (normalized_course == title or normalized_course in path):
+                return True
+        return False
 
     @staticmethod
     def _exact_query_term_boost(question_text: str, section_text: str, chunk_text: str) -> float:
