@@ -9,3 +9,6 @@ typer
 python-dotenv
 google-genai
 openai
+fastapi
+uvicorn
+pydantic

@@ -682,6 +682,32 @@ Važno:
 
 ## 25. Povezani dokumenti
 
+## Local API
+
+Pokretanje lokalnog FastAPI backend-a:
+
+```bash
+python -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Primer health testa:
+
+```bash
+curl -X GET http://127.0.0.1:8000/health
+```
+
+Primer chat testa bez conversation_id:
+
+```bash
+curl -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json" -d "{\"question\":\"Da li se na Razvoju softvera sada radi Flask?\",\"history\":[]}"
+```
+
+Primer chat testa sa conversation_id:
+
+```bash
+curl -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json" -d "{\"conversation_id\":\"demo-1\",\"question\":\"A šta sa ERP karijerom?\",\"history\":[{\"role\":\"user\",\"content\":\"Šta da izaberem ako me zanima AI?\"},{\"role\":\"assistant\",\"content\":\"AI putanja uključuje Baze podataka, Analizu podataka, Poslovnu analitiku i druge predmete.\"}]}"
+```
+
 Ovaj README se oslanja na:
 
 ```text

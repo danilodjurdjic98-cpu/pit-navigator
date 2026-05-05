@@ -1,3 +1,4 @@
+
 # Secrets
 .env
 *.env
@@ -24,3 +25,6 @@ Thumbs.db
 # Optional local temp files
 *.tmp
 *.bak
+
+# Local website sample files
+pin sajt/
