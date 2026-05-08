@@ -113,6 +113,59 @@ STATUS_QUERY_TERMS = [
     "status predmeta",
 ]
 
+COURSE_DOCUMENT_QUERY_TERMS = [
+    "šta se radi",
+    "sta se radi",
+    "šta se uči",
+    "sta se uci",
+    "predmet",
+    "kao predmet",
+    "opiši",
+    "opisi",
+    "objasni",
+]
+
+POSLOVNA_INFORMATIKA_QUERY_TERMS = [
+    "poslovna informatika",
+    "poslovne informatike",
+    "poslovnoj informatici",
+    "poslovnu informatiku",
+    "poslovni informacioni sistemi",
+    "ovaj predmet",
+]
+
+POSLOVNA_INFORMATIKA_2027_PATH = "01_courses/2027/poslovna_informatika.md"
+POSLOVNA_INFORMATIKA_CURRENT_PLAN_PATH = "03_course_plans/2025_2026/poslovna_informatika.md"
+
+SOURCE_BOUNDARY_QUERY_TERMS = [
+    "oprezno",
+    "potvr",
+    "potvrd",
+    "dokument",
+    "status",
+    "espb",
+    "godina",
+    "semestar",
+    "nedeljni raspored",
+    "nastavnici",
+    "kolokvijum",
+    "course plan",
+    "course_plan",
+]
+
+POSLOVNA_INFORMATIKA_TOPIC_TERMS = [
+    "implementacija erp",
+    "komponente erp",
+    "erp konsultantski",
+    "sap posao",
+    "bi, data, erp",
+    "software karijeru",
+    "aktuelno izvođenje",
+    "aktuelno izvodjenje",
+    "course plan",
+    "course_plan",
+]
+
 DATA_ENGINEER_QUERY_TERMS = [
     "data engineer",
     "data inženjer",
@@ -133,6 +186,7 @@ EXACT_BOOST_TERMS = {
     "sql",
     "python",
     "java",
+    "javu",
     "javascript",
     "wordpress",
     "woocommerce",
@@ -148,6 +202,15 @@ EXACT_BOOST_TERMS = {
     "rag",
     "ai",
     "bi",
+    "dashboard",
+    "dashboardi",
+    "filter",
+    "filteri",
+    "slicer",
+    "sliceri",
+    "cloud",
+    "big",
+    "data",
 }
 
 EXACT_BOOST_PHRASES = {
@@ -269,6 +332,31 @@ class Retriever:
         if "COURSE_EXPLANATION" in intents and document_type == "course":
             boost += 0.15
         if (
+            POSLOVNA_INFORMATIKA_2027_PATH in path
+            and (
+                any(term in question_text for term in POSLOVNA_INFORMATIKA_QUERY_TERMS)
+                or any(term in question_text for term in POSLOVNA_INFORMATIKA_TOPIC_TERMS)
+            )
+            and any(intent in intents for intent in {"COURSE_EXPLANATION", "COURSE_PLAN_CURRENT", "CAREER_RECOMMENDATION", "JOB_MARKET", "ACCREDITATION_COMPARISON"})
+        ):
+            boost += 0.55
+            if (
+                any(term in question_text for term in SOURCE_BOUNDARY_QUERY_TERMS)
+                and (
+                    "granice izvora" in section_text
+                    or "nije_potvrdjeno" in chunk_text
+                    or "ne potvrdjuje" in chunk_text
+                    or "ne potvrđuje" in chunk_text
+                )
+            ):
+                boost += 0.45
+        if (
+            POSLOVNA_INFORMATIKA_CURRENT_PLAN_PATH in path
+            and any(term in question_text for term in POSLOVNA_INFORMATIKA_TOPIC_TERMS + SOURCE_BOUNDARY_QUERY_TERMS)
+            and any(intent in intents for intent in {"COURSE_EXPLANATION", "COURSE_PLAN_CURRENT", "FALLBACK"})
+        ):
+            boost += 0.40
+        if (
             document_type == "course"
             and path.startswith("01_courses/2027/")
             and course_names
@@ -285,6 +373,17 @@ class Retriever:
             and Retriever._matches_detected_course(chunk, course_names)
         ):
             boost += 0.50
+        if (
+            any(
+                intent in intents
+                for intent in {"COURSE_EXPLANATION", "COURSE_PLAN_CURRENT", "PROGRAM_OVERVIEW"}
+            )
+            and course_names
+            and document_type in {"course", "course_plan"}
+            and any(term in question_text for term in COURSE_DOCUMENT_QUERY_TERMS)
+            and Retriever._matches_detected_course(chunk, course_names)
+        ):
+            boost += 0.45
         if "ELECTIVE_RECOMMENDATION" in intents and document_type in {
             "basket_overview",
             "thematic_basket",

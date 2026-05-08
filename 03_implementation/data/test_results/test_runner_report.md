@@ -1,6 +1,6 @@
 # PIT Navigator retrieval-only test runner report
 
-Generated at: 2026-05-05T22:07:03.241198+00:00
+Generated at: 2026-05-06T14:39:50.558767+00:00
 
 ## Summary
 
@@ -15,7 +15,7 @@ Generated at: 2026-05-05T22:07:03.241198+00:00
 
 Question: Da li se na Razvoju softvera sada radi Flask?
 
-Detected intents: COURSE_PLAN_CURRENT
+Detected intents: COURSE_PLAN_CURRENT, COURSE_EXPLANATION
 Detected course names: Razvoj softvera
 
 Retrieved documents:
@@ -34,31 +34,31 @@ Retrieved documents:
    - document_type: course_plan
    - section_heading: 13. Šta bot ne sme da tvrdi
    - score: 0.8207
-4. `03_course_plans/2025_2026/erp_softver.md`
+4. `01_courses/2027/razvoj_softvera.md`
+   - title: Razvoj softvera
+   - document_type: course
+   - section_heading: 3. Planirani praktični fokus, Python, Flask i AI alati
+   - score: 0.8202
+5. `01_courses/2027/razvoj_softvera.md`
+   - title: Razvoj softvera
+   - document_type: course
+   - section_heading: 13. Šta bot ne sme da tvrdi
+   - score: 0.7764
+6. `01_courses/2027/razvoj_softvera.md`
+   - title: Razvoj softvera
+   - document_type: course
+   - section_heading: 12. Kako bot treba da objasni predmet
+   - score: 0.7674
+7. `03_course_plans/2025_2026/erp_softver.md`
    - title: ERP softver
    - document_type: course_plan
    - section_heading: 5.5 Python, PyMongo i Tkinter
    - score: 0.6794
-5. `03_course_plans/2025_2026/erp_softver.md`
+8. `03_course_plans/2025_2026/erp_softver.md`
    - title: ERP softver
    - document_type: course_plan
    - section_heading: 9.5 Developer
    - score: 0.6768
-6. `03_course_plans/2025_2026/erp_softver.md`
-   - title: ERP softver
-   - document_type: course_plan
-   - section_heading: 10. Veza sa drugim predmetima
-   - score: 0.6706
-7. `01_courses/2027/razvoj_softvera.md`
-   - title: Razvoj softvera
-   - document_type: course
-   - section_heading: 3. Planirani praktični fokus, Python, Flask i AI alati
-   - score: 0.6702
-8. `03_course_plans/2025_2026/objektno_orijentisano_programiranje.md`
-   - title: Objektno orijentisano programiranje
-   - document_type: course_plan
-   - section_heading: 10. Veza sa drugim predmetima
-   - score: 0.6635
 
 ### FALLBACK_TEACHER_NIT: PASS
 

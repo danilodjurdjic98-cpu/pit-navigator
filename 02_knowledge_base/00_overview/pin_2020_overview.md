@@ -28,6 +28,8 @@ keywords:
   - razvoj softvera
   - analiza podataka
   - poslovna analitika
+  - finansije i podaci
+  - finansijska analitika
 ---
 
 # PIN 2020, Poslovna informatika
@@ -241,6 +243,28 @@ Posebno relevantni predmeti:
 Ova putanja je relevantna za studente koje zanimaju digitalni poslovni modeli, digitalizacija procesa, tehnologije u poslovanju i primena novih informacionih tehnologija.
 
 Napomena: Elektronsko poslovanje, ERP softver i Menadžment projekata su obavezni predmeti. Nove informacione tehnologije, Digitalni marketing, Elektronska trgovina, Elektronski platni sistemi i Mašinsko učenje su izborni predmeti.
+
+### 7.5 Finansije, podaci i poslovna analitika
+
+PIN 2020 je dobra osnova i za studente koje zanimaju finansije povezane sa podacima, izveštavanjem, ERP sistemima i poslovnom analitikom.
+
+Posebno relevantni predmeti:
+
+- Analiza podataka
+- Baze podataka
+- Informacioni sistemi i poslovna analitika
+- ERP softver
+- Računovodstveni informacioni sistemi
+- Ekonometrija
+- Kvantitativne finansije
+- Operaciona istraživanja
+- Primenjena napredna analitika
+
+Za finansijsku putanju u PIN 2020 najvažnije je da student poveže obaveznu osnovu iz podataka, baza, informacionih sistema i ERP-a sa izbornim predmetima koji dodaju računovodstveni, finansijski, ekonometrijski ili kvantitativni ugao.
+
+Ako student pita šta da bira za finansije i podatke, bot treba da preporuči kombinaciju: Analiza podataka, Baze podataka, Informacioni sistemi i poslovna analitika i ERP softver kao osnovu, a zatim Računovodstvene informacione sisteme, Ekonometriju, Kvantitativne finansije, Operaciona istraživanja ili Primenjenu naprednu analitiku prema tome da li ga više zanimaju finansijski izveštaji, ERP podaci, modeli, rizik ili napredna analitika.
+
+Napomena: Analiza podataka, Baze podataka, Informacioni sistemi i poslovna analitika i ERP softver su obavezni predmeti modula PIN 2020. Računovodstveni informacioni sistemi, Ekonometrija, Kvantitativne finansije, Operaciona istraživanja i Primenjena napredna analitika su izborni predmeti i zavise od izbornih blokova i pravila izbora.
 
 ## 8. Kako PIN 2020 povezati sa PIT 2027
 

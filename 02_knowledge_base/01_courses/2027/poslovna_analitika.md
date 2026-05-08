@@ -83,6 +83,8 @@ Poslovna analitika je obavezan predmet na modulu PIT 2027, odnosno Poslovne info
 
 Predmet povezuje podatke, analitičke metode i poslovno odlučivanje. Njegova osnovna ideja je da student nauči kako se poslovni problemi mogu razumeti, modelirati i rešavati pomoću podataka, vizualizacije, radnih tabela i analitičkih metoda.
 
+Ovaj dokument je formalni akreditacioni opis predmeta za PIT 2027. Ne predstavlja nužno aktuelni plan izvođenja za 2025/2026, jer za taj plan rada u bazi znanja ne postoji poseban izvor.
+
 U studentskom jeziku, ovaj predmet je posebno važan ako te zanimaju:
 
 - poslovna analitika
@@ -93,6 +95,26 @@ U studentskom jeziku, ovaj predmet je posebno važan ako te zanimaju:
 - donošenje odluka na osnovu podataka
 - data analyst / business analyst putanja
 - Master in Business Analytics kao nastavak školovanja
+
+## 1.1 Šta se radi na predmetu Poslovna analitika
+
+Na predmetu Poslovna analitika uči se kako da se poslovni problem prevede u analitički zadatak: kako se podaci posmatraju, opisuju, vizualizuju, modeliraju i koriste za donošenje odluka.
+
+Student-friendly rečeno, predmet služi da student razume kako se iz podataka dolazi do poslovnog zaključka. Ne radi se samo o računanju, već i o tome kako da se rezultat objasni, poveže sa realnim problemom i pretvori u argument za odluku.
+
+Prema formalnom opisu za PIT 2027, predmet obuhvata deskriptivnu analitiku, vizualizaciju podataka, modeliranje poslovnih problema u radnim tabelama, preskriptivnu analitiku, osnove optimizacije, linearno i celobrojno programiranje, Monte Karlo simulacije i uvod u Power BI okruženje.
+
+Predmet je koristan za studente koje zanimaju business analyst, BI analitičar, data analyst, konsultantska, ERP/SAP i digitalna transformacija putanja, jer razvija razumevanje poslovnih podataka, izveštavanja, modeliranja i odlučivanja.
+
+## 1.2 Tipična pitanja na koja ovaj dokument odgovara
+
+- šta se radi na predmetu Poslovna analitika
+- šta se uči na Poslovnoj analitici
+- šta je Poslovna analitika kao predmet
+- čemu služi predmet Poslovna analitika
+- za koje karijerne putanje je korisna Poslovna analitika
+- da li je Poslovna analitika važna za BI ili business analyst putanju
+- da li je Poslovna analitika isto što i Analiza podataka ili Poslovna inteligencija
 
 ## 2. Formalni opis predmeta
 

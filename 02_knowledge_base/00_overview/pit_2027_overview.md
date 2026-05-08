@@ -33,6 +33,9 @@ keywords:
   - korisničko iskustvo
   - razvoj softvera
   - analiza podataka
+  - finansije i podaci
+  - finansijska analitika
+  - finance analytics
 ---
 
 # PIT 2027, Poslovne informacione tehnologije
@@ -278,6 +281,33 @@ Ova putanja je relevantna za studente koje zanimaju digitalni poslovni modeli, d
 Napomena: Elektronsko poslovanje i veštačka inteligencija, Poslovna inteligencija, Poslovna analitika, ERP softver, Korisničko iskustvo i dizajn i Menadžment projekata su obavezni predmeti. Nove informacione tehnologije i Mašinsko učenje su izborni predmeti.
 
 U akreditaciji 2027 ova putanja ima jaču formalnu osnovu kroz nove obavezne predmete kao što su Elektronsko poslovanje i veštačka inteligencija, Poslovna inteligencija i Poslovna analitika.
+
+### 7.5 Finansije, podaci i finance analytics
+
+PIT 2027 je posebno dobra osnova za studente koje zanimaju finansije povezane sa podacima, BI-jem, poslovnom analitikom, ERP sistemima i modeliranjem.
+
+Posebno relevantni predmeti:
+
+- Baze podataka
+- Poslovna analitika
+- Analiza podataka
+- Poslovna inteligencija
+- ERP softver
+- Računovodstveni informacioni sistemi
+- Analiza finansijskih izveštaja
+- Upravljačko računovodstvo
+- Operaciona istraživanja
+- Ekonometrija
+- Kvantitativne finansije
+- Mašinsko učenje
+
+Za većinu studenata koje zanimaju finansije i podaci, najvažnija osnova su Baze podataka, Poslovna analitika, Analiza podataka, Poslovna inteligencija i ERP softver. Ti predmeti daju podatke, poslovni kontekst, BI izveštavanje i razumevanje sistema iz kojih finansijski podaci nastaju.
+
+Izborni predmeti zatim treba da pojačaju konkretan pravac: Analiza finansijskih izveštaja je najprirodnija za finansijsko izveštavanje i pokazatelje; Računovodstveni informacioni sistemi su vrlo korisni za ERP, računovodstvene podatke i BI u finansijskom kontekstu; Upravljačko računovodstvo dodaje internu kontrolu, troškove i menadžersko odlučivanje; Ekonometrija i Kvantitativne finansije su jake za modele, rizik, tržišta i empirijsku analizu; Operaciona istraživanja i Mašinsko učenje su korisni ako student želi optimizaciju, simulacije, predikcije ili AI pristup finansijskim podacima.
+
+Bot treba da finansijsku putanju u PIT 2027 tretira kao ozbiljnu i prirodnu podvarijantu data/BI/ERP profila, a ne kao sporednu oblast. Ipak, ne sme da tvrdi da jedan izborni predmet sam pokriva finansijsku karijeru.
+
+Napomena: Baze podataka, Poslovna analitika, Analiza podataka, Poslovna inteligencija i ERP softver su obavezni predmeti modula PIT 2027. Ostali navedeni predmeti su izborni i zavise od izbornih blokova i pravila izbora.
 
 ## 8. Kako PIT 2027 povezati sa PIN 2020
 
