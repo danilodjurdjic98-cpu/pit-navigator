@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections.abc import Iterator
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
@@ -11,6 +13,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 
@@ -19,8 +22,8 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import Settings, load_settings  # noqa: E402
-from src.generator import generate_answer  # noqa: E402
-from src.intent_classifier import classify  # noqa: E402
+from src.generator import generate_answer, generate_answer_stream  # noqa: E402
+from src.intent_classifier import Classification, classify  # noqa: E402
 from src.prompt_builder import build_messages, collect_source_paths  # noqa: E402
 from src.retriever import Retriever  # noqa: E402
 
@@ -28,6 +31,18 @@ from src.retriever import Retriever  # noqa: E402
 OUT_OF_SCOPE_MESSAGE = (
     "Za ovo nemam dovoljno precizan dokument u bazi znanja. Mogu da pomognem "
     "sa pitanjima o modulu PIT, predmetima, izbornim korpama i karijernim putanjama."
+)
+CERTIFICATE_MESSAGE = (
+    "U dostupnim dokumentima nemam potvrdu da smer automatski nudi profesionalne "
+    "sertifikate.\n\n"
+    "Ispravno je reći da pojedini predmeti mogu dati osnovu za rad sa alatima i "
+    "oblastima kao što su baze podataka, ERP/SAP, Power BI, Python, Java, web "
+    "tehnologije ili AI alati, ali to nije isto što i zvaničan profesionalni "
+    "sertifikat.\n\n"
+    "Ako student želi sertifikat, to se obično proverava posebno: preko fakultetskih "
+    "obaveštenja, partnerskih programa ili eksternih sertifikacionih kuća. PIT "
+    "Navigator ne treba da tvrdi da sertifikat postoji ako to nije eksplicitno "
+    "potvrđeno u dokumentima."
 )
 PROGRAM_NAME_MESSAGE = (
     "Naziv je Poslovne informacione tehnologije, skraćeno PIT. Na postojećem sajtu "
@@ -65,6 +80,23 @@ PIN_AI_CAREER_MESSAGE = (
     "AI engineer, obično je potrebno dodatno učenje programiranja, statistike, "
     "mašinskog učenja i portfolio projekti."
 )
+PIN_OUTLOOK_MESSAGE = (
+    "Za postojeci modul Poslovna informatika, skraceno PIN (akreditacija PIN 2020), "
+    "najpostenije je reci: perspektivan je kao poslovno-informaticki profil, ali "
+    "ne treba ga posmatrati kao garanciju posla niti kao cisto programerski smer.\n\n"
+    "Njegova prednost je sto spaja ekonomiju, poslovne procese, informacione sisteme, "
+    "baze podataka, analitiku, ERP/SAP logiku i razvoj poslovnih aplikacija. To je "
+    "dobar temelj za uloge kao sto su business analyst, BI/reporting analyst, ERP "
+    "konsultant, data analyst pocetnog nivoa, IT/business consultant ili junior uloga "
+    "u digitalnoj transformaciji.\n\n"
+    "Za jacu konkurentnost na trzistu vazno je da uz fakultet gradis prakticne "
+    "vestine: SQL, Excel/Power BI, osnove programiranja, razumevanje poslovnih "
+    "procesa, projekte i praksu. Sa tim dodatkom PIN moze da bude vrlo upotrebljiva "
+    "osnova, posebno za pozicije koje traze most izmedju biznisa i IT-ja.\n\n"
+    "Ovo je AI procena, ne zvanicna garancija zaposlenja. Za PIN 2020 nemam jednako "
+    "detaljno razradjene karijerne korpe kao za PIT 2027, pa ovo tretiraj kao "
+    "karijernu orijentaciju, ne kao zvanican opis ishoda modula."
+)
 PIN_ELECTIVES_MESSAGE = (
     "Ako misliš na postojeći PIN 2020, mogu da dam korisnu orijentaciju, ali uz važnu "
     "napomenu: detaljno sam treniran pre svega na materijalima za novu akreditaciju "
@@ -86,6 +118,81 @@ PIN_ELECTIVES_MESSAGE = (
     "i mašinskom učenju.\n\n"
     "Za konačan izbor ipak proveri aktuelni PIN spisak izbornih predmeta i pravila "
     "izbora, jer se dostupnost predmeta može razlikovati od nove PIT 2027 strukture."
+)
+PIT_ELECTIVE_BASKETS_MESSAGE = (
+    "Za PIT 2027 izborne predmete je najbolje gledati na dva nacina: formalno po "
+    "izbornim pozicijama i prakticno po tematskim korpama.\n\n"
+    "Formalne izborne pozicije u PIT 2027:\n\n"
+    "Treca godina, peti semestar\n"
+    "- Izborni predmet 1: Menadzment odnosa sa kupcima, Poresko planiranje, "
+    "Finansijska i aktuarska matematika\n"
+    "- Izborni predmet 2: Linearna algebra, Teorija verovatnoce\n\n"
+    "Treca godina, sesti semestar\n"
+    "- Izborni predmet 3: Racunovodstveni informacioni sistemi, Marketing, "
+    "Organizacija, Finansijska ekonomija, Medjunarodne finansije, Monetarna "
+    "ekonomija, Makroekonomski modeli, Ekonomija i biznis u turizmu\n"
+    "- Izborni predmet 4: Analiza finansijskih izvestaja, Upravljacko "
+    "racunovodstvo, Osnovi poslovnih finansija\n\n"
+    "Cetvrta godina, sedmi semestar\n"
+    "- Izborni predmet 1: Istrazivanje trzista, Operaciona istrazivanja\n\n"
+    "Cetvrta godina, osmi semestar\n"
+    "- Izborni predmet 2: Masinsko ucenje, Ekonometrija, Kvantitativne finansije, "
+    "Ekonomska statistika\n"
+    "- Izborni predmet 3: Elektronska trgovina, Nove informacione tehnologije, "
+    "Elektronski platni sistemi\n\n"
+    "Tematske korpe za lakse razmisljanje o karijeri:\n\n"
+    "Data / AI / BI korpa:\n"
+    "- Baze podataka, Analiza podataka, Poslovna analitika, Poslovna inteligencija, "
+    "Operaciona istrazivanja, Masinsko ucenje, Elektronsko poslovanje i vestacka "
+    "inteligencija, ERP softver\n\n"
+    "Software / ERP / digital korpa:\n"
+    "- Objektno orijentisano programiranje, Razvoj softvera, ERP softver, Baze "
+    "podataka, Korisnicko iskustvo i dizajn, Elektronsko poslovanje i vestacka "
+    "inteligencija, Elektronska trgovina, Elektronski platni sistemi, Nove "
+    "informacione tehnologije\n\n"
+    "Finance analytics korpa:\n"
+    "- Analiza podataka, Poslovna analitika, Poslovna inteligencija, Operaciona "
+    "istrazivanja, Masinsko ucenje, Ekonometrija, Kvantitativne finansije, "
+    "Finansijska ekonomija, Analiza finansijskih izvestaja, Racunovodstveni "
+    "informacioni sistemi\n\n"
+    "Napomena: tematske korpe nisu formalno pravilo izbora, nego prakticna mapa po "
+    "interesovanjima. Formalno, student bira predmete u okviru izbornih pozicija."
+)
+PIT_ELECTIVE_RECOMMENDATION_MESSAGE = (
+    "Ako nemas vec jasno interesovanje, ja bih birao kombinaciju koja ti daje najjaci "
+    "PIT profil: podaci + poslovni sistemi + finansijsko razumevanje + malo tehnicke "
+    "osnove.\n\n"
+    "Moja opsta preporuka po izbornim pozicijama:\n\n"
+    "- Treca godina, peti semestar, Izborni predmet 1: Menadzment odnosa sa kupcima, "
+    "ako zelis CRM, korisnike i poslovne sisteme. Ako te vise vuku finansije, onda "
+    "Poresko planiranje ima smisla kao finansijsko-regulatorna dopuna.\n"
+    "- Treca godina, peti semestar, Izborni predmet 2: Linearna algebra, jer je dobra "
+    "osnova za podatke, modele, optimizaciju i masinsko ucenje.\n"
+    "- Treca godina, sesti semestar, Izborni predmet 3: Racunovodstveni informacioni "
+    "sistemi su vrlo jak izbor za PIT, jer povezuju racunovodstvo, ERP, poslovne "
+    "podatke i informacione sisteme. Ako hoces ozbiljniji finansijski pravac, "
+    "Finansijska ekonomija je takodje vazna opcija.\n"
+    "- Treca godina, sesti semestar, Izborni predmet 4: Analiza finansijskih izvestaja "
+    "je jedan od najkorisnijih finansijskih izbora za PIT, jer direktno jaca rad sa "
+    "finansijskim podacima, BI-jem i poslovnim odlucivanjem. Za ambiciozniji "
+    "menadzersko-kontrolni pravac, Upravljacko racunovodstvo je takodje vrlo dobro.\n"
+    "- Cetvrta godina, sedmi semestar: Operaciona istrazivanja, jer daju Python, "
+    "optimizaciju, simulacije i analiticko modeliranje.\n"
+    "- Cetvrta godina, osmi semestar, Izborni predmet 2: Masinsko ucenje ako te vise "
+    "zanima AI/data; Ekonometrija ili Kvantitativne finansije ako hoces da pojacas "
+    "finansijsko-analiticki profil.\n"
+    "- Cetvrta godina, osmi semestar, Izborni predmet 3: Elektronska trgovina za "
+    "e-commerce/digital business, ili Elektronski platni sistemi ako te zanimaju "
+    "fintech i digitalna placanja.\n\n"
+    "Najuravnotezenija PIT kombinacija bi bila: Linearna algebra, Racunovodstveni "
+    "informacioni sistemi, Analiza finansijskih izvestaja, Operaciona istrazivanja, "
+    "pa zatim Masinsko ucenje ili Kvantitativne finansije/Ekonometrija, zavisno od "
+    "toga da li vise zelis AI/data ili finance analytics.\n\n"
+    "Posebno bih naglasio finansijske predmete: Analiza finansijskih izvestaja, "
+    "Upravljacko racunovodstvo, Racunovodstveni informacioni sistemi, Finansijska "
+    "ekonomija, Ekonometrija i Kvantitativne finansije nisu sporedni za PIT. Oni daju "
+    "kontekst da podatke i sisteme povezes sa realnim poslovnim odlukama, izvestajima, "
+    "ERP/SAP procesima i finansijskom analitikom."
 )
 
 MAX_HISTORY_MESSAGES = 6
@@ -114,6 +221,17 @@ class ChatResponse(BaseModel):
     fallback_used: bool
     detected_intents: list[str]
     detected_course_names: list[str]
+
+
+@dataclass(frozen=True)
+class ChatGenerationContext:
+    conversation_id: str
+    question: str
+    messages: list[dict[str, str]]
+    sources: list[str]
+    detected_intents: list[str]
+    detected_course_names: list[str]
+    accreditation_context: str | None
 
 
 app = FastAPI(title="PIT Navigator API")
@@ -296,6 +414,14 @@ def _is_pin_followup(question: str) -> bool:
             "postojeci pin",
             "za pin",
             "pin 2020",
+            "modul poslovna informatika",
+            "smer poslovna informatika",
+            "mislim na stari",
+            "stari modul",
+            "starom modulu",
+            "stari smer",
+            "starom smeru",
+            "stara verzija",
         ]
     )
 
@@ -317,12 +443,25 @@ def _detect_accreditation_context(
         "stare akreditacije",
         "postojeći smer",
         "postojeci smer",
+        "modul poslovna informatika",
+        "smer poslovna informatika",
+        "mislim na stari",
+        "stari modul",
+        "starom modulu",
+        "stari smer",
+        "starom smeru",
+        "stara verzija",
     ]
     pit_markers = [
         "mislim na pit",
         "mislio sam na pit",
         "mislila sam na pit",
         "pit 2027",
+        "na pit",
+        "za pit",
+        "modul pit",
+        "smer pit",
+        "pit modul",
         "novu akreditaciju",
         "nova akreditacija",
         "nove akreditacije",
@@ -376,6 +515,143 @@ def _is_career_jobs_question(question: str) -> bool:
     )
 
 
+def _is_employment_outlook_question(question: str) -> bool:
+    normalized = question.casefold()
+    if any(
+        marker in normalized
+        for marker in [
+            "kompetent",
+            "trzistu",
+            "tržištu",
+            "tržište rada",
+            "zavrsim",
+            "završim",
+            "budućnost",
+        ]
+    ):
+        return True
+    return any(
+        marker in normalized
+        for marker in [
+            "perspektiv",
+            "zaposl",
+            "posao",
+            "poslove",
+            "poslova",
+            "trziste rada",
+            "tržište rada",
+            "plata",
+            "plate",
+            "karijer",
+            "isplati",
+            "isplativo",
+            "buducnost",
+            "budućnost",
+        ]
+    )
+
+
+def _is_program_level_career_question(question: str) -> bool:
+    normalized = question.casefold()
+    return _is_employment_outlook_question(question) and any(
+        marker in normalized
+        for marker in [
+            "smer",
+            "modul",
+            "program",
+            "profil",
+            "kad zavrsim",
+            "kad završim",
+            "kada zavrsim",
+            "kada završim",
+            "zavrsim ovaj",
+            "završim ovaj",
+        ]
+    )
+
+
+def _is_certificate_question(question: str) -> bool:
+    normalized = question.casefold()
+    return any(
+        marker in normalized
+        for marker in [
+            "sertifikat",
+            "sertifikate",
+            "sertifikata",
+            "sertifikaciju",
+            "certifikat",
+            "certificate",
+        ]
+    )
+
+
+def _is_elective_basket_list_question(question: str) -> bool:
+    normalized = question.casefold()
+    has_elective_marker = any(
+        marker in normalized
+        for marker in [
+            "korpa",
+            "korpe",
+            "korpama",
+            "izborne",
+            "izborni",
+            "izbornih",
+            "izborne pozicije",
+        ]
+    )
+    has_list_marker = any(
+        marker in normalized
+        for marker in [
+            "spisak",
+            "lista",
+            "listu",
+            "sve",
+            "svih",
+            "daj",
+            "navedi",
+            "nabroj",
+            "po korpama",
+        ]
+    )
+    return has_elective_marker and has_list_marker
+
+
+def _is_generic_elective_pick_question(question: str) -> bool:
+    normalized = question.casefold()
+    if any(
+        marker in normalized
+        for marker in [
+            "ai",
+            "data",
+            "bi",
+            "erp",
+            "sap",
+            "program",
+            "developer",
+            "finans",
+            "marketing",
+            "e-commerce",
+            "fintech",
+        ]
+    ):
+        return False
+    return any(
+        marker in normalized
+        for marker in [
+            "koje predlazes",
+            "koje predlaÅ¾eÅ¡",
+            "sta predlazes",
+            "Å¡ta predlaÅ¾eÅ¡",
+            "sta da uzmem",
+            "Å¡ta da uzmem",
+            "koje da uzmem",
+            "koje da izaberem",
+            "sta da izaberem",
+            "Å¡ta da izaberem",
+        ]
+    )
+
+
 def _is_elective_recommendation_question(question: str, intents: list[str]) -> bool:
     normalized = question.casefold()
     if set(intents) & {
@@ -414,6 +690,15 @@ def _history_has_elective_recommendation(history: list[HistoryMessage]) -> bool:
         if message.role.strip().casefold() != "user":
             continue
         if _is_elective_recommendation_question(message.content, []):
+            return True
+    return False
+
+
+def _history_has_employment_outlook_question(history: list[HistoryMessage]) -> bool:
+    for message in reversed(history[-MAX_HISTORY_MESSAGES:]):
+        if message.role.strip().casefold() != "user":
+            continue
+        if _is_employment_outlook_question(message.content):
             return True
     return False
 
@@ -492,6 +777,15 @@ def _append_web_chat_instructions(
         "- Koristi \"Poslovna informatika, skraćeno PIN\" za postojeći/stari naziv.",
         "- \"PIT 2027\" i \"PIN 2020\" tretiraj kao akreditacione oznake/verzije, ne kao marketinške nazive.",
     ]
+    if _is_employment_outlook_question(question):
+        instructions.extend(
+            [
+                "- Ako korisnik pita za perspektivu, zaposlenje, poslove, plate ili isplativost, odgovori kao AI/Gemini procena zasnovana na dostupnom kontekstu i opstem karijernom rasudjivanju.",
+                "- U takvom odgovoru eksplicitno napomeni kratko: \"Ovo je AI procena, ne zvanicna garancija zaposlenja.\"",
+                "- Budi koristan i konkretan: navedi zasto je pravac perspektivan, koje uloge su realisticne i sta student treba dodatno da gradi kroz vestine, projekte i praksu.",
+                "- Ne navodi plate, rokove zaposljavanja ili sigurnost posla kao cinjenice.",
+            ]
+        )
     if accreditation_context == "PIN 2020":
         instructions.extend(
             [
@@ -677,6 +971,258 @@ def _elapsed_ms(start_time: float) -> int:
     return int((perf_counter() - start_time) * 1000)
 
 
+def _make_response(
+    *,
+    conversation_id: str,
+    answer: str,
+    sources: list[str] | None = None,
+    provider: str = "",
+    model: str = "",
+    fallback_used: bool = False,
+    detected_intents: list[str] | None = None,
+    detected_course_names: list[str] | None = None,
+) -> ChatResponse:
+    return ChatResponse(
+        conversation_id=conversation_id,
+        answer=answer,
+        sources=sources or [],
+        provider=provider,
+        model=model,
+        fallback_used=fallback_used,
+        detected_intents=detected_intents or [],
+        detected_course_names=detected_course_names or [],
+    )
+
+
+def _log_response(
+    response: ChatResponse,
+    request: ChatRequest,
+    start_time: float,
+    error: str | None = None,
+) -> None:
+    _write_chat_log(
+        _base_log_entry(
+            conversation_id=response.conversation_id,
+            question=request.question,
+            answer=response.answer,
+            sources=response.sources,
+            detected_intents=response.detected_intents,
+            detected_course_names=response.detected_course_names,
+            provider=response.provider,
+            model=response.model,
+            fallback_used=response.fallback_used,
+            latency_ms=_elapsed_ms(start_time),
+            error=error,
+        )
+    )
+
+
+def _prepare_chat(
+    request: ChatRequest,
+    conversation_id: str,
+    settings: Settings,
+    retriever: Retriever,
+    start_time: float,
+) -> ChatResponse | ChatGenerationContext:
+    accreditation_context = _detect_accreditation_context(
+        request.question,
+        request.history,
+    )
+    pin_elective_followup = (
+        accreditation_context == "PIN 2020"
+        and (
+            _is_elective_recommendation_question(request.question, [])
+            or (_is_pin_followup(request.question) and _history_has_elective_recommendation(request.history))
+        )
+        and not _is_career_jobs_question(request.question)
+    )
+    pin_outlook_followup = (
+        accreditation_context == "PIN 2020"
+        and (
+            _is_employment_outlook_question(request.question)
+            or (_is_pin_followup(request.question) and _history_has_employment_outlook_question(request.history))
+        )
+    )
+    is_program_level_career = _is_program_level_career_question(request.question)
+    effective_question = (
+        request.question
+        if is_program_level_career
+        else _build_effective_question(request.question, request.history)
+    )
+    classification = classify(effective_question)
+    if is_program_level_career:
+        classification = Classification(
+            intents=["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION", "JOB_MARKET"],
+            course_names=[],
+        )
+    if pin_outlook_followup:
+        classification = Classification(
+            intents=list(
+                dict.fromkeys(classification.intents + ["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION", "JOB_MARKET"])
+            ),
+            course_names=[],
+        )
+        response = _make_response(
+            conversation_id=conversation_id,
+            answer=PIN_OUTLOOK_MESSAGE,
+            sources=[],
+            detected_intents=classification.intents,
+            detected_course_names=classification.course_names,
+        )
+        _log_response(response, request, start_time)
+        return response
+    if accreditation_context != "PIN 2020" and _is_elective_basket_list_question(request.question):
+        classification = Classification(
+            intents=list(dict.fromkeys(classification.intents + ["ELECTIVE_RECOMMENDATION"])),
+            course_names=[],
+        )
+        response = _make_response(
+            conversation_id=conversation_id,
+            answer=PIT_ELECTIVE_BASKETS_MESSAGE,
+            sources=[],
+            detected_intents=classification.intents,
+            detected_course_names=classification.course_names,
+        )
+        _log_response(response, request, start_time)
+        return response
+    if accreditation_context != "PIN 2020" and _is_generic_elective_pick_question(request.question):
+        classification = Classification(
+            intents=list(
+                dict.fromkeys(
+                    classification.intents
+                    + ["ELECTIVE_RECOMMENDATION", "INTEREST_BASED_RECOMMENDATION"]
+                )
+            ),
+            course_names=[],
+        )
+        response = _make_response(
+            conversation_id=conversation_id,
+            answer=PIT_ELECTIVE_RECOMMENDATION_MESSAGE,
+            sources=[],
+            detected_intents=classification.intents,
+            detected_course_names=classification.course_names,
+        )
+        _log_response(response, request, start_time)
+        return response
+    if _is_certificate_question(request.question):
+        classification = Classification(
+            intents=list(dict.fromkeys(classification.intents + ["PROGRAM_OVERVIEW"])),
+            course_names=[],
+        )
+        response = _make_response(
+            conversation_id=conversation_id,
+            answer=CERTIFICATE_MESSAGE,
+            sources=[],
+            detected_intents=classification.intents,
+            detected_course_names=classification.course_names,
+        )
+        _log_response(response, request, start_time)
+        return response
+    results = retriever.search(
+        effective_question,
+        classification.intents,
+        settings.top_k,
+        classification.course_names,
+    )
+
+    def direct(answer: str, sources: list[str] | None = None) -> ChatResponse:
+        response = _make_response(
+            conversation_id=conversation_id,
+            answer=answer,
+            sources=sources,
+            detected_intents=classification.intents,
+            detected_course_names=classification.course_names,
+        )
+        _log_response(response, request, start_time)
+        return response
+
+    if (
+        not results
+        or (
+            settings.refuse_out_of_scope
+            and results[0].score < settings.min_retrieval_score
+        )
+    ):
+        if pin_elective_followup:
+            return direct(PIN_ELECTIVES_MESSAGE)
+        if (
+            accreditation_context == "PIN 2020"
+            and _is_career_jobs_question(request.question)
+            and not _is_employment_outlook_question(request.question)
+        ):
+            return direct(PIN_AI_CAREER_MESSAGE)
+        return direct(OUT_OF_SCOPE_MESSAGE)
+
+    context_results = _select_context_results(settings, results)
+    if not context_results:
+        if pin_elective_followup:
+            return direct(PIN_ELECTIVES_MESSAGE)
+        if (
+            accreditation_context == "PIN 2020"
+            and _is_career_jobs_question(request.question)
+            and not _is_employment_outlook_question(request.question)
+        ):
+            return direct(PIN_AI_CAREER_MESSAGE)
+        if _is_pin_followup(request.question):
+            return direct(PIN_FOLLOWUP_MESSAGE)
+        return direct(OUT_OF_SCOPE_MESSAGE)
+
+    sources = collect_source_paths(context_results) if settings.include_sources else []
+
+    if _is_program_name_question(request.question):
+        return direct(PROGRAM_NAME_MESSAGE, sources)
+    if pin_elective_followup:
+        return direct(PIN_ELECTIVES_MESSAGE, sources)
+    if (
+        accreditation_context == "PIN 2020"
+        and _is_career_jobs_question(request.question)
+        and not _is_employment_outlook_question(request.question)
+    ):
+        return direct(PIN_AI_CAREER_MESSAGE, sources)
+    if _is_pin_followup(request.question):
+        return direct(PIN_FOLLOWUP_MESSAGE, sources)
+
+    messages = build_messages(
+        effective_question,
+        classification.intents,
+        classification.course_names,
+        context_results,
+    )
+    messages = _append_web_chat_instructions(
+        messages,
+        request.question,
+        classification.intents,
+        accreditation_context,
+    )
+    return ChatGenerationContext(
+        conversation_id=conversation_id,
+        question=request.question,
+        messages=messages,
+        sources=sources,
+        detected_intents=classification.intents,
+        detected_course_names=classification.course_names,
+        accreditation_context=accreditation_context,
+    )
+
+
+def _finalize_generated_answer(
+    answer: str,
+    request: ChatRequest,
+    context: ChatGenerationContext,
+) -> str:
+    answer = _apply_accreditation_assumption(
+        _strip_final_source_section(answer),
+        request.question,
+        context.detected_intents,
+        context.accreditation_context,
+    )
+    return _dedupe_pin_followup_note(answer)
+
+
+def _sse_event(event: str, data: dict[str, Any]) -> str:
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "pit-navigator-api"}
@@ -690,6 +1236,57 @@ def chat(request: ChatRequest) -> ChatResponse:
 
     try:
         settings, retriever = _get_runtime()
+        prepared = _prepare_chat(request, conversation_id, settings, retriever, start_time)
+        if isinstance(prepared, ChatResponse):
+            return prepared
+
+        generation_result = generate_answer(prepared.messages)
+        answer = _provider_value(generation_result, "answer", "") or ""
+        provider = _provider_value(generation_result, "provider", settings.llm_provider) or ""
+        model = _provider_value(generation_result, "model", _model_for_settings(settings)) or ""
+        fallback_used = bool(_provider_value(generation_result, "fallback_used", False))
+        generator_error = _provider_value(generation_result, "error")
+
+        if not answer:
+            error = _sanitize_error(generator_error or "Generator nije vratio odgovor.", settings)
+            _write_chat_log(
+                _base_log_entry(
+                    conversation_id=prepared.conversation_id,
+                    question=request.question,
+                    sources=prepared.sources,
+                    detected_intents=prepared.detected_intents,
+                    detected_course_names=prepared.detected_course_names,
+                    provider=provider,
+                    model=model,
+                    fallback_used=fallback_used,
+                    latency_ms=_elapsed_ms(start_time),
+                    error=error,
+                )
+            )
+            raise HTTPException(
+                status_code=500,
+                detail="Došlo je do greške pri obradi pitanja.",
+            )
+
+        final_answer = _finalize_generated_answer(answer, request, prepared)
+        response = _make_response(
+            conversation_id=prepared.conversation_id,
+            answer=final_answer,
+            sources=prepared.sources,
+            provider=provider,
+            model=model,
+            fallback_used=fallback_used,
+            detected_intents=prepared.detected_intents,
+            detected_course_names=prepared.detected_course_names,
+        )
+        _log_response(
+            response,
+            request,
+            start_time,
+            error=_sanitize_error(generator_error, settings) if generator_error else None,
+        )
+        return response
+
         accreditation_context = _detect_accreditation_context(
             request.question,
             request.history,
@@ -1073,3 +1670,155 @@ def chat(request: ChatRequest) -> ChatResponse:
             status_code=500,
             detail="Došlo je do greške pri obradi pitanja.",
         ) from None
+
+
+@app.post("/chat/stream")
+def chat_stream(request: ChatRequest) -> StreamingResponse:
+    start_time = perf_counter()
+    conversation_id = request.conversation_id or str(uuid4())
+    settings: Settings | None = None
+
+    def event_stream() -> Iterator[str]:
+        nonlocal settings
+        try:
+            settings, retriever = _get_runtime()
+            prepared = _prepare_chat(request, conversation_id, settings, retriever, start_time)
+            if isinstance(prepared, ChatResponse):
+                yield _sse_event(
+                    "final",
+                    {
+                        "conversation_id": prepared.conversation_id,
+                        "answer": prepared.answer,
+                        "sources": prepared.sources,
+                        "provider": prepared.provider,
+                        "model": prepared.model,
+                        "fallback_used": prepared.fallback_used,
+                        "detected_intents": prepared.detected_intents,
+                        "detected_course_names": prepared.detected_course_names,
+                    },
+                )
+                return
+
+            yield _sse_event(
+                "meta",
+                {
+                    "conversation_id": prepared.conversation_id,
+                    "sources": prepared.sources,
+                    "detected_intents": prepared.detected_intents,
+                    "detected_course_names": prepared.detected_course_names,
+                },
+            )
+
+            raw_answer_parts: list[str] = []
+            provider = settings.llm_provider
+            model = _model_for_settings(settings)
+            fallback_used = False
+            generator_error: Any = None
+
+            for generation_event in generate_answer_stream(prepared.messages):
+                event_type = generation_event.get("type")
+                if event_type == "token":
+                    token = generation_event.get("text", "")
+                    if token:
+                        raw_answer_parts.append(token)
+                        yield _sse_event("token", {"text": token})
+                    continue
+                if event_type == "final":
+                    provider = generation_event.get("provider", provider) or ""
+                    model = generation_event.get("model", model) or ""
+                    fallback_used = bool(generation_event.get("fallback_used", False))
+                    generator_error = generation_event.get("error")
+                    break
+                if event_type == "error":
+                    provider = generation_event.get("provider", provider) or ""
+                    model = generation_event.get("model", model) or ""
+                    fallback_used = bool(generation_event.get("fallback_used", False))
+                    generator_error = generation_event.get("error")
+                    error = _sanitize_error(generator_error or "Generator nije vratio odgovor.", settings)
+                    _write_chat_log(
+                        _base_log_entry(
+                            conversation_id=prepared.conversation_id,
+                            question=request.question,
+                            sources=prepared.sources,
+                            detected_intents=prepared.detected_intents,
+                            detected_course_names=prepared.detected_course_names,
+                            provider=provider,
+                            model=model,
+                            fallback_used=fallback_used,
+                            latency_ms=_elapsed_ms(start_time),
+                            error=error,
+                        )
+                    )
+                    yield _sse_event("error", {"detail": "Doslo je do greske pri obradi pitanja."})
+                    return
+
+            raw_answer = "".join(raw_answer_parts)
+            if not raw_answer:
+                error = _sanitize_error(generator_error or "Generator nije vratio odgovor.", settings)
+                _write_chat_log(
+                    _base_log_entry(
+                        conversation_id=prepared.conversation_id,
+                        question=request.question,
+                        sources=prepared.sources,
+                        detected_intents=prepared.detected_intents,
+                        detected_course_names=prepared.detected_course_names,
+                        provider=provider,
+                        model=model,
+                        fallback_used=fallback_used,
+                        latency_ms=_elapsed_ms(start_time),
+                        error=error,
+                    )
+                )
+                yield _sse_event("error", {"detail": "Doslo je do greske pri obradi pitanja."})
+                return
+
+            final_answer = _finalize_generated_answer(raw_answer, request, prepared)
+            response = _make_response(
+                conversation_id=prepared.conversation_id,
+                answer=final_answer,
+                sources=prepared.sources,
+                provider=provider,
+                model=model,
+                fallback_used=fallback_used,
+                detected_intents=prepared.detected_intents,
+                detected_course_names=prepared.detected_course_names,
+            )
+            _log_response(
+                response,
+                request,
+                start_time,
+                error=_sanitize_error(generator_error, settings) if generator_error else None,
+            )
+            yield _sse_event(
+                "final",
+                {
+                    "conversation_id": response.conversation_id,
+                    "answer": response.answer,
+                    "sources": response.sources,
+                    "provider": response.provider,
+                    "model": response.model,
+                    "fallback_used": response.fallback_used,
+                    "detected_intents": response.detected_intents,
+                    "detected_course_names": response.detected_course_names,
+                },
+            )
+        except Exception as exc:
+            error = _sanitize_error(exc, settings)
+            _write_chat_log(
+                _base_log_entry(
+                    conversation_id=conversation_id,
+                    question=request.question,
+                    latency_ms=_elapsed_ms(start_time),
+                    error=error,
+                )
+            )
+            yield _sse_event("error", {"detail": "Doslo je do greske pri obradi pitanja."})
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+        },
+    )

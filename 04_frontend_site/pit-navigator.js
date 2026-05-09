@@ -3,6 +3,7 @@
 
 	// Za produkciju zameniti sa produkcionim API URL-om.
 	const API_URL = window.PIT_CONFIG?.API_URL || "http://127.0.0.1:8000/chat";
+	const STREAM_API_URL = window.PIT_CONFIG?.STREAM_API_URL || API_URL.replace(/\/chat\/?$/, "/chat/stream");
 	const CONVERSATION_KEY = "pitNavigatorConversationId";
 	const MESSAGES_KEY = "pitNavigatorMessages";
 	const MAX_HISTORY_MESSAGES = 6;
@@ -161,25 +162,7 @@
 	}
 
 	function appendSources(sources) {
-		const displaySources = filterDisplaySources(sources);
-		if (displaySources.length === 0) {
-			return;
-		}
-
-		const sourceBlock = document.createElement("div");
-		sourceBlock.className = "pit-sources";
-		sourceBlock.innerHTML = "<strong>Izvori:</strong><div class=\"pit-source-list\"></div>";
-		const listEl = sourceBlock.querySelector(".pit-source-list");
-
-		displaySources.forEach(function (source) {
-			const chip = document.createElement("span");
-			chip.className = "pit-source-chip";
-			chip.textContent = readableSourceLabel(source);
-			chip.title = String(source || "");
-			listEl.appendChild(chip);
-		});
-
-		messagesEl.appendChild(sourceBlock);
+		return;
 	}
 
 	function appendMessage(role, content, sources) {
@@ -235,6 +218,15 @@
 		messagesEl.scrollTop = messagesEl.scrollHeight;
 	}
 
+	function updateTypingPlaceholder(placeholder, answer) {
+		if (!placeholder || !placeholder.bubble) {
+			return;
+		}
+		placeholder.bubble.removeAttribute("aria-label");
+		placeholder.bubble.innerHTML = renderMarkdown(answer || "");
+		messagesEl.scrollTop = messagesEl.scrollHeight;
+	}
+
 	function removeTypingPlaceholder(placeholder) {
 		if (placeholder && placeholder.row && placeholder.row.parentNode) {
 			placeholder.row.parentNode.removeChild(placeholder.row);
@@ -265,6 +257,113 @@
 		statusEl.textContent = isBusy ? "PIT Navigator priprema odgovor..." : "";
 	}
 
+	function parseSseChunk(buffer, onEvent) {
+		const events = buffer.split(/\r?\n\r?\n/);
+		const rest = events.pop() || "";
+
+		events.forEach(function (rawEvent) {
+			let eventName = "message";
+			const dataLines = [];
+			rawEvent.split(/\r?\n/).forEach(function (line) {
+				if (line.startsWith("event:")) {
+					eventName = line.slice(6).trim();
+					return;
+				}
+				if (line.startsWith("data:")) {
+					dataLines.push(line.slice(5).trimStart());
+				}
+			});
+			if (dataLines.length === 0) {
+				return;
+			}
+			try {
+				onEvent(eventName, JSON.parse(dataLines.join("\n")));
+			} catch (error) {
+				onEvent("error", {});
+			}
+		});
+
+		return rest;
+	}
+
+	async function fetchJsonAnswer(payload) {
+		const response = await fetch(API_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(payload)
+		});
+
+		if (!response.ok) {
+			throw new Error("API error");
+		}
+
+		return response.json();
+	}
+
+	async function streamAnswer(payload, placeholder) {
+		const response = await fetch(STREAM_API_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accept": "text/event-stream"
+			},
+			body: JSON.stringify(payload)
+		});
+
+		if (!response.ok || !response.body) {
+			throw new Error("Streaming API error");
+		}
+
+		const reader = response.body.getReader();
+		const decoder = new TextDecoder();
+		let buffer = "";
+		let streamedAnswer = "";
+		let finalData = null;
+
+		function handleEvent(eventName, data) {
+			if (eventName === "meta" && data.conversation_id) {
+				localStorage.setItem(CONVERSATION_KEY, data.conversation_id);
+				return;
+			}
+			if (eventName === "token") {
+				streamedAnswer += data.text || "";
+				updateTypingPlaceholder(placeholder, streamedAnswer);
+				return;
+			}
+			if (eventName === "final") {
+				finalData = data;
+				if (data.conversation_id) {
+					localStorage.setItem(CONVERSATION_KEY, data.conversation_id);
+				}
+				return;
+			}
+			if (eventName === "error") {
+				throw new Error("Streaming event error");
+			}
+		}
+
+		while (true) {
+			const readResult = await reader.read();
+			if (readResult.done) {
+				break;
+			}
+			buffer += decoder.decode(readResult.value, { stream: true });
+			buffer = parseSseChunk(buffer, handleEvent);
+		}
+		buffer += decoder.decode();
+		if (buffer.trim()) {
+			parseSseChunk(buffer + "\n\n", handleEvent);
+		}
+
+		if (!finalData) {
+			throw new Error("Missing final streaming event");
+		}
+
+		return finalData;
+	}
+
 	async function sendQuestion() {
 		const question = questionEl.value.trim();
 		if (!question || sendButton.disabled) {
@@ -279,25 +378,19 @@
 		questionEl.value = "";
 		setBusy(true);
 		const typingPlaceholder = appendTypingPlaceholder();
+		const payload = {
+			conversation_id: conversationId,
+			question: question,
+			history: historyBeforeQuestion
+		};
 
 		try {
-			const response = await fetch(API_URL, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					conversation_id: conversationId,
-					question: question,
-					history: historyBeforeQuestion
-				})
-			});
-
-			if (!response.ok) {
-				throw new Error("API error");
+			let data;
+			try {
+				data = await streamAnswer(payload, typingPlaceholder);
+			} catch (streamError) {
+				data = await fetchJsonAnswer(payload);
 			}
-
-			const data = await response.json();
 			if (data.conversation_id) {
 				localStorage.setItem(CONVERSATION_KEY, data.conversation_id);
 			}

@@ -2,6 +2,9 @@
 	--pit-primary: #c68ee4;
 	--pit-primary-dark: #7D3FA1;
 	--pit-primary-glow: rgba(198, 142, 228, 0.16);
+	--pit-ink: #18141D;
+	--pit-ink-soft: #241D2B;
+	--pit-ink-lift: #302638;
 	--pit-text: #292929;
 	--pit-text-muted: #4A4A4A;
 	--pit-border: #D7D7D7;
@@ -13,32 +16,247 @@
 }
 
 body {
+	margin: 0;
+	padding: 0;
+	color: #888888;
+	background: #111111;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	line-height: 1.4em;
+}
+
+a {
+	color: var(--pit-primary-dark);
+	text-decoration: none;
+}
+
+a:hover,
+a:focus {
+	text-decoration: underline;
+}
+
+.clear::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.wrapper {
+	width: 100%;
+}
+
+.fl_left {
+	float: left;
+}
+
+.fl_right {
+	float: right;
+}
+
+.row0 {
+	background: #232323;
+	color: #888888;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.row1 {
+	background: #FFFFFF;
+	color: #292929;
+	border-top: 2px solid var(--pit-primary);
+	box-shadow: none;
+}
+
+.row3 {
+	background:
+		radial-gradient(circle at 16% 0%, rgba(198, 142, 228, 0.22), transparent 30%),
+		linear-gradient(180deg, #FFFFFF 0%, #F7F4FA 38%, #201927 100%);
+	color: #292929;
+}
+
+.row5 {
+	background: #232323;
+	color: #888888;
+	border-top: 1px solid var(--pit-primary);
+}
+
+.row6 {
+	background: #111111;
+	color: #888888;
+}
+
+#topbar,
+#header,
+.container,
+#footer,
+#copyright {
+	max-width: 978px;
+	margin: 0 auto;
+}
+
+#topbar {
+	padding: 5px 0 8px;
+}
+
+#topbar ul,
+#mainav ul,
+#footer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#topbar a,
+#topbar li {
+	color: #888888;
+}
+
+#header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	min-height: 82px;
+}
+
+#logo h1 {
+	margin: 0;
 	color: var(--pit-text);
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 36px;
+	font-variant: small-caps;
+	letter-spacing: 0;
+	line-height: normal;
+}
+
+#mainav > ul {
+	display: flex;
+	align-items: center;
+	gap: 0;
+	text-transform: uppercase;
+}
+
+#mainav li {
+	position: relative;
+}
+
+#mainav a {
+	display: block;
+	padding: 20px;
+	color: var(--pit-text);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: normal;
+	text-decoration: none;
+	transition: all 0.4s ease-in-out;
+}
+
+#mainav li.active > a,
+#mainav a:hover,
+#mainav a:focus {
+	background: var(--pit-primary);
+	color: #FFFFFF;
+	border-radius: 0;
+}
+
+#mainav li ul {
+	position: absolute;
+	z-index: 20;
+	top: 100%;
+	left: 0;
+	display: none;
+	width: 170px;
+	background: rgba(0, 0, 0, 0.8);
+	border: none;
+	box-shadow: none;
+	text-transform: none;
+}
+
+#mainav li:hover > ul,
+#mainav li:focus-within > ul {
+	display: block;
+}
+
+#mainav li ul a {
+	padding: 10px 12px;
+	color: #FFFFFF;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+	font-weight: 400;
+	white-space: normal;
+}
+
+.container {
+	padding-top: 24px;
+	padding-bottom: 54px;
+}
+
+#footer {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(220px, 0.35fr);
+	gap: 28px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#footer .title {
+	margin: 0 0 30px;
+	padding: 0 0 8px;
+	color: inherit;
+	border-bottom: 1px solid #111111;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 16px;
+	line-height: 1.3;
+	text-transform: uppercase;
+}
+
+#footer p {
+	margin: 0;
+}
+
+#footer a,
+#footer li {
+	color: #EFEFEF;
+}
+
+#footer li {
+	margin: 6px 0;
+}
+
+#copyright {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	font-size: 13px;
+}
+
+#copyright p {
+	margin: 0;
 }
 
 .pit-chat-shell {
-	max-width: 1240px;
+	max-width: 978px;
 	margin: 0 auto;
 }
 
 .pit-heading {
-	margin-bottom: 20px;
-	padding-bottom: 14px;
-	border-bottom: 1px solid var(--pit-border);
+	margin-bottom: 14px;
+	padding: 0 0 12px;
+	border-bottom: 1px solid rgba(125, 63, 161, 0.25);
 }
 
 .pit-heading h1 {
 	margin: 0 0 10px;
 	color: var(--pit-text);
-	font-size: 36px;
-	line-height: 1.2;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 30px;
+	line-height: normal;
+	text-transform: uppercase;
 }
 
 .pit-heading p {
 	margin: 0;
 	max-width: 860px;
-	font-size: 16px;
-	line-height: 1.6;
+	font-size: 14px;
+	line-height: 1.55;
 	color: var(--pit-text-muted);
 }
 
@@ -46,26 +264,31 @@ body {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 	gap: 16px;
-	margin-bottom: 18px;
+	margin-top: 18px;
+	margin-bottom: 0;
 }
 
 .pit-info-box,
 .pit-chat-panel {
-	background: var(--pit-white);
-	border: 1px solid var(--pit-border);
+	border: 1px solid rgba(255, 255, 255, 0.12);
 	border-radius: 8px;
-	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
 }
 
 .pit-info-box {
-	padding: 18px 20px;
+	padding: 18px 20px 16px;
+	background: rgba(255, 255, 255, 0.94);
+	border-color: rgba(255, 255, 255, 0.55);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
 }
 
 .pit-info-box h2 {
 	margin: 0 0 10px;
 	color: var(--pit-text);
+	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 18px;
 	line-height: 1.3;
+	text-transform: uppercase;
 }
 
 .pit-info-box ul {
@@ -83,33 +306,38 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	margin: 0 0 14px;
+	margin: 16px 0 0;
 }
 
 .pit-chip {
-	border: 1px solid var(--pit-border);
-	background: var(--pit-white);
-	color: var(--pit-text);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.9);
+	color: #241D2B;
 	border-radius: 999px;
 	padding: 8px 12px;
 	cursor: pointer;
 	font-size: 14px;
 	line-height: 1.2;
-	transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+	transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .pit-chip:hover,
 .pit-chip:focus {
 	border-color: var(--pit-primary);
 	color: var(--pit-primary-dark);
-	box-shadow: 0 0 0 3px var(--pit-primary-glow);
+	box-shadow: 0 0 0 3px var(--pit-primary-glow), 0 10px 24px rgba(0, 0, 0, 0.12);
+	transform: translateY(-1px);
 	outline: none;
 }
 
 .pit-chat-panel {
 	overflow: hidden;
+	position: relative;
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 34%),
+		linear-gradient(135deg, var(--pit-ink) 0%, var(--pit-ink-soft) 52%, #141118 100%);
 	border-top: 4px solid var(--pit-primary);
-	box-shadow: 0 18px 44px rgba(0, 0, 0, 0.09);
+	font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 .pit-chat-top {
@@ -117,40 +345,44 @@ body {
 	align-items: center;
 	justify-content: space-between;
 	gap: 16px;
-	padding: 14px 18px;
-	border-bottom: 1px solid var(--pit-border);
+	padding: 16px 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .pit-chat-top h2 {
 	margin: 0;
-	color: var(--pit-text);
-	font-size: 20px;
+	color: #FFFFFF;
+	font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	letter-spacing: 0;
 	line-height: 1.3;
+	text-transform: none;
 }
 
 .pit-status {
 	min-height: 20px;
-	color: #666666;
+	color: rgba(255, 255, 255, 0.7);
 	font-size: 13px;
 	text-align: right;
 }
 
 .pit-messages {
 	min-height: 260px;
-	max-height: 520px;
-	height: clamp(260px, 42vh, 520px);
+	max-height: 500px;
+	height: clamp(260px, 44vh, 500px);
 	overflow-y: auto;
-	padding: 20px;
+	padding: 24px 20px 18px;
 	background:
-		linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(250, 250, 250, 0.95)),
-		var(--pit-bg-subtle);
+		radial-gradient(circle at 100% 0%, rgba(198, 142, 228, 0.12), transparent 30%),
+		linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+		var(--pit-ink-soft);
 }
 
 .pit-message-row {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
-	margin-bottom: 14px;
+	gap: 6px;
+	margin-bottom: 18px;
 }
 
 .pit-message-row.user {
@@ -164,19 +396,19 @@ body {
 
 .pit-message-row::before {
 	content: attr(data-label);
-	color: #777777;
-	font-size: 11px;
-	font-weight: 700;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.52);
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: none;
 }
 
 .pit-message {
-	max-width: min(820px, 86%);
-	padding: 13px 15px;
-	border-radius: 14px;
-	font-size: 15px;
-	line-height: 1.6;
+	max-width: min(760px, 86%);
+	padding: 14px 16px;
+	border-radius: 18px;
+	font-size: 15.5px;
+	line-height: 1.72;
 	word-wrap: break-word;
 	overflow-wrap: anywhere;
 }
@@ -187,22 +419,23 @@ body {
 }
 
 .pit-message.user {
-	background: var(--pit-primary);
+	background: linear-gradient(135deg, #c68ee4, #9D60C0);
 	color: var(--pit-white);
-	border-bottom-right-radius: 4px;
-	box-shadow: 0 10px 24px rgba(198, 142, 228, 0.24);
+	border-bottom-right-radius: 6px;
+	box-shadow: 0 12px 28px rgba(198, 142, 228, 0.22);
 }
 
 .pit-message.assistant {
-	background: var(--pit-white);
-	color: var(--pit-text);
-	border: 1px solid var(--pit-border);
-	border-bottom-left-radius: 4px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.045);
+	background: rgba(255, 255, 255, 0.08);
+	color: rgba(255, 255, 255, 0.92);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-bottom-left-radius: 6px;
+	box-shadow: none;
+	backdrop-filter: blur(8px);
 }
 
 .pit-message.assistant p {
-	margin: 0 0 10px;
+	margin: 0 0 12px;
 }
 
 .pit-message.assistant p:last-child {
@@ -210,16 +443,16 @@ body {
 }
 
 .pit-message.assistant ul {
-	margin: 8px 0 10px 20px;
+	margin: 8px 0 12px 20px;
 	padding: 0;
 }
 
 .pit-message.assistant li {
-	margin: 4px 0;
+	margin: 6px 0;
 }
 
 .pit-message.assistant strong {
-	color: var(--pit-text);
+	color: #FFFFFF;
 	font-weight: 700;
 }
 
@@ -233,20 +466,20 @@ body {
 	display: inline-flex;
 	gap: 4px;
 	align-items: center;
-	margin-left: 8px;
+	margin-left: 6px;
 	vertical-align: middle;
 }
 
 .pit-loading-text {
-	color: var(--pit-text-muted);
-	font-weight: 600;
+	color: rgba(255, 255, 255, 0.82);
+	font-weight: 500;
 }
 
 .pit-typing span {
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
-	background: var(--pit-primary-dark);
+	background: #D7A6F0;
 	animation: pitTypingPulse 1s infinite ease-in-out;
 }
 
@@ -273,7 +506,7 @@ body {
 	max-width: min(820px, 86%);
 	margin: -8px 0 14px;
 	padding: 0 0 0 2px;
-	color: #666666;
+	color: rgba(255, 255, 255, 0.72);
 	font-size: 12px;
 	line-height: 1.5;
 }
@@ -289,10 +522,10 @@ body {
 	display: inline-block;
 	max-width: 100%;
 	padding: 5px 9px;
-	border: 1px solid var(--pit-border);
+	border: 1px solid rgba(198, 142, 228, 0.45);
 	border-radius: 999px;
-	background: var(--pit-white);
-	color: var(--pit-primary-dark);
+	background: rgba(255, 255, 255, 0.08);
+	color: #F0DAFA;
 	font-weight: 600;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -302,24 +535,28 @@ body {
 .pit-composer {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
-	gap: 10px;
-	padding: 14px 18px;
-	border-top: 1px solid var(--pit-border);
-	background: var(--pit-white);
+	gap: 12px;
+	padding: 16px 18px;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	background: var(--pit-ink);
+	align-items: stretch;
 }
 
 .pit-composer textarea {
 	width: 100%;
 	min-height: 48px;
 	max-height: 120px;
-	resize: vertical;
-	border: 1px solid var(--pit-border);
-	border-radius: 8px;
-	padding: 11px 13px;
+	resize: none;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 14px;
+	padding: 13px 14px;
+	background: rgba(255, 255, 255, 0.96);
 	color: var(--pit-text);
-	font-family: inherit;
+	font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	line-height: 1.45;
+	display: block;
+	box-sizing: border-box;
 }
 
 .pit-composer textarea:focus {
@@ -332,17 +569,26 @@ body {
 	border: 1px solid var(--pit-primary);
 	background: var(--pit-primary);
 	color: var(--pit-white);
-	border-radius: 8px;
+	border-radius: 14px;
 	padding: 0 18px;
 	cursor: pointer;
 	font-weight: 700;
 	min-height: 48px;
 	font-size: 14px;
+	white-space: nowrap;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.pit-action:hover,
+.pit-action:focus {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 24px rgba(198, 142, 228, 0.22);
 }
 
 .pit-action.secondary {
-	background: var(--pit-white);
-	color: var(--pit-primary-dark);
+	background: transparent;
+	color: #F2DDFB;
+	border-color: rgba(198, 142, 228, 0.65);
 }
 
 .pit-action:disabled {
@@ -357,9 +603,9 @@ body {
 .pit-disclaimer {
 	margin: 0;
 	padding: 10px 18px 12px;
-	border-top: 1px solid var(--pit-border);
-	background: var(--pit-white);
-	color: #666666;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	background: rgba(0, 0, 0, 0.12);
+	color: rgba(255, 255, 255, 0.68);
 	font-size: 12px;
 	line-height: 1.5;
 }

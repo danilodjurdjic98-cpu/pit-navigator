@@ -33,7 +33,16 @@ PROGRAM_NAME_QUERY_TERMS = [
 
 COURSE_PATTERNS: dict[str, list[str]] = {
     "ERP softver": ["erp", "sap"],
-    "Razvoj softvera": ["razvoj softvera", "flask", "php"],
+    "Razvoj softvera": [
+        "razvoj softvera",
+        "razvoju softvera",
+        "razvoja softvera",
+        "razvojem softvera",
+        "predmet razvoj softvera",
+        "predmetu razvoj softvera",
+        "flask",
+        "php",
+    ],
     "Objektno orijentisano programiranje": ["oop", "objektno"],
     "Mašinsko učenje": ["mašinsko", "masinsko"],
     "Operaciona istraživanja": ["operaciona"],
@@ -144,9 +153,32 @@ def classify(question: str) -> Classification:
             intents.append("ACCREDITATION_COMPARISON")
     if _contains_any(text, ["pit", "smer", "program", "šta se tu uči", "sta se tu uci"]):
         intents.append("PROGRAM_OVERVIEW")
+    if course_names and _contains_any(text, ["konkretno", "predmet", "predmetu"]):
+        intents.append("COURSE_EXPLANATION")
     if _contains_any(
         text,
         ["trenutno", "sada", "ove godine", "2025/26", "2025/2026", "kako se polaže", "kako se polaze", "ocenjuje", "ocenjivanje", "ocena", "poeni", "predispitne obaveze", "završni test", "zavrsni test", "kolokvijum", "ispit", "vežbe", "vezbe", "plan rada", "projekat", "predispitne", "koji alati", "šta se radi na predmetu", "sta se radi na predmetu", "šta se uči na", "sta se uci na", "da li se na", "radi sql", "radi java", "radi power bi", "radi erp"],
+    ):
+        intents.append("COURSE_PLAN_CURRENT")
+    if course_names and _contains_any(text, ["sta se radi na", "šta se radi na"]):
+        intents.append("COURSE_PLAN_CURRENT")
+    if _contains_any(text, ["sta se konkretno radi", "šta se konkretno radi", "konkretno radi"]):
+        intents.append("COURSE_PLAN_CURRENT")
+    if _contains_any(
+        text,
+        [
+            "programski jezik",
+            "programski jezici",
+            "koji jezik",
+            "koji programski",
+            "neki programski",
+            "radi php",
+            "radi python",
+            "radi flask",
+            "php",
+            "python",
+            "flask",
+        ],
     ):
         intents.append("COURSE_PLAN_CURRENT")
     if _contains_any(
@@ -167,6 +199,11 @@ def classify(question: str) -> Classification:
             "sta su",
             "šta se iz",
             "sta se iz",
+            "konkretno predmet",
+            "konkretno o predmetu",
+            "konkretno za predmet",
+            "predmet ",
+            "predmetu ",
             "koje karijere",
             "karijere",
             "ovaj predmet",
@@ -270,8 +307,11 @@ def classify(question: str) -> Classification:
             "želim da budem",
             "zelim da budem",
             "karijera",
+            "kompetent",
             "uloge",
             "posle ovog smera",
+            "zavrsim ovaj smer",
+            "završim ovaj smer",
         ],
     ):
         intents.append("CAREER_RECOMMENDATION")
@@ -291,6 +331,11 @@ def classify(question: str) -> Classification:
             "ai će pojesti",
             "ai ce pojesti",
             "plata",
+            "kompetent",
+            "trzistu",
+            "tržištu",
+            "zavrsim",
+            "završim",
         ],
     ):
         intents.append("JOB_MARKET")
@@ -303,4 +348,8 @@ def classify(question: str) -> Classification:
     if not intents:
         intents.append("FALLBACK")
 
-    return Classification(intents=list(dict.fromkeys(intents)), course_names=course_names)
+    deduped_intents = list(dict.fromkeys(intents))
+    if "programski" in text and "PROGRAM_OVERVIEW" in deduped_intents:
+        deduped_intents.remove("PROGRAM_OVERVIEW")
+
+    return Classification(intents=deduped_intents, course_names=course_names)

@@ -34,8 +34,10 @@ http://127.0.0.1:5500/pit-navigator.html
 Za lokalni test potrebno je servirati fajlove zajedno sa postojećim `layout/` folderom sajta.
 
 `API_URL` može da se override-uje kroz `window.PIT_CONFIG` u `pit-navigator.html`.
+`STREAM_API_URL` može posebno da se override-uje ako streaming endpoint nije izveden iz istog URL-a.
 
 Podrazumevano `API_URL` trenutno pokazuje na `http://127.0.0.1:8000/chat`. Pre produkcije treba ga zameniti produkcionim API URL-om.
+Podrazumevano `STREAM_API_URL` pokazuje na `http://127.0.0.1:8000/chat/stream`.
 
 Conversation history se čuva u browser `localStorage`.
 

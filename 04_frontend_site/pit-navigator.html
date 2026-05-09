@@ -11,7 +11,6 @@
 <link href="pit-navigator.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
-<p>&nbsp;</p>
 
 <div class="wrapper row0">
   <div id="topbar" class="clear">
@@ -72,6 +71,29 @@
         <p>AI asistent za pitanja o modulu Poslovne informacione tehnologije, predmetima, izbornim korpama i karijernim putanjama.</p>
       </section>
 
+      <section class="pit-chat-panel" aria-label="PIT Navigator chat">
+        <div class="pit-chat-top">
+          <h2>Razgovor</h2>
+          <div id="pitStatus" class="pit-status" aria-live="polite"></div>
+        </div>
+        <div id="pitMessages" class="pit-messages" aria-live="polite"></div>
+        <div class="pit-composer">
+          <textarea id="pitQuestion" rows="2" placeholder="Unesite pitanje o PIT modulu..."></textarea>
+          <button id="pitSend" class="pit-action" type="button">Pošalji</button>
+          <button id="pitNew" class="pit-action secondary" type="button">Novi razgovor</button>
+        </div>
+        <p class="pit-disclaimer">PIT Navigator je u beta fazi. Odgovori se generišu pomoću AI-a i mogu sadržati netačnosti. Za zvanične informacije konsultujte fakultetske resurse.</p>
+      </section>
+
+      <section class="pit-examples" aria-label="Primer pitanja">
+        <button class="pit-chip" type="button">Šta je PIT i po čemu se razlikuje od PIN-a?</button>
+        <button class="pit-chip" type="button">Šta da izaberem ako me zanima AI?</button>
+        <button class="pit-chip" type="button">Šta da izaberem ako želim business analyst putanju?</button>
+        <button class="pit-chip" type="button">Da li je ERP dobar za SAP karijeru?</button>
+        <button class="pit-chip" type="button">Kako da spojim programiranje i analitiku?</button>
+        <button class="pit-chip" type="button">Koji predmeti su korisni za data/BI karijeru?</button>
+      </section>
+
       <section class="pit-info-grid" aria-label="Informacije o PIT Navigatoru">
         <div class="pit-info-box">
           <h2>Mogu da pomognem sa:</h2>
@@ -91,29 +113,6 @@
             <li>pitanjima izvan modula PIT</li>
           </ul>
         </div>
-      </section>
-
-      <section class="pit-examples" aria-label="Primer pitanja">
-        <button class="pit-chip" type="button">Šta je PIT i po čemu se razlikuje od PIN-a?</button>
-        <button class="pit-chip" type="button">Šta da izaberem ako me zanima AI?</button>
-        <button class="pit-chip" type="button">Šta da izaberem ako želim business analyst putanju?</button>
-        <button class="pit-chip" type="button">Da li je ERP dobar za SAP karijeru?</button>
-        <button class="pit-chip" type="button">Kako da spojim programiranje i analitiku?</button>
-        <button class="pit-chip" type="button">Koji predmeti su korisni za data/BI karijeru?</button>
-      </section>
-
-      <section class="pit-chat-panel" aria-label="PIT Navigator chat">
-        <div class="pit-chat-top">
-          <h2>Razgovor</h2>
-          <div id="pitStatus" class="pit-status" aria-live="polite"></div>
-        </div>
-        <div id="pitMessages" class="pit-messages" aria-live="polite"></div>
-        <div class="pit-composer">
-          <textarea id="pitQuestion" rows="2" placeholder="Unesite pitanje o PIT modulu..."></textarea>
-          <button id="pitSend" class="pit-action" type="button">Pošalji</button>
-          <button id="pitNew" class="pit-action secondary" type="button">Novi razgovor</button>
-        </div>
-        <p class="pit-disclaimer">PIT Navigator je u beta fazi. Odgovori se generišu pomoću AI-a i mogu sadržati netačnosti. Za zvanične informacije konsultujte fakultetske resurse.</p>
       </section>
     </div>
   </main>
@@ -147,7 +146,8 @@
 <script>
   // U produkciji API_URL zameniti produkcionim PIT Navigator API endpoint-om.
   window.PIT_CONFIG = window.PIT_CONFIG || {
-    API_URL: "http://127.0.0.1:8000/chat"
+    API_URL: "http://127.0.0.1:8010/chat",
+    STREAM_API_URL: "http://127.0.0.1:8010/chat/stream"
   };
 </script>
 <script src="pit-navigator.js"></script>
