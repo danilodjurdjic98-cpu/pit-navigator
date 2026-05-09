@@ -1,12 +1,12 @@
 # PIT Navigator retrieval-only test runner report
 
-Generated at: 2026-05-06T14:39:50.558767+00:00
+Generated at: 2026-05-09T21:33:25.272836+00:00
 
 ## Summary
 
 - Total tests: 7
-- Passed: 7
-- Needs review: 0
+- Passed: 6
+- Needs review: 1
 - Failed: 0
 
 ## Details
@@ -44,27 +44,12 @@ Retrieved documents:
    - document_type: course
    - section_heading: 13. Šta bot ne sme da tvrdi
    - score: 0.7764
-6. `01_courses/2027/razvoj_softvera.md`
-   - title: Razvoj softvera
-   - document_type: course
-   - section_heading: 12. Kako bot treba da objasni predmet
-   - score: 0.7674
-7. `03_course_plans/2025_2026/erp_softver.md`
-   - title: ERP softver
-   - document_type: course_plan
-   - section_heading: 5.5 Python, PyMongo i Tkinter
-   - score: 0.6794
-8. `03_course_plans/2025_2026/erp_softver.md`
-   - title: ERP softver
-   - document_type: course_plan
-   - section_heading: 9.5 Developer
-   - score: 0.6768
 
 ### FALLBACK_TEACHER_NIT: PASS
 
 Question: Ko drži Nove informacione tehnologije i da li je profesor dobar?
 
-Detected intents: FALLBACK
+Detected intents: COURSE_EXPLANATION, FALLBACK
 Detected course names: Nove informacione tehnologije
 
 Retrieved documents:
@@ -93,21 +78,6 @@ Retrieved documents:
    - document_type: answering_policy
    - section_heading: 9. Pravilo za predmete koji nisu prvi prioritet
    - score: 1.0188
-6. `06_policy/pit_navigator_answering_policy.md`
-   - title: PIT Navigator, pravila odgovaranja
-   - document_type: answering_policy
-   - section_heading: 21. Pravilo za ton odgovora
-   - score: 1.0143
-7. `05_retrieval_guides/pit_navigator_retrieval_map.md`
-   - title: PIT Navigator, retrieval mapa dokumenata
-   - document_type: retrieval_guide
-   - section_heading: 4.6 CAREER_RECOMMENDATION
-   - score: 0.6155
-8. `05_retrieval_guides/pit_navigator_retrieval_map.md`
-   - title: PIT Navigator, retrieval mapa dokumenata
-   - document_type: retrieval_guide
-   - section_heading: 5.1 Ako korisnik pita za predmet iz 2027
-   - score: 0.6077
 
 ### FALLBACK_ECONOMETRIJA: PASS
 
@@ -142,21 +112,6 @@ Retrieved documents:
    - document_type: retrieval_guide
    - section_heading: 10.4 Primer odgovora
    - score: 0.5717
-6. `05_retrieval_guides/pit_navigator_intent_examples.md`
-   - title: PIT Navigator, primeri intent-a i očekivanog retrieval-a
-   - document_type: retrieval_guide
-   - section_heading: 10.3 Logika odgovora
-   - score: 0.5687
-7. `04_baskets/2027/pit_data_ai_bi_korpa.md`
-   - title: PIT 2027, Data / AI / BI korpa
-   - document_type: thematic_basket
-   - section_heading: 4.3 Ekonometrija
-   - score: 0.5617
-8. `05_retrieval_guides/pit_navigator_intent_examples.md`
-   - title: PIT Navigator, primeri intent-a i očekivanog retrieval-a
-   - document_type: retrieval_guide
-   - section_heading: 7.4 Primeri prioriteta
-   - score: 0.5566
 
 ### ELECTIVE_AI: PASS
 
@@ -191,21 +146,6 @@ Retrieved documents:
    - document_type: elective_reference
    - section_heading: 5.1 Ako korisnika zanimaju AI, data ili BI
    - score: 0.8315
-6. `04_baskets/2027/pit_software_erp_digital_korpa.md`
-   - title: PIT 2027, Software / ERP / digital korpa
-   - document_type: thematic_basket
-   - section_heading: 8. FAQ odgovori za korisnike
-   - score: 0.8272
-7. `04_baskets/2027/pit_software_erp_digital_korpa.md`
-   - title: PIT 2027, Software / ERP / digital korpa
-   - document_type: thematic_basket
-   - section_heading: 3.6 Elektronsko poslovanje i veštačka inteligencija
-   - score: 0.8271
-8. `01_courses/2027/elektronsko_poslovanje_i_vestacka_inteligencija.md`
-   - title: Elektronsko poslovanje i veštačka inteligencija
-   - document_type: course
-   - section_heading: 7. Napomena o AI agentima
-   - score: 0.8132
 
 ### COMPARISON_PIN_PIT: PASS
 
@@ -240,77 +180,51 @@ Retrieved documents:
    - document_type: retrieval_guide
    - section_heading: 9. Pravila za modernizaciju PIN 2020
    - score: 0.7937
-6. `00_overview/pin_2020_overview.md`
-   - title: PIN 2020, Poslovna informatika
-   - document_type: overview
-   - section_heading: 9. Šta bot ne sme da tvrdi u vezi sa PIN 2020
-   - score: 0.7905
-7. `00_overview/pin_2020_overview.md`
-   - title: PIN 2020, Poslovna informatika
-   - document_type: overview
-   - section_heading: 8. Kako PIN 2020 povezati sa PIT 2027
-   - score: 0.7840
-8. `05_retrieval_guides/pit_navigator_intent_examples.md`
-   - title: PIT Navigator, primeri intent-a i očekivanog retrieval-a
-   - document_type: retrieval_guide
-   - section_heading: 4.1 Primeri pitanja
-   - score: 0.7724
 
 ### CAREER_ERP_SAP: PASS
 
 Question: Koji predmeti su dobri za ERP/SAP konsultanta?
 
-Detected intents: CAREER_RECOMMENDATION
+Detected intents: COURSE_EXPLANATION, CAREER_RECOMMENDATION
 Detected course names: ERP softver
 
 Retrieved documents:
-1. `04_baskets/2027/pit_software_erp_digital_korpa.md`
+1. `01_courses/2027/erp_softver.md`
+   - title: ERP softver
+   - document_type: course
+   - section_heading: 9.1 ERP / SAP konsultant
+   - score: 1.5810
+2. `04_baskets/2027/pit_software_erp_digital_korpa.md`
    - title: PIT 2027, Software / ERP / digital korpa
    - document_type: thematic_basket
    - section_heading: 3.3 ERP softver
    - score: 1.5357
-2. `04_baskets/2027/pit_software_erp_digital_korpa.md`
+3. `04_baskets/2027/pit_software_erp_digital_korpa.md`
    - title: PIT 2027, Software / ERP / digital korpa
    - document_type: thematic_basket
    - section_heading: 5.2 Ako studenta zanima ERP / SAP konsultantska putanja
    - score: 1.5310
-3. `04_baskets/2027/pit_software_erp_digital_korpa.md`
-   - title: PIT 2027, Software / ERP / digital korpa
-   - document_type: thematic_basket
-   - section_heading: 4.5 Računovodstveni informacioni sistemi
-   - score: 1.3851
-4. `03_course_plans/2025_2026/masinsko_ucenje.md`
-   - title: Mašinsko učenje
-   - document_type: course_plan
-   - section_heading: 10.5 ERP / SAP konsultant
-   - score: 1.0379
+4. `01_courses/2027/erp_softver.md`
+   - title: ERP softver
+   - document_type: course
+   - section_heading: 5.2 SAP ERP ekosistem
+   - score: 1.5089
 5. `03_course_plans/2025_2026/erp_softver.md`
    - title: ERP softver
    - document_type: course_plan
    - section_heading: 9.1 ERP / SAP konsultant
-   - score: 1.0278
-6. `05_retrieval_guides/pit_navigator_intent_examples.md`
-   - title: PIT Navigator, primeri intent-a i očekivanog retrieval-a
-   - document_type: retrieval_guide
-   - section_heading: 8.4 Primer odgovora za ERP/SAP
-   - score: 1.0215
-7. `03_course_plans/2025_2026/operaciona_istrazivanja.md`
-   - title: Operaciona istraživanja
-   - document_type: course_plan
-   - section_heading: 9.4 ERP / SAP konsultant
-   - score: 1.0170
-8. `03_course_plans/2025_2026/analiza_podataka.md`
-   - title: Analiza podataka
-   - document_type: course_plan
-   - section_heading: 9.4 ERP / SAP konsultant
-   - score: 1.0149
+   - score: 1.4778
 
-### ELECTIVE_ECOMMERCE_EPS_NIT: PASS
+### ELECTIVE_ECOMMERCE_EPS_NIT: NEEDS_REVIEW
 
 Question: Da li da izaberem Elektronsku trgovinu, Elektronske platne sisteme ili Nove informacione tehnologije?
 
-Detected intents: ELECTIVE_RECOMMENDATION
+Detected intents: COURSE_EXPLANATION, ELECTIVE_RECOMMENDATION
 Detected course names: Nove informacione tehnologije, Elektronska trgovina, Elektronski platni sistemi
+
+Notes:
+- Missing paths: 04_baskets/2027/pit_izborne_korpe_overview.md
+- At least one retrieved result is from an expected folder.
 
 Retrieved documents:
 1. `04_baskets/2027/pit_minor_electives_reference.md`
@@ -338,18 +252,3 @@ Retrieved documents:
    - document_type: thematic_basket
    - section_heading: 6.4 Četvrta godina, osmi semestar, Izborni predmet 3
    - score: 2.2262
-6. `04_baskets/2027/pit_software_erp_digital_korpa.md`
-   - title: PIT 2027, Software / ERP / digital korpa
-   - document_type: thematic_basket
-   - section_heading: 4.2 Elektronski platni sistemi
-   - score: 2.2053
-7. `04_baskets/2027/pit_izborne_korpe_overview.md`
-   - title: PIT 2027, pregled izbornih korpi i pravila preporuke
-   - document_type: basket_overview
-   - section_heading: 5.7 Četvrta godina, osmi semestar, Izborni predmet 3
-   - score: 1.9897
-8. `04_baskets/2027/pit_izborne_korpe_overview.md`
-   - title: PIT 2027, pregled izbornih korpi i pravila preporuke
-   - document_type: basket_overview
-   - section_heading: 5.5 Četvrta godina, sedmi semestar, Izborni predmet 1
-   - score: 1.7961

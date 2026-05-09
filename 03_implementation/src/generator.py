@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import concurrent.futures
+from collections.abc import Iterator
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from collections.abc import Iterator
 from typing import Any
 
 from .config import Settings, load_settings
@@ -28,8 +29,18 @@ class ProviderError(RuntimeError):
     pass
 
 
-def generate_answer(messages: list[Message]) -> dict[str, Any]:
-    settings = load_settings()
+def _call_with_timeout(fn: Any, timeout_seconds: int) -> Any:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(fn)
+        try:
+            return future.result(timeout=timeout_seconds)
+        except concurrent.futures.TimeoutError:
+            raise ProviderError(f"LLM call timed out after {timeout_seconds}s")
+
+
+def generate_answer(messages: list[Message], settings: Settings | None = None) -> dict[str, Any]:
+    if settings is None:
+        settings = load_settings()
     primary_provider = settings.llm_provider.strip().lower()
     fallback_provider = settings.llm_fallback_provider.strip().lower()
 
@@ -73,8 +84,9 @@ def generate_answer(messages: list[Message]) -> dict[str, Any]:
             return result.to_dict()
 
 
-def generate_answer_stream(messages: list[Message]) -> Iterator[dict[str, Any]]:
-    settings = load_settings()
+def generate_answer_stream(messages: list[Message], settings: Settings | None = None) -> Iterator[dict[str, Any]]:
+    if settings is None:
+        settings = load_settings()
     primary_provider = settings.llm_provider.strip().lower()
     fallback_provider = settings.llm_fallback_provider.strip().lower()
     yielded_text = False
@@ -181,16 +193,22 @@ def _generate_with_gemini(messages: list[Message], settings: Settings) -> Provid
 
     system_instruction, contents = _messages_to_gemini_prompt(messages)
     client = genai.Client(api_key=settings.gemini_api_key)
-    response = client.models.generate_content(
-        model=settings.gemini_model,
-        contents=contents,
-        config=types.GenerateContentConfig(
-            system_instruction=system_instruction or None,
-            temperature=settings.llm_temperature,
-            max_output_tokens=settings.llm_max_tokens,
-            top_p=settings.llm_top_p,
-        ),
+    generate_config = types.GenerateContentConfig(
+        system_instruction=system_instruction or None,
+        temperature=settings.llm_temperature,
+        max_output_tokens=settings.llm_max_tokens,
+        top_p=settings.llm_top_p,
+        thinking_config=types.ThinkingConfig(thinking_budget=0),
     )
+
+    def _call() -> Any:
+        return client.models.generate_content(
+            model=settings.gemini_model,
+            contents=contents,
+            config=generate_config,
+        )
+
+    response = _call_with_timeout(_call, settings.llm_timeout)
     answer = getattr(response, "text", None) or str(response)
     return ProviderResult(
         answer=answer,
@@ -227,6 +245,7 @@ def _generate_stream_with_gemini(
             temperature=settings.llm_temperature,
             max_output_tokens=settings.llm_max_tokens,
             top_p=settings.llm_top_p,
+            thinking_config=types.ThinkingConfig(thinking_budget=0),
         ),
     )
     for chunk in response_stream:
@@ -256,7 +275,7 @@ def _generate_with_openai(messages: list[Message], settings: Settings) -> Provid
     except ImportError as exc:
         raise ProviderError("Missing openai package. Install requirements.txt.") from exc
 
-    client = OpenAI(api_key=settings.openai_api_key)
+    client = OpenAI(api_key=settings.openai_api_key, timeout=settings.llm_timeout)
     response = client.chat.completions.create(
         model=settings.openai_model,
         messages=messages,
@@ -288,7 +307,7 @@ def _generate_stream_with_openai(
     except ImportError as exc:
         raise ProviderError("Missing openai package. Install requirements.txt.") from exc
 
-    client = OpenAI(api_key=settings.openai_api_key)
+    client = OpenAI(api_key=settings.openai_api_key, timeout=settings.llm_timeout)
     answer_parts: list[str] = []
     stream = client.chat.completions.create(
         model=settings.openai_model,
@@ -361,10 +380,8 @@ def _log_generation(
         f"prompt_chars={_prompt_length(messages)} "
         f"error={result.error or ''}\n"
     )
-    log_path.write_text(
-        (log_path.read_text(encoding="utf-8") if log_path.exists() else "") + line,
-        encoding="utf-8",
-    )
+    with log_path.open("a", encoding="utf-8") as log_file:
+        log_file.write(line)
 
 
 if __name__ == "__main__":

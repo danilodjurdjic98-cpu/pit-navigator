@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="pit-navigator.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
@@ -30,14 +30,14 @@
 <div class="wrapper row1">
   <header id="header" class="clear">
     <div id="logo" class="fl_left">
-      <h1><a href="index.html"></a>POSLOVNA INFORMATIKA</h1>
+      <h1><a href="../../index.html"></a>POSLOVNA INFORMATIKA</h1>
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="../../index.html">Home</a></li>
         <li><a class="drop" href="#">Predavanja</a>
           <ul>
-            <li><a href="materijal/PIN-uvodne informacije26.pdf">Uvodne informacije</a></li>
+            <li><a href="../../materijal/PIN-uvodne informacije26.pdf">Uvodne informacije</a></li>
             <li><a href="#">SQL &gt;&gt;</a></li>
             <li><a href="#">Java &gt;&gt;</a></li>
             <li><a href="#">Teorijski deo &gt;&gt;</a></li>
@@ -50,14 +50,14 @@
             <li><a href="#">vežbe - Java &gt;&gt;</a></li>
           </ul>
         </li>
-        <li><a href="materijal/plan_PIN_2026.pdf">Informacioni paket</a></li>
+        <li><a href="../../materijal/plan_PIN_2026.pdf">Informacioni paket</a></li>
         <li><a class="drop" href="http://ns.ekof.bg.ac.rs/~pin/aktivnosti/index.php">Aktivnosti studenata</a></li>
         <li><a class="drop" href="#">Pripremna nastava</a>
           <ul>
-            <li><a href="pripremna/2026/prijemni_inf_26.pdf">Osnovne informacije</a></li>
+            <li><a href="../../pripremna/2026/prijemni_inf_26.pdf">Osnovne informacije</a></li>
           </ul>
         </li>
-        <li class="active"><a href="pit-navigator.html">PIT Navigator</a></li>
+        <li class="active"><a href="./">PIT Navigator</a></li>
       </ul>
     </nav>
   </header>
@@ -127,11 +127,11 @@
     <div class="one_quarter">
       <h6 class="title">BRZI LINKOVI</h6>
       <ul class="nospace linklist">
-        <li><a href="index.html">Home Page</a></li>
+        <li><a href="../../index.html">Home Page</a></li>
         <li>Predavanja</li>
         <li>Vežbe</li>
         <li><a href="#">Kontakt</a></li>
-        <li><a href="pit-navigator.html">PIT Navigator</a></li>
+        <li><a href="./">PIT Navigator</a></li>
       </ul>
     </div>
   </footer>
@@ -139,15 +139,16 @@
 
 <div class="wrapper row6">
   <div id="copyright" class="clear">
-    <p class="fl_left"> |PoslovnaInformatika | 2019</p>
+    <p class="fl_left"> |PoslovnaInformatika | 2026</p>
   </div>
 </div>
 
 <script>
-  // U produkciji API_URL zameniti produkcionim PIT Navigator API endpoint-om.
-  window.PIT_CONFIG = window.PIT_CONFIG || {
-    API_URL: "http://127.0.0.1:8001/chat",
-    STREAM_API_URL: "http://127.0.0.1:8001/chat/stream"
+  // PRODUKCIJA: zameniti URL pre upload-a na server.
+  // Format: "https://ime-servera.com" bez trailing slash-a.
+  window.PIT_CONFIG = {
+    API_URL: "https://PIT-NAVIGATOR-API-URL/chat",
+    STREAM_API_URL: "https://PIT-NAVIGATOR-API-URL/chat/stream"
   };
 </script>
 <script src="pit-navigator.js"></script>

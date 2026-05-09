@@ -26,5 +26,9 @@ Thumbs.db
 *.tmp
 *.bak
 
+# Internal planning files
+Plan rada.txt
+logika pocetak.txt
+
 # Local website sample files
 pin sajt/

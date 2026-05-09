@@ -11,6 +11,9 @@ from time import perf_counter
 from typing import Any
 from uuid import uuid4
 
+import asyncio
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -23,7 +26,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from src.config import Settings, load_settings  # noqa: E402
 from src.generator import generate_answer, generate_answer_stream  # noqa: E402
-from src.intent_classifier import Classification, classify  # noqa: E402
+from src.intent_classifier import Classification, classify, detect_course_names  # noqa: E402
 from src.prompt_builder import build_messages, collect_source_paths  # noqa: E402
 from src.retriever import Retriever  # noqa: E402
 
@@ -208,7 +211,7 @@ class HistoryMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     conversation_id: str | None = None
-    question: str = Field(..., min_length=1)
+    question: str = Field(..., min_length=1, max_length=2000)
     history: list[HistoryMessage] = Field(default_factory=list)
 
 
@@ -234,12 +237,22 @@ class ChatGenerationContext:
     accreditation_context: str | None
 
 
-app = FastAPI(title="PIT Navigator API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    loop = asyncio.get_event_loop()
+    try:
+        await loop.run_in_executor(None, _get_runtime)
+    except Exception as exc:
+        print(f"[startup] Pre-warm failed (index may be missing): {exc}")
+    yield
 
-# Production deployment should add: https://pin.ekof.bg.ac.rs
+
+app = FastAPI(title="PIT Navigator API", lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://pin.ekof.bg.ac.rs",
         "http://localhost",
         "http://localhost:5500",
         "http://127.0.0.1:5500",
@@ -1044,9 +1057,10 @@ def _prepare_chat(
         )
     )
     is_program_level_career = _is_program_level_career_question(request.question)
+    current_question_course_names = detect_course_names(request.question)
     effective_question = (
         request.question
-        if is_program_level_career
+        if is_program_level_career or current_question_course_names
         else _build_effective_question(request.question, request.history)
     )
     classification = classify(effective_question)
@@ -1228,6 +1242,22 @@ def health() -> dict[str, str]:
     return {"status": "ok", "service": "pit-navigator-api"}
 
 
+@app.get("/health/deep")
+def health_deep() -> dict[str, Any]:
+    try:
+        settings, retriever = _get_runtime()
+        return {
+            "status": "ok",
+            "service": "pit-navigator-api",
+            "model_loaded": retriever.model is not None,
+            "index_chunks": len(retriever.chunks),
+            "provider": settings.llm_provider,
+            "fallback_provider": settings.llm_fallback_provider,
+        }
+    except Exception as exc:
+        return {"status": "error", "detail": str(exc)[:200]}
+
+
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
     start_time = perf_counter()
@@ -1240,7 +1270,7 @@ def chat(request: ChatRequest) -> ChatResponse:
         if isinstance(prepared, ChatResponse):
             return prepared
 
-        generation_result = generate_answer(prepared.messages)
+        generation_result = generate_answer(prepared.messages, settings)
         answer = _provider_value(generation_result, "answer", "") or ""
         provider = _provider_value(generation_result, "provider", settings.llm_provider) or ""
         model = _provider_value(generation_result, "model", _model_for_settings(settings)) or ""
@@ -1287,373 +1317,6 @@ def chat(request: ChatRequest) -> ChatResponse:
         )
         return response
 
-        accreditation_context = _detect_accreditation_context(
-            request.question,
-            request.history,
-        )
-        pin_elective_followup = (
-            accreditation_context == "PIN 2020"
-            and (
-                _is_elective_recommendation_question(request.question, [])
-                or (_is_pin_followup(request.question) and _history_has_elective_recommendation(request.history))
-            )
-            and not _is_career_jobs_question(request.question)
-        )
-        effective_question = _build_effective_question(request.question, request.history)
-        classification = classify(effective_question)
-        results = retriever.search(
-            effective_question,
-            classification.intents,
-            settings.top_k,
-            classification.course_names,
-        )
-
-        if (
-            not results
-            or (
-                settings.refuse_out_of_scope
-                and results[0].score < settings.min_retrieval_score
-            )
-        ):
-            if pin_elective_followup:
-                response = ChatResponse(
-                    conversation_id=conversation_id,
-                    answer=PIN_ELECTIVES_MESSAGE,
-                    sources=[],
-                    provider="",
-                    model="",
-                    fallback_used=False,
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                )
-                _write_chat_log(
-                    _base_log_entry(
-                        conversation_id=conversation_id,
-                        question=request.question,
-                        answer=response.answer,
-                        detected_intents=response.detected_intents,
-                        detected_course_names=response.detected_course_names,
-                        latency_ms=_elapsed_ms(start_time),
-                    )
-                )
-                return response
-            if accreditation_context == "PIN 2020" and _is_career_jobs_question(request.question):
-                response = ChatResponse(
-                    conversation_id=conversation_id,
-                    answer=PIN_AI_CAREER_MESSAGE,
-                    sources=[],
-                    provider="",
-                    model="",
-                    fallback_used=False,
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                )
-                _write_chat_log(
-                    _base_log_entry(
-                        conversation_id=conversation_id,
-                        question=request.question,
-                        answer=response.answer,
-                        detected_intents=response.detected_intents,
-                        detected_course_names=response.detected_course_names,
-                        latency_ms=_elapsed_ms(start_time),
-                    )
-                )
-                return response
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=OUT_OF_SCOPE_MESSAGE,
-                sources=[],
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        context_results = _select_context_results(settings, results)
-        if not context_results:
-            if pin_elective_followup:
-                response = ChatResponse(
-                    conversation_id=conversation_id,
-                    answer=PIN_ELECTIVES_MESSAGE,
-                    sources=[],
-                    provider="",
-                    model="",
-                    fallback_used=False,
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                )
-                _write_chat_log(
-                    _base_log_entry(
-                        conversation_id=conversation_id,
-                        question=request.question,
-                        answer=response.answer,
-                        detected_intents=response.detected_intents,
-                        detected_course_names=response.detected_course_names,
-                        latency_ms=_elapsed_ms(start_time),
-                    )
-                )
-                return response
-            if accreditation_context == "PIN 2020" and _is_career_jobs_question(request.question):
-                response = ChatResponse(
-                    conversation_id=conversation_id,
-                    answer=PIN_AI_CAREER_MESSAGE,
-                    sources=[],
-                    provider="",
-                    model="",
-                    fallback_used=False,
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                )
-                _write_chat_log(
-                    _base_log_entry(
-                        conversation_id=conversation_id,
-                        question=request.question,
-                        answer=response.answer,
-                        detected_intents=response.detected_intents,
-                        detected_course_names=response.detected_course_names,
-                        latency_ms=_elapsed_ms(start_time),
-                    )
-                )
-                return response
-            if _is_pin_followup(request.question):
-                response = ChatResponse(
-                    conversation_id=conversation_id,
-                    answer=PIN_FOLLOWUP_MESSAGE,
-                    sources=[],
-                    provider="",
-                    model="",
-                    fallback_used=False,
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                )
-                _write_chat_log(
-                    _base_log_entry(
-                        conversation_id=conversation_id,
-                        question=request.question,
-                        answer=response.answer,
-                        detected_intents=response.detected_intents,
-                        detected_course_names=response.detected_course_names,
-                        latency_ms=_elapsed_ms(start_time),
-                    )
-                )
-                return response
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=OUT_OF_SCOPE_MESSAGE,
-                sources=[],
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        if _is_program_name_question(request.question):
-            sources = collect_source_paths(context_results) if settings.include_sources else []
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=PROGRAM_NAME_MESSAGE,
-                sources=sources,
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    sources=response.sources,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    provider=response.provider,
-                    model=response.model,
-                    fallback_used=response.fallback_used,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        if pin_elective_followup:
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=PIN_ELECTIVES_MESSAGE,
-                sources=collect_source_paths(context_results) if settings.include_sources else [],
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    sources=response.sources,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    provider=response.provider,
-                    model=response.model,
-                    fallback_used=response.fallback_used,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        if accreditation_context == "PIN 2020" and _is_career_jobs_question(request.question):
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=PIN_AI_CAREER_MESSAGE,
-                sources=collect_source_paths(context_results) if settings.include_sources else [],
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    sources=response.sources,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    provider=response.provider,
-                    model=response.model,
-                    fallback_used=response.fallback_used,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        if _is_pin_followup(request.question):
-            response = ChatResponse(
-                conversation_id=conversation_id,
-                answer=PIN_FOLLOWUP_MESSAGE,
-                sources=collect_source_paths(context_results) if settings.include_sources else [],
-                provider="",
-                model="",
-                fallback_used=False,
-                detected_intents=classification.intents,
-                detected_course_names=classification.course_names,
-            )
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    answer=response.answer,
-                    sources=response.sources,
-                    detected_intents=response.detected_intents,
-                    detected_course_names=response.detected_course_names,
-                    provider=response.provider,
-                    model=response.model,
-                    fallback_used=response.fallback_used,
-                    latency_ms=_elapsed_ms(start_time),
-                )
-            )
-            return response
-
-        messages = build_messages(
-            effective_question,
-            classification.intents,
-            classification.course_names,
-            context_results,
-        )
-        messages = _append_web_chat_instructions(
-            messages,
-            request.question,
-            classification.intents,
-            accreditation_context,
-        )
-        generation_result = generate_answer(messages)
-        answer = _provider_value(generation_result, "answer", "") or ""
-        provider = _provider_value(generation_result, "provider", settings.llm_provider) or ""
-        model = _provider_value(generation_result, "model", _model_for_settings(settings)) or ""
-        fallback_used = bool(_provider_value(generation_result, "fallback_used", False))
-        generator_error = _provider_value(generation_result, "error")
-
-        if not answer:
-            error = _sanitize_error(generator_error or "Generator nije vratio odgovor.", settings)
-            _write_chat_log(
-                _base_log_entry(
-                    conversation_id=conversation_id,
-                    question=request.question,
-                    sources=collect_source_paths(context_results),
-                    detected_intents=classification.intents,
-                    detected_course_names=classification.course_names,
-                    provider=provider,
-                    model=model,
-                    fallback_used=fallback_used,
-                    latency_ms=_elapsed_ms(start_time),
-                    error=error,
-                )
-            )
-            raise HTTPException(
-                status_code=500,
-                detail="Došlo je do greške pri obradi pitanja.",
-            )
-
-        answer = _apply_accreditation_assumption(
-            _strip_final_source_section(answer),
-            request.question,
-            classification.intents,
-            accreditation_context,
-        )
-        answer = _dedupe_pin_followup_note(answer)
-        sources = collect_source_paths(context_results) if settings.include_sources else []
-        response = ChatResponse(
-            conversation_id=conversation_id,
-            answer=answer,
-            sources=sources,
-            provider=provider,
-            model=model,
-            fallback_used=fallback_used,
-            detected_intents=classification.intents,
-            detected_course_names=classification.course_names,
-        )
-        _write_chat_log(
-            _base_log_entry(
-                conversation_id=conversation_id,
-                question=request.question,
-                answer=response.answer,
-                sources=response.sources,
-                detected_intents=response.detected_intents,
-                detected_course_names=response.detected_course_names,
-                provider=response.provider,
-                model=response.model,
-                fallback_used=response.fallback_used,
-                latency_ms=_elapsed_ms(start_time),
-                error=_sanitize_error(generator_error, settings) if generator_error else None,
-            )
-        )
-        return response
     except HTTPException:
         raise
     except Exception as exc:
@@ -1715,7 +1378,7 @@ def chat_stream(request: ChatRequest) -> StreamingResponse:
             fallback_used = False
             generator_error: Any = None
 
-            for generation_event in generate_answer_stream(prepared.messages):
+            for generation_event in generate_answer_stream(prepared.messages, settings):
                 event_type = generation_event.get("type")
                 if event_type == "token":
                     token = generation_event.get("text", "")
