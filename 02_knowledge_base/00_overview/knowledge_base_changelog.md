@@ -67,6 +67,35 @@ Ova verzija je dovoljna za početno RAG testiranje jer sadrži:
 - indeks knowledge base-a
 - README kao ulaznu orijentaciju za korišćenje baze
 
+## Version v1.1, 2026-05-13
+
+Status: expanded_business_analytics_retrieval
+Scope: MBA Business Analytics continuation and course importance retrieval
+
+Added:
+
+- `00_overview/mba_business_analytics_as_pit_continuation.md`
+- `05_retrieval_guides/pit_course_importance_guide.md`
+
+Changed:
+
+- dodat dokument o Master in Business Analytics kao prirodnom nastavku PIT/PIN profila
+- dodat retrieval guide za značaj predmeta i vezu sa karijernim putanjama
+- proširen kontekst za Operaciona istraživanja, Mašinsko učenje i Analizu finansijskih izveštaja
+- dodata veza između PIT predmeta, MBA Business Analytics kompetencija i karijera kao što su BI, AI/data analytics, finance analytics, ERP/SAP, consulting i digital transformation
+
+Not changed:
+
+- backend logika nije menjana
+- frontend stil i runtime konfiguracija nisu menjani
+- postojeći izvori i policy pravila ostaju aktivni
+
+Notes:
+
+- MBA se predstavlja kao prirodan, ali ne jedini nastavak posle PIT-a
+- MBA se ne predstavlja kao čisti data science ili software engineering master
+- dokumenti ne garantuju posao, platu, praksu ili uspeh
+
 ## 3. Glavna struktura v1.0
 
 U verziji v1.0 knowledge base je organizovan ovako:

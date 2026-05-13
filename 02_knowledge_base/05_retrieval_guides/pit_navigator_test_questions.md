@@ -1387,7 +1387,224 @@ Policy rizici:
 - ne koristiti previše žargona bez objašnjenja
 - ne obećati posao
 
-## 15. Minimalni test set za prvu proveru
+## 15. MBA i značaj predmeta testovi
+
+### 15.1 Test pitanje
+
+```text
+Da li je Master in Business Analytics dobar nastavak posle PIT-a?
+```
+
+Očekivani intent:
+
+```text
+PROGRAM_OVERVIEW
+COURSE_EXPLANATION
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/mba_business_analytics_as_pit_continuation.md
+05_retrieval_guides/pit_course_importance_guide.md
+```
+
+Očekivani elementi odgovora:
+
+- MBA je prirodan nastavak za PIT/PIN studente koje zanimaju business analytics, data management, BI, Python/R, ML osnove, data storytelling i digital transformation
+- nije jedini mogući nastavak
+- nije čisti data science ili software engineering master
+- ne garantuje posao
+
+### 15.2 Test pitanje
+
+```text
+Šta dobijam ako posle PIT-a upišem MBA?
+```
+
+Očekivani intent:
+
+```text
+PROGRAM_OVERVIEW
+COURSE_EXPLANATION
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/mba_business_analytics_as_pit_continuation.md
+05_retrieval_guides/pit_course_importance_guide.md
+```
+
+Očekivani elementi odgovora:
+
+- produbljivanje poslovne analitike
+- data management, Python/R, ML/statističko modelovanje, BI i data storytelling
+- marketing/customer analytics, financial/risk analytics, consulting analytics
+- privatnost, bezbednost i etika podataka
+
+### 15.3 Test pitanje
+
+```text
+Da li je MBA više za data science ili business analytics?
+```
+
+Očekivani intent:
+
+```text
+COURSE_EXPLANATION
+CAREER_RECOMMENDATION
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/mba_business_analytics_as_pit_continuation.md
+```
+
+Očekivani elementi odgovora:
+
+- MBA treba predstaviti kao business analytics profil
+- može uključiti ML i statističko modelovanje, ali nije isto što i čisti data science master
+- fokus je na poslovnoj odluci, interpretaciji i primeni podataka
+
+### 15.4 Test pitanje
+
+```text
+Koji predmeti na PIT-u su najbolja priprema za MBA?
+```
+
+Očekivani intent:
+
+```text
+PROGRAM_OVERVIEW
+COURSE_EXPLANATION
+CAREER_RECOMMENDATION
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/mba_business_analytics_as_pit_continuation.md
+05_retrieval_guides/pit_course_importance_guide.md
+```
+
+Očekivani elementi odgovora:
+
+- Baze podataka, Analiza podataka, Poslovna analitika, Poslovna inteligencija, ERP softver
+- Operaciona istraživanja i Mašinsko učenje kao jaka analitička pojačanja
+- Analiza finansijskih izveštaja, Istraživanje tržišta i Menadžment projekata za domenske putanje
+
+### 15.5 Test pitanje
+
+```text
+Koji je značaj Operacionih istraživanja?
+```
+
+Očekivani intent:
+
+```text
+COURSE_EXPLANATION
+```
+
+Primarni dokumenti:
+
+```text
+05_retrieval_guides/pit_course_importance_guide.md
+01_courses/2027/operaciona_istrazivanja.md
+03_course_plans/2025_2026/operaciona_istrazivanja.md
+```
+
+Očekivani elementi odgovora:
+
+- most između poslovnog odlučivanja, optimizacije, simulacija i preskriptivne analitike
+- dodaje "šta da uradimo" dimenziju
+- korisno za business analytics, finance/risk, supply chain, pricing, resource allocation i consulting
+- ne predstaviti kao čist programerski predmet
+
+### 15.6 Test pitanje
+
+```text
+Koliko je Mašinsko učenje važno za AI putanju?
+```
+
+Očekivani intent:
+
+```text
+COURSE_EXPLANATION
+CAREER_RECOMMENDATION
+```
+
+Primarni dokumenti:
+
+```text
+05_retrieval_guides/pit_course_importance_guide.md
+01_courses/2027/masinsko_ucenje.md
+```
+
+Očekivani elementi odgovora:
+
+- najdirektniji predmet za AI/data modeling putanju
+- klasifikacija, regresija, klasterovanje, evaluacija i interpretacija modela
+- ne pravi automatski ML inženjera
+- vredan je kada se model poveže sa poslovnom odlukom
+
+### 15.7 Test pitanje
+
+```text
+Zašto je Analiza finansijskih izveštaja korisna za PIT studenta?
+```
+
+Očekivani intent:
+
+```text
+COURSE_EXPLANATION
+CAREER_RECOMMENDATION
+```
+
+Primarni dokumenti:
+
+```text
+05_retrieval_guides/pit_course_importance_guide.md
+04_baskets/2027/pit_finance_analytics_korpa.md
+04_baskets/2027/pit_minor_electives_reference.md
+```
+
+Očekivani elementi odgovora:
+
+- daje finansijski kontekst za BI, ERP i analitičke modele
+- povezuje izveštaje, pokazatelje, profitabilnost, likvidnost, zaduženost, efikasnost i performanse
+- korisna je za finance analytics, controlling, consulting, risk/credit analytics i ERP/FI
+- nije tehnički data predmet, već domensko znanje za analitiku
+
+### 15.8 Dodatna pitanja za pokrivanje
+
+```text
+Koji je značaj Baza podataka?
+Koji je značaj ERP softvera?
+Koji predmet je najvažniji za business analyst putanju?
+Koji predmeti su najkorisniji za finance analytics?
+Ako hoću konsultantsku analytics putanju, šta da biram?
+```
+
+Primarni dokumenti:
+
+```text
+05_retrieval_guides/pit_course_importance_guide.md
+00_overview/mba_business_analytics_as_pit_continuation.md
+04_baskets/2027/pit_data_ai_bi_korpa.md
+04_baskets/2027/pit_finance_analytics_korpa.md
+04_baskets/2027/pit_software_erp_digital_korpa.md
+```
+
+Policy rizici za celu sekciju:
+
+- ne garantovati posao, praksu, platu ili uspeh
+- ne predstaviti PIT kao čisto programerski smer
+- ne predstaviti MBA kao čisti data science master
+- ne tvrditi da jedan predmet sam pokriva celu karijeru
+
+## 16. Minimalni test set za prvu proveru
 
 Ako se radi brza QA provera, dovoljno je testirati ova pitanja:
 
@@ -1414,7 +1631,7 @@ Očekivanje:
 - nastavnici se ne komentarišu
 - fallback se koristi kada nema detaljnog dokumenta
 
-## 16. Šta znači uspešan test
+## 17. Šta znači uspešan test
 
 Test je uspešan ako bot:
 
@@ -1429,7 +1646,7 @@ Test je uspešan ako bot:
 - koristi fallback kada nema dovoljno informacija
 - daje praktičan i razumljiv odgovor
 
-## 17. Šta znači neuspešan test
+## 18. Šta znači neuspešan test
 
 Test nije uspešan ako bot:
 
@@ -1444,7 +1661,7 @@ Test nije uspešan ako bot:
 - koristi tematsku korpu kao formalno pravilo
 - ne koristi fallback kada nema detaljan dokument
 
-## 18. Preporučeni zapis rezultata testiranja
+## 19. Preporučeni zapis rezultata testiranja
 
 Za svaki test koristiti format:
 
@@ -1478,7 +1695,7 @@ Policy issues: none
 Action needed: none
 ```
 
-## 19. Povezani dokumenti
+## 20. Povezani dokumenti
 
 Ovaj test set je povezan sa:
 

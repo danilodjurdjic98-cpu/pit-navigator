@@ -175,6 +175,29 @@ DATA_ENGINEER_QUERY_TERMS = [
     "inzenjer podataka",
 ]
 
+MASTER_CONTINUATION_QUERY_TERMS = [
+    "master",
+    "mba",
+    "business analytics",
+    "master in business analytics",
+    "posle pit",
+    "posle pita",
+    "posle pin",
+    "posle pina",
+    "posle ovog",
+    "posle ovoga",
+    "sta posle",
+    "šta posle",
+    "sta dalje",
+    "šta dalje",
+    "nastavak",
+    "nastavim",
+    "upisem posle",
+    "upišem posle",
+    "koji master",
+    "kakav master",
+]
+
 EXACT_BOOST_TERMS = {
     "flask",
     "php",
@@ -411,6 +434,11 @@ class Retriever:
             and "04_baskets/2027/pit_data_ai_bi_korpa.md" in path
         ):
             boost += 0.55
+        if any(term in question_text for term in MASTER_CONTINUATION_QUERY_TERMS):
+            if "00_overview/mba_business_analytics_as_pit_continuation.md" in path:
+                boost += 1.10
+            if "05_retrieval_guides/pit_course_importance_guide.md" in path:
+                boost += 0.45
         if "ACCREDITATION_COMPARISON" in intents and "pin_2020_vs_pit_2027.md" in path:
             boost += 0.25
         if "FALLBACK" in intents and document_type in {"answering_policy", "retrieval_guide"}:

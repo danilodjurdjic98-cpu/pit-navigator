@@ -150,7 +150,25 @@ Važno pravilo:
 
 Bot treba da kaže da PIT 2027 formalno jasnije strukturira modernizaciju kroz nove obavezne predmete i izborne pozicije, ali da PIN 2020 ne treba predstavljati kao zastareo.
 
-### 4.4 knowledge_base_index.md
+### 4.4 mba_business_analytics_as_pit_continuation.md
+
+Svrha:
+
+Pregled Master in Business Analytics programa kao prirodnog, ali ne jedinog, nastavka PIT/PIN profila.
+
+Koristi se za:
+
+- pitanja da li je MBA dobar nastavak posle PIT-a
+- pitanja šta student dobija ako posle PIT-a upiše Master in Business Analytics
+- objašnjenje da je MBA business analytics profil, a ne čisti data science ili software engineering master
+- povezivanje PIT osnove sa SQL-om, Python/R analitikom, BI-jem, ML osnovama, data storytellingom, financial/risk analytics, customer analytics, consulting i digital transformation putanjama
+- realne napomene da master ne garantuje posao i ne pretvara automatski studenta u data scientista, ML inženjera ili software inženjera
+
+Važno pravilo:
+
+Bot treba da predstavi MBA kao prirodan nastavak za studente koji žele poslovnu analitiku, data management, programiranje za analitiku, vizualizaciju, ML/statističko modelovanje, konsultantsku analitiku i etiku podataka, ali ne sme da ga predstavi kao jedini ispravan nastavak posle PIT-a.
+
+### 4.5 knowledge_base_index.md
 
 Svrha:
 
@@ -753,6 +771,23 @@ Koristi se za:
 - primer očekivane logike odgovora
 - izbegavanje pogrešnog retrieval-a
 
+### 12.3 pit_course_importance_guide.md
+
+Svrha:
+
+Retrieval vodič za objašnjenje značaja predmeta, korisnosti predmeta za karijerne putanje i veze predmeta sa MBA Business Analytics.
+
+Koristi se za:
+
+- pitanja "zašto je ovaj predmet važan"
+- pitanja "da li je predmet koristan za MBA, BI, AI, ERP/SAP, finance analytics ili consulting"
+- objašnjenje veze između predmeta, karijernih putanja i poslovno-analitičkog profila
+- posebno za Operaciona istraživanja, Mašinsko učenje i Analizu finansijskih izveštaja
+
+Važno pravilo:
+
+Ovaj dokument nije formalni silabus. Za ocenjivanje, nedeljni plan i aktuelno izvođenje treba koristiti course_plan dokumente kada postoje.
+
 ## 13. Folder 06_policy
 
 Folder:
@@ -994,6 +1029,7 @@ Posebno povezani dokumenti:
 00_overview/pin_2020_overview.md
 00_overview/pit_2027_overview.md
 00_overview/pin_2020_vs_pit_2027.md
+00_overview/mba_business_analytics_as_pit_continuation.md
 
 04_baskets/2027/pit_izborne_korpe_overview.md
 04_baskets/2027/pit_data_ai_bi_korpa.md
@@ -1003,6 +1039,7 @@ Posebno povezani dokumenti:
 
 05_retrieval_guides/pit_navigator_retrieval_map.md
 05_retrieval_guides/pit_navigator_intent_examples.md
+05_retrieval_guides/pit_course_importance_guide.md
 
 06_policy/pit_navigator_answering_policy.md
 ```

@@ -415,6 +415,34 @@ def _is_program_name_question(question: str) -> bool:
     )
 
 
+def _is_master_continuation_question(question: str) -> bool:
+    normalized = question.casefold()
+    return any(
+        marker in normalized
+        for marker in [
+            "master",
+            "mba",
+            "business analytics",
+            "posle pit",
+            "posle pita",
+            "posle pin",
+            "posle pina",
+            "posle ovog",
+            "posle ovoga",
+            "sta posle",
+            "šta posle",
+            "sta dalje",
+            "šta dalje",
+            "nastavak",
+            "nastavim",
+            "upisem posle",
+            "upišem posle",
+            "koji master",
+            "kakav master",
+        ]
+    )
+
+
 def _is_pin_followup(question: str) -> bool:
     normalized = question.casefold().strip()
     return any(
@@ -1058,15 +1086,34 @@ def _prepare_chat(
     )
     is_program_level_career = _is_program_level_career_question(request.question)
     current_question_course_names = detect_course_names(request.question)
+    is_master_continuation = _is_master_continuation_question(request.question)
     effective_question = (
         request.question
         if is_program_level_career or current_question_course_names
         else _build_effective_question(request.question, request.history)
     )
+    if is_master_continuation:
+        effective_question = (
+            f"{effective_question}\n\n"
+            "Korisnik pita neformalno o tome koji master, nastavak ili dalji smer "
+            "ima smisla posle PIT/PIN profila. Relevantan kontekst je Master in "
+            "Business Analytics kao prirodan, ali ne jedini, nastavak PIT/PIN "
+            "profila, uz vezu sa PIT predmetima, MBA Business Analytics "
+            "kompetencijama i karijernim putanjama."
+        )
     classification = classify(effective_question)
     if is_program_level_career:
         classification = Classification(
             intents=["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION", "JOB_MARKET"],
+            course_names=[],
+        )
+    if is_master_continuation:
+        classification = Classification(
+            intents=list(
+                dict.fromkeys(
+                    classification.intents + ["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION"]
+                )
+            ),
             course_names=[],
         )
     if pin_outlook_followup:

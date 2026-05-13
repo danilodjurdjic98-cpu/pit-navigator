@@ -63,3 +63,27 @@
     - "04_baskets/2027/pit_minor_electives_reference.md"
     - "04_baskets/2027/pit_software_erp_digital_korpa.md"
     - "04_baskets/2027/pit_izborne_korpe_overview.md"
+
+- id: MBA_CONTINUATION
+  question: "Koji je značaj PIT predmeta za MBA Business Analytics?"
+  expected_intents:
+    - PROGRAM_OVERVIEW
+  expected_paths:
+    - "00_overview/mba_business_analytics_as_pit_continuation.md"
+    - "05_retrieval_guides/pit_course_importance_guide.md"
+
+- id: COURSE_IMPORTANCE_ML_OR
+  question: "Kako se Operaciona istraživanja i Mašinsko učenje povezuju sa MBA Business Analytics i AI karijera?"
+  expected_intents:
+    - CAREER_RECOMMENDATION
+  expected_paths:
+    - "00_overview/mba_business_analytics_as_pit_continuation.md"
+    - "05_retrieval_guides/pit_course_importance_guide.md"
+
+- id: COURSE_IMPORTANCE_AFI
+  question: "AFI za PIT studenta, MBA Business Analytics i finance analytics posle PIT-a"
+  expected_intents:
+    - PROGRAM_OVERVIEW
+  expected_paths:
+    - "00_overview/mba_business_analytics_as_pit_continuation.md"
+    - "05_retrieval_guides/pit_course_importance_guide.md"

@@ -31,6 +31,30 @@ PROGRAM_NAME_QUERY_TERMS = [
 ]
 
 
+MASTER_CONTINUATION_QUERY_TERMS = [
+    "master",
+    "mba",
+    "business analytics",
+    "master in business analytics",
+    "posle pit",
+    "posle pita",
+    "posle pin",
+    "posle pina",
+    "posle ovog",
+    "posle ovoga",
+    "sta posle",
+    "šta posle",
+    "sta dalje",
+    "šta dalje",
+    "nastavak",
+    "nastavim",
+    "upisem posle",
+    "upišem posle",
+    "koji master",
+    "kakav master",
+]
+
+
 COURSE_PATTERNS: dict[str, list[str]] = {
     "ERP softver": ["erp", "sap"],
     "Razvoj softvera": [
@@ -151,6 +175,8 @@ def classify(question: str) -> Classification:
         intents.append("PROGRAM_OVERVIEW")
         if _contains_any(text, ["pin", "pit"]):
             intents.append("ACCREDITATION_COMPARISON")
+    if _contains_any(text, MASTER_CONTINUATION_QUERY_TERMS):
+        intents.extend(["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION"])
     if _contains_any(text, ["pit", "smer", "program", "šta se tu uči", "sta se tu uci"]):
         intents.append("PROGRAM_OVERVIEW")
     if course_names and _contains_any(text, ["konkretno", "predmet", "predmetu"]):
