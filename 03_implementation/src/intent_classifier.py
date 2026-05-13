@@ -55,6 +55,62 @@ MASTER_CONTINUATION_QUERY_TERMS = [
 ]
 
 
+CURRICULUM_QUERY_TERMS = [
+    "kurikulum",
+    "nastavni plan",
+    "struktura studija",
+    "koji predmeti se slusaju",
+    "koji predmeti se slušaju",
+    "sta se slusa",
+    "šta se sluša",
+    "sta se radi",
+    "šta se radi",
+    "sta ima od predmeta",
+    "šta ima od predmeta",
+    "predmeti na pit",
+    "predmeti na smeru",
+    "predmeti po semestrima",
+    "po semestrima",
+    "treća godina",
+    "treca godina",
+    "trećoj godini",
+    "trecoj godini",
+    "3. godini",
+    "3 godini",
+    "četvrta godina",
+    "cetvrta godina",
+    "četvrtoj godini",
+    "cetvrtoj godini",
+    "4. godini",
+    "4 godini",
+    "peti semestar",
+    "šesti semestar",
+    "sesti semestar",
+    "sedmi semestar",
+    "osmi semestar",
+    "obavezni predmeti",
+    "izborni blokovi",
+    "espb",
+]
+
+
+FINANCE_ANALYTICS_QUERY_TERMS = [
+    "finansije",
+    "finansijska korpa",
+    "finansijskoj korpi",
+    "finansijsku korpu",
+    "finance analytics",
+    "financial analytics",
+    "finansijska analitika",
+    "finansijsku analitiku",
+    "finansijskoj analitici",
+    "finansijski pravac",
+    "finansijskom pravcu",
+    "risk analytics",
+    "controlling",
+]
+
+
 COURSE_PATTERNS: dict[str, list[str]] = {
     "ERP softver": ["erp", "sap"],
     "Razvoj softvera": [
@@ -177,6 +233,10 @@ def classify(question: str) -> Classification:
             intents.append("ACCREDITATION_COMPARISON")
     if _contains_any(text, MASTER_CONTINUATION_QUERY_TERMS):
         intents.extend(["PROGRAM_OVERVIEW", "CAREER_RECOMMENDATION"])
+    if _contains_any(text, CURRICULUM_QUERY_TERMS):
+        intents.append("PROGRAM_OVERVIEW")
+    if _contains_any(text, FINANCE_ANALYTICS_QUERY_TERMS):
+        intents.extend(["ELECTIVE_RECOMMENDATION", "CAREER_RECOMMENDATION"])
     if _contains_any(text, ["pit", "smer", "program", "šta se tu uči", "sta se tu uci"]):
         intents.append("PROGRAM_OVERVIEW")
     if course_names and _contains_any(text, ["konkretno", "predmet", "predmetu"]):

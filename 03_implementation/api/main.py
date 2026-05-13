@@ -198,6 +198,55 @@ PIT_ELECTIVE_RECOMMENDATION_MESSAGE = (
     "ERP/SAP procesima i finansijskom analitikom."
 )
 
+PIT_FOURTH_YEAR_CURRICULUM_MESSAGE = (
+    "U PIT 2027 četvrta godina nije sastavljena samo od izbornih predmeta; ima i "
+    "obavezne predmete, stručnu praksu i završni blok.\n\n"
+    "Sedmi semestar, obavezni predmeti:\n"
+    "- Razvoj softvera, 7 ESPB\n"
+    "- Poslovna inteligencija, 7 ESPB\n"
+    "- Menadžment projekata, 7 ESPB\n\n"
+    "Sedmi semestar, izborni i dodatni obavezni deo strukture:\n"
+    "- Izborni blok PIT 5: bira se 7 kredita između Istraživanja tržišta i "
+    "Operacionih istraživanja\n"
+    "- Stručna praksa, 3 ESPB\n\n"
+    "Osmi semestar, obavezni predmeti:\n"
+    "- Elektronsko poslovanje i veštačka inteligencija, 7 ESPB\n"
+    "- ERP softver, 7 ESPB\n\n"
+    "Osmi semestar, izborni i završni deo strukture:\n"
+    "- Izborni blok PIT 6: Mašinsko učenje, Ekonometrija, Kvantitativne finansije "
+    "ili Ekonomska statistika, prema pravilima bloka\n"
+    "- Izborni blok PIT 7: Elektronska trgovina, Nove informacione tehnologije ili "
+    "Elektronski platni sistemi\n"
+    "- Završni blok: Završni rad i povezane završne aktivnosti\n\n"
+    "Dakle, četvrta godina kombinuje obavezne predmete, izborne blokove, stručnu "
+    "praksu i završni rad."
+)
+
+PIT_THIRD_YEAR_CURRICULUM_MESSAGE = (
+    "U PIT 2027 treća godina obuhvata peti i šesti semestar.\n\n"
+    "Peti semestar, obavezni predmeti:\n"
+    "- Baze podataka, 8 ESPB\n"
+    "- Poslovna analitika, 5 ESPB\n"
+    "- Diskretna matematika, 5 ESPB\n"
+    "- Korisničko iskustvo i dizajn, 5 ESPB\n\n"
+    "Peti semestar, izborni blokovi:\n"
+    "- Izborni blok PIT 1: bira se 1 od 2, Teorija verovatnoća ili Linearna algebra\n"
+    "- Izborni blok PIT 2: Menadžment odnosa sa kupcima, Poresko planiranje ili "
+    "Finansijska i aktuarska matematika, prema pravilima bloka\n\n"
+    "Šesti semestar, obavezni predmeti:\n"
+    "- Analiza podataka, 7 ESPB\n"
+    "- Objektno orijentisano programiranje, 7 ESPB\n\n"
+    "Šesti semestar, izborni blokovi:\n"
+    "- Izborni blok PIT 3: izbor iz grupe predmeta kao što su Računovodstveni "
+    "informacioni sistemi, Marketing, Organizacija, Finansijska ekonomija i drugi "
+    "predmeti iz tog bloka\n"
+    "- Izborni blok PIT 4: bira se 1 od 3, Analiza finansijskih izveštaja, "
+    "Upravljačko računovodstvo ili Osnovi poslovnih finansija\n\n"
+    "Dakle, treća godina gradi osnovu kroz baze podataka, poslovnu analitiku, "
+    "matematiku/logiku, UX, analizu podataka, OOP i poslovno-finansijske izborne "
+    "blokove."
+)
+
 MAX_HISTORY_MESSAGES = 6
 MAX_HISTORY_MESSAGE_CHARS = 1000
 MAX_ERROR_CHARS = 500
@@ -443,6 +492,77 @@ def _is_master_continuation_question(question: str) -> bool:
     )
 
 
+def _is_fourth_year_curriculum_question(question: str) -> bool:
+    normalized = question.casefold()
+    has_fourth_year = any(
+        marker in normalized
+        for marker in [
+            "četvrta godina",
+            "cetvrta godina",
+            "četvrtoj godini",
+            "cetvrtoj godini",
+            "4. godina",
+            "4 godina",
+            "4. godini",
+            "4 godini",
+            "sedmi semestar",
+            "osmi semestar",
+        ]
+    )
+    has_curriculum_marker = any(
+        marker in normalized
+        for marker in [
+            "šta se sluša",
+            "sta se slusa",
+            "šta se radi",
+            "sta se radi",
+            "predmeti",
+            "obavezni",
+            "izborni",
+            "kurikulum",
+            "nastavni plan",
+            "ima",
+        ]
+    )
+    return has_fourth_year and has_curriculum_marker
+
+
+def _is_third_year_curriculum_question(question: str) -> bool:
+    normalized = question.casefold()
+    has_third_year = any(
+        marker in normalized
+        for marker in [
+            "treća godina",
+            "treca godina",
+            "trećoj godini",
+            "trecoj godini",
+            "3. godina",
+            "3 godina",
+            "3. godini",
+            "3 godini",
+            "peti semestar",
+            "šesti semestar",
+            "sesti semestar",
+        ]
+    )
+    has_curriculum_marker = any(
+        marker in normalized
+        for marker in [
+            "šta se sluša",
+            "sta se slusa",
+            "šta se radi",
+            "sta se radi",
+            "predmeti",
+            "obavezni",
+            "izborni",
+            "kurikulum",
+            "nastavni plan",
+            "ima",
+        ]
+    )
+    return has_third_year and has_curriculum_marker
+
+
 def _is_pin_followup(question: str) -> bool:
     normalized = question.casefold().strip()
     return any(
@@ -652,6 +772,9 @@ def _is_elective_basket_list_question(question: str) -> bool:
             "navedi",
             "nabroj",
             "po korpama",
+            "sta mozes",
+            "šta možeš",
+            "reci mi",
         ]
     )
     return has_elective_marker and has_list_marker
@@ -1232,6 +1355,10 @@ def _prepare_chat(
 
     if _is_program_name_question(request.question):
         return direct(PROGRAM_NAME_MESSAGE, sources)
+    if accreditation_context != "PIN 2020" and _is_third_year_curriculum_question(request.question):
+        return direct(PIT_THIRD_YEAR_CURRICULUM_MESSAGE, sources)
+    if accreditation_context != "PIN 2020" and _is_fourth_year_curriculum_question(request.question):
+        return direct(PIT_FOURTH_YEAR_CURRICULUM_MESSAGE, sources)
     if pin_elective_followup:
         return direct(PIN_ELECTIVES_MESSAGE, sources)
     if (

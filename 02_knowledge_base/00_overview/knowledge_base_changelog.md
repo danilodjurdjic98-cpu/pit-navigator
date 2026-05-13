@@ -96,6 +96,32 @@ Notes:
 - MBA se ne predstavlja kao čisti data science ili software engineering master
 - dokumenti ne garantuju posao, platu, praksu ili uspeh
 
+## Version v1.2, 2026-05-13
+
+Status: expanded_curriculum_structure_retrieval
+Scope: PIT 2027 curriculum, semesters, mandatory courses, elective blocks and ECTS
+
+Added:
+
+- `00_overview/pit_2027_curriculum_structure.md`
+
+Changed:
+
+- dodat dokument sa kurikulumom PIT 2027 po trećoj i četvrtoj godini
+- dodata struktura po petom, šestom, sedmom i osmom semestru
+- dodati obavezni predmeti, izborni blokovi, ESPB i završni blok
+- dodata veza kurikuluma sa data/AI/BI, ERP/SAP, finance analytics, marketing/customer analytics, software/digital product i MBA Business Analytics putanjama
+
+Not changed:
+
+- backend logika nije menjana u ovoj izmeni kurikuluma
+- frontend i runtime konfiguracija nisu menjani
+- dokument se odnosi na PIT 2027 i ne menja pravila za PIN 2020
+
+Notes:
+
+- Ako korisnik pita za trenutni PIN 2020, bot treba da napomene da se ova struktura odnosi na PIT 2027
+
 ## 3. Glavna struktura v1.0
 
 U verziji v1.0 knowledge base je organizovan ovako:

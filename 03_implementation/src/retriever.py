@@ -198,6 +198,60 @@ MASTER_CONTINUATION_QUERY_TERMS = [
     "kakav master",
 ]
 
+CURRICULUM_QUERY_TERMS = [
+    "kurikulum",
+    "nastavni plan",
+    "struktura studija",
+    "koji predmeti se slusaju",
+    "koji predmeti se slušaju",
+    "sta se slusa",
+    "šta se sluša",
+    "sta se radi",
+    "šta se radi",
+    "sta ima od predmeta",
+    "šta ima od predmeta",
+    "predmeti na pit",
+    "predmeti na smeru",
+    "predmeti po semestrima",
+    "po semestrima",
+    "treća godina",
+    "treca godina",
+    "trećoj godini",
+    "trecoj godini",
+    "3. godini",
+    "3 godini",
+    "četvrta godina",
+    "cetvrta godina",
+    "četvrtoj godini",
+    "cetvrtoj godini",
+    "4. godini",
+    "4 godini",
+    "peti semestar",
+    "šesti semestar",
+    "sesti semestar",
+    "sedmi semestar",
+    "osmi semestar",
+    "obavezni predmeti",
+    "izborni blokovi",
+    "espb",
+]
+
+FINANCE_ANALYTICS_QUERY_TERMS = [
+    "finansije",
+    "finansijska korpa",
+    "finansijskoj korpi",
+    "finansijsku korpu",
+    "finance analytics",
+    "financial analytics",
+    "finansijska analitika",
+    "finansijsku analitiku",
+    "finansijskoj analitici",
+    "finansijski pravac",
+    "finansijskom pravcu",
+    "risk analytics",
+    "controlling",
+]
+
 EXACT_BOOST_TERMS = {
     "flask",
     "php",
@@ -439,6 +493,16 @@ class Retriever:
                 boost += 1.10
             if "05_retrieval_guides/pit_course_importance_guide.md" in path:
                 boost += 0.45
+        if any(term in question_text for term in CURRICULUM_QUERY_TERMS):
+            if "00_overview/pit_2027_curriculum_structure.md" in path:
+                boost += 1.30
+        if any(term in question_text for term in FINANCE_ANALYTICS_QUERY_TERMS):
+            if "04_baskets/2027/pit_finance_analytics_korpa.md" in path:
+                boost += 1.20
+            if "05_retrieval_guides/pit_course_importance_guide.md" in path:
+                boost += 0.35
+            if "00_overview/pit_2027_curriculum_structure.md" in path:
+                boost += 0.25
         if "ACCREDITATION_COMPARISON" in intents and "pin_2020_vs_pit_2027.md" in path:
             boost += 0.25
         if "FALLBACK" in intents and document_type in {"answering_policy", "retrieval_guide"}:

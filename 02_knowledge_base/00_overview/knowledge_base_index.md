@@ -168,7 +168,26 @@ Važno pravilo:
 
 Bot treba da predstavi MBA kao prirodan nastavak za studente koji žele poslovnu analitiku, data management, programiranje za analitiku, vizualizaciju, ML/statističko modelovanje, konsultantsku analitiku i etiku podataka, ali ne sme da ga predstavi kao jedini ispravan nastavak posle PIT-a.
 
-### 4.5 knowledge_base_index.md
+### 4.5 pit_2027_curriculum_structure.md
+
+Svrha:
+
+Struktura kurikuluma PIT 2027 po godinama, semestrima, obaveznim predmetima, izbornim blokovima i ESPB.
+
+Koristi se za:
+
+- pitanja koji su predmeti na PIT modulu
+- pitanja šta se sluša u trećoj ili četvrtoj godini
+- pitanja koji su obavezni predmeti po semestrima
+- pitanja koji su izborni blokovi i šta student bira
+- pitanja koliko ESPB nose predmeti
+- povezivanje kurikuluma sa data, BI, AI, ERP/SAP, finance analytics, marketing/customer analytics, software/digital product i MBA Business Analytics putanjama
+
+Važno pravilo:
+
+Ovaj dokument se odnosi na PIT 2027. Ako korisnik pita za trenutni PIN 2020, bot treba da napomene da se ova struktura odnosi na novu akreditaciju i da za PIN treba proveriti odgovarajući plan.
+
+### 4.6 knowledge_base_index.md
 
 Svrha:
 
@@ -1030,6 +1049,7 @@ Posebno povezani dokumenti:
 00_overview/pit_2027_overview.md
 00_overview/pin_2020_vs_pit_2027.md
 00_overview/mba_business_analytics_as_pit_continuation.md
+00_overview/pit_2027_curriculum_structure.md
 
 04_baskets/2027/pit_izborne_korpe_overview.md
 04_baskets/2027/pit_data_ai_bi_korpa.md

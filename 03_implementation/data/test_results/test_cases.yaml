@@ -87,3 +87,32 @@
   expected_paths:
     - "00_overview/mba_business_analytics_as_pit_continuation.md"
     - "05_retrieval_guides/pit_course_importance_guide.md"
+
+- id: CURRICULUM_OVERVIEW
+  question: "Daj mi kurikulum PIT-a po semestrima i obavezne predmete."
+  expected_intents:
+    - PROGRAM_OVERVIEW
+  expected_paths:
+    - "00_overview/pit_2027_curriculum_structure.md"
+
+- id: CURRICULUM_THIRD_YEAR
+  question: "Koji predmeti su u 3. godini na PIT-u?"
+  expected_intents:
+    - PROGRAM_OVERVIEW
+  expected_paths:
+    - "00_overview/pit_2027_curriculum_structure.md"
+
+- id: CURRICULUM_ELECTIVE_BLOCKS
+  question: "Koji su izborni blokovi na PIT-u u petom, sestom, sedmom i osmom semestru?"
+  expected_intents:
+    - PROGRAM_OVERVIEW
+    - ELECTIVE_RECOMMENDATION
+  expected_paths:
+    - "00_overview/pit_2027_curriculum_structure.md"
+
+- id: CURRICULUM_FOURTH_YEAR
+  question: "Šta se sluša u četvrtoj godini na PIT-u i koji su obavezni predmeti?"
+  expected_intents:
+    - PROGRAM_OVERVIEW
+  expected_paths:
+    - "00_overview/pit_2027_curriculum_structure.md"

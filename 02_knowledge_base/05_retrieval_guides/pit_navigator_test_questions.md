@@ -1604,7 +1604,77 @@ Policy rizici za celu sekciju:
 - ne predstaviti MBA kao čisti data science master
 - ne tvrditi da jedan predmet sam pokriva celu karijeru
 
-## 16. Minimalni test set za prvu proveru
+## 16. Kurikulum PIT 2027 testovi
+
+### 16.1 Test pitanje
+
+```text
+Koji su predmeti na PIT smeru?
+```
+
+Očekivani intent:
+
+```text
+PROGRAM_OVERVIEW
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/pit_2027_curriculum_structure.md
+00_overview/pit_2027_overview.md
+```
+
+Očekivani elementi odgovora:
+
+- odgovor po godinama i semestrima
+- obavezni predmeti odvojeni od izbornih blokova
+- jasno reći da se struktura odnosi na PIT 2027
+- ne mešati sa PIN 2020
+
+### 16.2 Dodatna kurikulumska pitanja
+
+```text
+Daj mi kurikulum PIT-a.
+Šta se sluša u trećoj godini na PIT-u?
+Šta se sluša u četvrtoj godini na PIT-u?
+Koji su izborni blokovi na PIT-u?
+Koji predmeti su obavezni u petom semestru?
+Koji predmeti su obavezni u šestom semestru?
+Koji predmeti su obavezni u sedmom semestru?
+Koji predmeti su obavezni u osmom semestru?
+Koje predmete da biram ako ciljam MBA Business Analytics?
+Koje predmete da biram ako ciljam finance analytics?
+Koje predmete da biram ako ciljam ERP/SAP?
+```
+
+Primarni dokumenti:
+
+```text
+00_overview/pit_2027_curriculum_structure.md
+04_baskets/2027/pit_izborne_korpe_overview.md
+04_baskets/2027/pit_data_ai_bi_korpa.md
+04_baskets/2027/pit_finance_analytics_korpa.md
+04_baskets/2027/pit_software_erp_digital_korpa.md
+00_overview/mba_business_analytics_as_pit_continuation.md
+```
+
+Očekivani elementi odgovora:
+
+- za treću godinu pomenuti peti i šesti semestar
+- za četvrtu godinu pomenuti sedmi i osmi semestar
+- za izborne blokove navesti pravila izbora i ne predstavljati ih kao obavezne za sve
+- za karijerne putanje povezati predmete sa putanjom, bez garancije posla
+- ako korisnik pita za trenutni PIN, napomenuti da se dokument odnosi na PIT 2027
+
+Policy rizici:
+
+- ne izmišljati predmete van spiska
+- ne garantovati posao
+- ne mešati PIT 2027 sa PIN 2020
+- ne zatrpavati korisnika šiframa ako traži kratak odgovor
+
+## 17. Minimalni test set za prvu proveru
 
 Ako se radi brza QA provera, dovoljno je testirati ova pitanja:
 
@@ -1631,7 +1701,7 @@ Očekivanje:
 - nastavnici se ne komentarišu
 - fallback se koristi kada nema detaljnog dokumenta
 
-## 17. Šta znači uspešan test
+## 18. Šta znači uspešan test
 
 Test je uspešan ako bot:
 
@@ -1646,7 +1716,7 @@ Test je uspešan ako bot:
 - koristi fallback kada nema dovoljno informacija
 - daje praktičan i razumljiv odgovor
 
-## 18. Šta znači neuspešan test
+## 19. Šta znači neuspešan test
 
 Test nije uspešan ako bot:
 
@@ -1661,7 +1731,7 @@ Test nije uspešan ako bot:
 - koristi tematsku korpu kao formalno pravilo
 - ne koristi fallback kada nema detaljan dokument
 
-## 19. Preporučeni zapis rezultata testiranja
+## 20. Preporučeni zapis rezultata testiranja
 
 Za svaki test koristiti format:
 
@@ -1695,13 +1765,14 @@ Policy issues: none
 Action needed: none
 ```
 
-## 20. Povezani dokumenti
+## 21. Povezani dokumenti
 
 Ovaj test set je povezan sa:
 
 ```text
 00_overview/knowledge_base_index.md
 00_overview/knowledge_base_changelog.md
+00_overview/pit_2027_curriculum_structure.md
 
 05_retrieval_guides/pit_navigator_retrieval_map.md
 05_retrieval_guides/pit_navigator_intent_examples.md
