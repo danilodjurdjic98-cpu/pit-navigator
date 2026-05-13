@@ -1,13 +1,13 @@
 # PIT Navigator retrieval-only test runner report
 
-Generated at: 2026-05-09T21:33:25.272836+00:00
+Generated at: 2026-05-13T20:36:50.232877+00:00
 
 ## Summary
 
-- Total tests: 7
-- Passed: 6
+- Total tests: 14
+- Passed: 12
 - Needs review: 1
-- Failed: 0
+- Failed: 1
 
 ## Details
 
@@ -102,16 +102,16 @@ Retrieved documents:
    - document_type: elective_reference
    - section_heading: 5.3 Ako korisnika zanimaju finansije i podaci
    - score: 1.4434
-4. `04_baskets/2027/pit_finance_analytics_korpa.md`
-   - title: PIT 2027, Finance analytics korpa
-   - document_type: thematic_basket
-   - section_heading: 4.7 Ekonometrija
-   - score: 0.5752
-5. `05_retrieval_guides/pit_navigator_intent_examples.md`
-   - title: PIT Navigator, primeri intent-a i očekivanog retrieval-a
+4. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
    - document_type: retrieval_guide
-   - section_heading: 10.4 Primer odgovora
-   - score: 0.5717
+   - section_heading: 17. Ekonometrija
+   - score: 0.8170
+5. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
+   - document_type: retrieval_guide
+   - section_heading: 5. Poslovna analitika
+   - score: 0.6592
 
 ### ELECTIVE_AI: PASS
 
@@ -252,3 +252,244 @@ Retrieved documents:
    - document_type: thematic_basket
    - section_heading: 6.4 Četvrta godina, osmi semestar, Izborni predmet 3
    - score: 2.2262
+
+### MBA_CONTINUATION: PASS
+
+Question: Koji je značaj PIT predmeta za MBA Business Analytics?
+
+Detected intents: PROGRAM_OVERVIEW, CAREER_RECOMMENDATION
+Detected course names: -
+
+Retrieved documents:
+1. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 4. Šta MBA nadograđuje
+   - score: 1.9415
+2. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 5. Kompetencije koje MBA razvija
+   - score: 1.9116
+3. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 9. Veza sa važnim PIT predmetima
+   - score: 1.8981
+4. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
+   - document_type: retrieval_guide
+   - section_heading: 21. Brze preporuke po putanjama
+   - score: 1.1323
+5. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
+   - document_type: retrieval_guide
+   - section_heading: 5. Poslovna analitika
+   - score: 1.0669
+
+### COURSE_IMPORTANCE_ML_OR: PASS
+
+Question: Kako se Operaciona istraživanja i Mašinsko učenje povezuju sa MBA Business Analytics i AI karijera?
+
+Detected intents: PROGRAM_OVERVIEW, CAREER_RECOMMENDATION
+Detected course names: Mašinsko učenje, Operaciona istraživanja
+
+Retrieved documents:
+1. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 5. Kompetencije koje MBA razvija
+   - score: 1.8816
+2. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 10. Kratak odgovor za bota
+   - score: 1.8187
+3. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 8. Kako birati predmete i projekte ako ciljaš MBA
+   - score: 1.7924
+4. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
+   - document_type: retrieval_guide
+   - section_heading: 10. Elektronsko poslovanje i veštačka inteligencija
+   - score: 1.2737
+5. `05_retrieval_guides/pit_course_importance_guide.md`
+   - title: PIT Navigator, vodič za značaj predmeta i veze sa karijernim putanjama
+   - document_type: retrieval_guide
+   - section_heading: 12. Mašinsko učenje
+   - score: 1.2566
+
+### COURSE_IMPORTANCE_AFI: FAIL
+
+Question: AFI za PIT studenta, MBA Business Analytics i finance analytics posle PIT-a
+
+Detected intents: PROGRAM_OVERVIEW, CAREER_RECOMMENDATION, ELECTIVE_RECOMMENDATION
+Detected course names: -
+
+Notes:
+- Missing paths: 05_retrieval_guides/pit_course_importance_guide.md
+
+Retrieved documents:
+1. `04_baskets/2027/pit_finance_analytics_korpa.md`
+   - title: PIT 2027, Finance analytics korpa
+   - document_type: thematic_basket
+   - section_heading: 4.3 Osnovi poslovnih finansija
+   - score: 2.0835
+2. `04_baskets/2027/pit_finance_analytics_korpa.md`
+   - title: PIT 2027, Finance analytics korpa
+   - document_type: thematic_basket
+   - section_heading: 4.1 Analiza finansijskih izveštaja
+   - score: 2.0676
+3. `04_baskets/2027/pit_finance_analytics_korpa.md`
+   - title: PIT 2027, Finance analytics korpa
+   - document_type: thematic_basket
+   - section_heading: 5.4 Ako studenta zanima finansijska analitika u užem smislu
+   - score: 2.0631
+4. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 8. Kako birati predmete i projekte ako ciljaš MBA
+   - score: 1.8424
+5. `00_overview/mba_business_analytics_as_pit_continuation.md`
+   - title: Master in Business Analytics kao prirodan nastavak PIT profila
+   - document_type: overview
+   - section_heading: 4. Šta MBA nadograđuje
+   - score: 1.8424
+
+### CURRICULUM_OVERVIEW: PASS
+
+Question: Daj mi kurikulum PIT-a po semestrima i obavezne predmete.
+
+Detected intents: PROGRAM_OVERVIEW
+Detected course names: -
+
+Retrieved documents:
+1. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Kratak odgovor za pitanje: daj mi kurikulum PIT-a
+   - score: 1.8475
+2. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: 1. Kratak pregled
+   - score: 1.8368
+3. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Napomena za osmi semestar
+   - score: 1.8175
+4. `01_courses/2027/masinsko_ucenje.md`
+   - title: Mašinsko učenje
+   - document_type: course
+   - section_heading: 6.1 Metode izvođenja nastave
+   - score: 0.6596
+5. `01_courses/2027/korisnicko_iskustvo_i_dizajn.md`
+   - title: Korisničko iskustvo i dizajn
+   - document_type: course
+   - section_heading: 6.1 Metode izvođenja nastave
+   - score: 0.6563
+
+### CURRICULUM_THIRD_YEAR: PASS
+
+Question: Koji predmeti su u 3. godini na PIT-u?
+
+Detected intents: PROGRAM_OVERVIEW
+Detected course names: -
+
+Retrieved documents:
+1. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Kratak odgovor za pitanje: daj mi kurikulum PIT-a
+   - score: 1.7996
+2. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Treća godina
+   - score: 1.7992
+3. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: 1. Kratak pregled
+   - score: 1.7941
+4. `00_overview/pit_2027_overview.md`
+   - title: PIT 2027, Poslovne informacione tehnologije
+   - document_type: overview
+   - section_heading: 3. Struktura modula
+   - score: 0.5529
+5. `05_retrieval_guides/pit_navigator_test_questions.md`
+   - title: PIT Navigator, test pitanja za retrieval i odgovore
+   - document_type: retrieval_test_set
+   - section_heading: 16.2 Dodatna kurikulumska pitanja
+   - score: 0.5482
+
+### CURRICULUM_ELECTIVE_BLOCKS: PASS
+
+Question: Koji su izborni blokovi na PIT-u u petom, sestom, sedmom i osmom semestru?
+
+Detected intents: PROGRAM_OVERVIEW, COURSE_EXPLANATION, ELECTIVE_RECOMMENDATION
+Detected course names: -
+
+Retrieved documents:
+1. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: 1. Kratak pregled
+   - score: 1.8913
+2. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Kratak odgovor za pitanje: daj mi kurikulum PIT-a
+   - score: 1.8402
+3. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Izborni blok PIT 6
+   - score: 1.8251
+4. `04_baskets/2027/pit_izborne_korpe_overview.md`
+   - title: PIT 2027, pregled izbornih korpi i pravila preporuke
+   - document_type: basket_overview
+   - section_heading: 4. Izborne pozicije PIT 2027
+   - score: 0.9329
+5. `04_baskets/2027/pit_izborne_korpe_overview.md`
+   - title: PIT 2027, pregled izbornih korpi i pravila preporuke
+   - document_type: basket_overview
+   - section_heading: 4.3 Četvrta godina, sedmi semestar
+   - score: 0.8820
+
+### CURRICULUM_FOURTH_YEAR: PASS
+
+Question: Šta se sluša u četvrtoj godini na PIT-u i koji su obavezni predmeti?
+
+Detected intents: PROGRAM_OVERVIEW
+Detected course names: -
+
+Retrieved documents:
+1. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Četvrta godina
+   - score: 1.8746
+2. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: Treća godina
+   - score: 1.8310
+3. `00_overview/pit_2027_curriculum_structure.md`
+   - title: Kurikulum modula Poslovne informacione tehnologije, PIT 2027
+   - document_type: overview
+   - section_heading: 1. Kratak pregled
+   - score: 1.8126
+4. `05_retrieval_guides/pit_navigator_test_questions.md`
+   - title: PIT Navigator, test pitanja za retrieval i odgovore
+   - document_type: retrieval_test_set
+   - section_heading: 16.2 Dodatna kurikulumska pitanja
+   - score: 0.5888
+5. `00_overview/pit_2027_overview.md`
+   - title: PIT 2027, Poslovne informacione tehnologije
+   - document_type: overview
+   - section_heading: 3. Struktura modula
+   - score: 0.5641

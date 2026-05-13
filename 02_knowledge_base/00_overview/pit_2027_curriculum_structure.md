@@ -61,6 +61,44 @@ Dokument se koristi kada student pita:
 
 Važna napomena: ova struktura se odnosi na PIT 2027, odnosno novu akreditaciju modula Poslovne informacione tehnologije. Ako korisnik pita za trenutni PIN 2020, bot treba da kaže da se ovaj dokument odnosi na PIT 2027 i da za PIN 2020 treba proveriti odgovarajući aktuelni plan i pravila.
 
+## Kratak odgovor za pitanje: daj mi kurikulum PIT-a
+
+Na PIT 2027 modulu treća godina obuhvata peti i šesti semestar.
+
+Peti semestar:
+
+- Obavezni predmet: Baze podataka, 8 ESPB
+- Obavezni predmet: Poslovna analitika, 5 ESPB
+- Obavezni predmet: Diskretna matematika, 5 ESPB
+- Obavezni predmet: Korisničko iskustvo i dizajn, 5 ESPB
+- Izborni blok PIT 1: Teorija verovatnoća ili Linearna algebra
+- Izborni blok PIT 2: Menadžment odnosa sa kupcima, Poresko planiranje ili Finansijska i aktuarska matematika
+
+Šesti semestar:
+
+- Obavezni predmet: Analiza podataka, 7 ESPB
+- Obavezni predmet: Objektno orijentisano programiranje, 7 ESPB
+- Izborni blok PIT 3: Računovodstveni informacioni sistemi, Marketing, Organizacija, Finansijska ekonomija, Međunarodne finansije, Monetarna ekonomija, Makroekonomski modeli ili Ekonomija i biznis u turizmu
+- Izborni blok PIT 4: Analiza finansijskih izveštaja, Upravljačko računovodstvo ili Osnovi poslovnih finansija
+
+Na PIT 2027 modulu četvrta godina obuhvata sedmi i osmi semestar.
+
+Sedmi semestar:
+
+- Obavezni predmet: Razvoj softvera, 7 ESPB
+- Obavezni predmet: Poslovna inteligencija, 7 ESPB
+- Obavezni predmet: Menadžment projekata, 7 ESPB
+- Izborni blok PIT 5: Istraživanje tržišta ili Operaciona istraživanja
+- Obavezna stručna praksa: Stručna praksa, 3 ESPB
+
+Osmi semestar:
+
+- Obavezni predmet: Elektronsko poslovanje i veštačka inteligencija, 7 ESPB
+- Obavezni predmet: ERP softver, 7 ESPB
+- Izborni blok PIT 6: Mašinsko učenje, Ekonometrija, Kvantitativne finansije ili Ekonomska statistika
+- Izborni blok PIT 7: Elektronska trgovina, Nove informacione tehnologije ili Elektronski platni sistemi
+- Završni blok: Završni rad, seminarski radovi ili letnja škola, prema pravilima završnog bloka
+
 ## 2. Treća godina, peti semestar
 
 ### Obavezni predmeti
