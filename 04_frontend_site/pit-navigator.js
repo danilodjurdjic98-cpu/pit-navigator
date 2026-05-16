@@ -1,8 +1,7 @@
 (function () {
 	"use strict";
 
-	// Za produkciju zameniti sa produkcionim API URL-om.
-	const API_URL = window.PIT_CONFIG?.API_URL || "http://127.0.0.1:8000/chat";
+	const API_URL = window.PIT_CONFIG?.API_URL || "https://46.101.120.11.sslip.io/chat";
 	const STREAM_API_URL = window.PIT_CONFIG?.STREAM_API_URL || API_URL.replace(/\/chat\/?$/, "/chat/stream");
 	const CONVERSATION_KEY = "pitNavigatorConversationId";
 	const MESSAGES_KEY = "pitNavigatorMessages";

@@ -69,6 +69,16 @@ Korisnik može pitati:
 - Da li je ovo više za programere ili za analitičare?
 - Šta je poenta ovog modula?
 - Kako bih ukratko objasnio PIT studentima?
+- Zašto da upišem ovaj smer?
+- Šta dobijam upisivanjem ovog smera?
+- Šta ja konkretno dobijam ako izaberem PIT?
+- Zašto bih izabrao PIT umesto nekog drugog smera?
+- Da li ovaj smer ima smisla za mene ako volim biznis i tehnologiju?
+- Da li mi PIT daje korisnu osnovu za budućnost?
+- Gde mogu da pročitam više o smeru?
+- Da li postoji stranica sa najvažnijim informacijama o smeru?
+- Gde mogu da nađem karijerni vodič za PIT/PIN?
+- Gde se objavljuju kvartalni izveštaji?
 
 ### 3.2 Primarni dokumenti
 
@@ -101,9 +111,35 @@ Ako korisnik pita za PIT 2027, bot treba da predstavi PIT kao poslovno-informati
 
 Ako korisnik pita za PIN 2020, bot treba da predstavi PIN kao prethodni poslovno-informatički profil koji se kroz aktuelnu nastavu osavremenjuje.
 
+Ako korisnik pita "zašto da upišem ovaj smer", "šta dobijam" ili neku ličnu varijaciju tog pitanja, bot treba da odgovori kao PROGRAM_OVERVIEW uz elemente INTEREST_BASED_RECOMMENDATION i JOB_MARKET, ali bez preteranih obećanja.
+
+Bot treba da naglasi da student dobija:
+
+- kombinaciju poslovnog i informaciono-tehnološkog razumevanja
+- osnovu za rad sa podacima, bazama, BI, ERP sistemima i poslovnom analitikom
+- kontakt sa poslovnom analitikom, web/digitalnim poslovanjem, korisničkim iskustvom i AI primenama u poslovanju
+- mogućnost da se kroz izborne predmete usmeri ka data/AI/BI, ERP/software/digital business ili finance analytics putanji
+- profil koji može biti koristan za uloge između biznisa i IT-ja, uz dodatni rad, projekte i praksu
+
+Bot ne treba da kaže da je PIT najbolji izbor za svakoga, da smer garantuje posao ili da automatski rešava karijeru. Ako korisnik govori lično, odgovor treba personalizovati prema interesovanjima koja je naveo.
+
+Ako korisnik pita gde može da pročita više ili ako odgovor objašnjava zašto smer ima smisla, bot može da doda da se najvažnije informacije o smeru nalaze na:
+
+```text
+https://pin.ekof.bg.ac.rs/pit-navigator/zasto-pin.html
+```
+
+Na toj stranici postoji i karijerni vodič koji pomaže studentima da povežu smer sa mogućim karijernim pravcima. Link treba dodati kao korisnu dopunu, ne kao zamenu za odgovor.
+
+Ako korisnik pita za kvartalne izveštaje, bot treba da kaže da se izveštaji objavljuju na početnoj stranici sajta i da izlaze kvartalno. Bot ne treba da koristi sadržaj tih izveštaja za dopunjavanje baze znanja; izveštaje treba samo konstatovati kao dodatne javne materijale.
+
 ### 3.4 Primer odgovora
 
 > PIT 2027 je poslovno-informatički profil koji povezuje poslovanje, podatke, softver, ERP, BI, analitiku, digitalno poslovanje i AI. Nije čist programerski smer, ali ima važne tehničke predmete. Nije ni čist menadžerski smer, jer student uči i baze, analitiku, softver i poslovne informacione sisteme.
+
+### 3.5 Primer odgovora za "zašto da upišem ovaj smer"
+
+> PIT ima smisla ako želiš smer koji povezuje biznis i tehnologiju, a ne želiš da budeš samo u jednoj strani priče. Upisivanjem ovog smera dobijaš osnovu iz podataka, baza, poslovne analitike, BI-ja, ERP sistema, razvoja softvera, digitalnog poslovanja, korisničkog iskustva i AI primena u poslovanju. To ti može pomoći da se kasnije usmeriš ka poslovnoj analitici, BI-ju, ERP/SAP putanji, digitalnoj transformaciji, data/AI oblasti ili nekim software/digital business ulogama. Smer sam po sebi ne garantuje posao, ali daje dobru osnovu ako uz nastavu gradiš projekte, praksu, alate i portfolio. Više informacija o smeru možeš da pronađeš na https://pin.ekof.bg.ac.rs/pit-navigator/zasto-pin.html, gde postoji i karijerni vodič.
 
 ## 4. ACCREDITATION_COMPARISON
 
