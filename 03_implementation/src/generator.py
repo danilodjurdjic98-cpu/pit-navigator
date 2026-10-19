@@ -266,6 +266,16 @@ def _generate_stream_with_gemini(
     yield result.to_dict() | {"type": "final"}
 
 
+def _openai_generation_options(settings: Settings) -> dict[str, Any]:
+    if settings.openai_model == "gpt-6-luna" or settings.openai_model.startswith("gpt-6-luna-"):
+        return {"max_completion_tokens": settings.llm_max_tokens}
+    return {
+        "temperature": settings.llm_temperature,
+        "max_tokens": settings.llm_max_tokens,
+        "top_p": settings.llm_top_p,
+    }
+
+
 def _generate_with_openai(messages: list[Message], settings: Settings) -> ProviderResult:
     if not settings.openai_api_key:
         raise ProviderError("Missing OPENAI_API_KEY for OpenAI provider.")
@@ -279,9 +289,7 @@ def _generate_with_openai(messages: list[Message], settings: Settings) -> Provid
     response = client.chat.completions.create(
         model=settings.openai_model,
         messages=messages,
-        temperature=settings.llm_temperature,
-        max_tokens=settings.llm_max_tokens,
-        top_p=settings.llm_top_p,
+        **_openai_generation_options(settings),
     )
     answer = response.choices[0].message.content or ""
     return ProviderResult(
@@ -312,9 +320,7 @@ def _generate_stream_with_openai(
     stream = client.chat.completions.create(
         model=settings.openai_model,
         messages=messages,
-        temperature=settings.llm_temperature,
-        max_tokens=settings.llm_max_tokens,
-        top_p=settings.llm_top_p,
+        **_openai_generation_options(settings),
         stream=True,
     )
     for chunk in stream:

@@ -5,7 +5,7 @@
   expected_course_names:
     - Razvoj softvera
   expected_paths:
-    - "03_course_plans/2025_2026/razvoj_softvera.md"
+    - "03_course_plans/2026_2027/razvoj_softvera.md"
 
 - id: FALLBACK_TEACHER_NIT
   question: "Ko drži Nove informacione tehnologije i da li je profesor dobar?"
@@ -49,7 +49,7 @@
     - ERP softver
   expected_paths:
     - "04_baskets/2027/pit_software_erp_digital_korpa.md"
-    - "03_course_plans/2025_2026/erp_softver.md"
+    - "03_course_plans/2026_2027/erp_softver.md"
 
 - id: ELECTIVE_ECOMMERCE_EPS_NIT
   question: "Da li da izaberem Elektronsku trgovinu, Elektronske platne sisteme ili Nove informacione tehnologije?"
