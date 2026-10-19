@@ -86,7 +86,7 @@ Posebno je bitna za: data analyst, BI, business analyst, MBA Business Analytics,
 
 Povezuje se sa: Bazama podataka, Poslovnom analitikom, Poslovnom inteligencijom, Mašinskim učenjem, Ekonometrijom i Operacionim istraživanjima.
 
-Veza sa MBA: MBA nadograđuje analizu podataka kroz naprednije modelovanje, vizualizaciju, decision analytics i data storytelling.
+Veza sa MBA: MBA nadograđuje analizu podataka kroz naprednije modeliranje, vizualizaciju, decision analytics i data storytelling.
 
 Ograničenje: analiza podataka daje osnovu, ali za ozbiljniji portfolio treba rad na realnim skupovima podataka i jasna poslovna preporuka.
 
@@ -174,7 +174,7 @@ Veza sa MBA: MBA profili treba da razumeju deskriptivnu, prediktivnu i preskript
 
 Za PIT studenta: predmet je posebno koristan jer povezuje poslovni problem sa modelom odlučivanja. Primeri mogu biti alokacija resursa, optimizacija troškova, izbor portfolija, raspoređivanje, pricing ili simulacija rizika.
 
-Važna napomena: ne treba ga predstavljati kao čist programerski predmet. Programiranje je alat, ali suština je modelovanje odluke, ograničenja i posledica.
+Važna napomena: ne treba ga predstavljati kao čist programerski predmet. Programiranje je alat, ali suština je modeliranje odluke, ograničenja i posledica.
 
 Ograničenje: sam predmet ne pokriva celu analytics karijeru. Najbolji je kada se kombinuje sa SQL-om, analizom podataka, BI-jem, ML osnovama i poslovnim domenom.
 
@@ -186,7 +186,7 @@ Posebno je bitno za: AI analyst, data analyst sa ML komponentom, business analyt
 
 Povezuje se sa: Analizom podataka, Bazama podataka, Poslovnom analitikom, Operacionim istraživanjima, Ekonometrijom i Elektronskim poslovanjem i veštačkom inteligencijom.
 
-Veza sa MBA: MBA Business Analytics često uključuje ML/statističko modelovanje, interpretaciju modela, validaciju, metrike performansi i odgovornu upotrebu AI. Mašinsko učenje je zato jaka priprema za taj deo mastera.
+Veza sa MBA: MBA Business Analytics često uključuje ML/statističko modeliranje, interpretaciju modela, validaciju, metrike performansi i odgovornu upotrebu AI. Mašinsko učenje je zato jaka priprema za taj deo mastera.
 
 Za PIT studenta: predmet je realno važan jer ne pravi automatski ML inženjera, ali daje sposobnost da student razume model, proceni rezultat, objasni ograničenja i poveže predikciju sa poslovnom odlukom.
 
@@ -246,13 +246,13 @@ Ograničenje: za naprednu analitiku treba ga dopuniti statistikom, BI alatima, P
 
 ## 17. Ekonometrija
 
-Značaj: Ekonometrija daje osnovu za statističko modelovanje ekonomskih i finansijskih podataka, testiranje odnosa i empirijsku analizu.
+Značaj: Ekonometrija daje osnovu za statističko modeliranje ekonomskih i finansijskih podataka, testiranje odnosa i empirijsku analizu.
 
 Posebno je bitna za: data analytics, finance analytics, risk analytics, istraživačke i ekonomsko-analitičke putanje.
 
 Povezuje se sa: Analizom podataka, Mašinskim učenjem, Kvantitativnim finansijama, Poslovnom analitikom i Analizom finansijskih izveštaja.
 
-Veza sa MBA: korisna je za razumevanje statističkog modelovanja, validacije i interpretacije odnosa u podacima.
+Veza sa MBA: korisna je za razumevanje statističkog modeliranja, validacije i interpretacije odnosa u podacima.
 
 Ograničenje: nije zamena za BI, SQL ili poslovnu komunikaciju; treba je povezati sa primenjenim projektima.
 
@@ -264,7 +264,7 @@ Posebno su bitne za: finance analytics, risk analytics, quantitative finance, cr
 
 Povezuju se sa: Ekonometrijom, Analizom finansijskih izveštaja, Mašinskim učenjem, Operacionim istraživanjima i Analizom podataka.
 
-Veza sa MBA: doprinose financial/risk analytics delu MBA profila, naročito kada se kombinuju sa modelovanjem i interpretacijom.
+Veza sa MBA: doprinose financial/risk analytics delu MBA profila, naročito kada se kombinuju sa modeliranjem i interpretacijom.
 
 Ograničenje: za PIT profil je važno da se kvantitativni deo prevede u razumljivu poslovnu preporuku.
 

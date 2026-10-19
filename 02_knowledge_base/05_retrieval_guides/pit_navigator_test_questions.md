@@ -1439,7 +1439,7 @@ Primarni dokumenti:
 Očekivani elementi odgovora:
 
 - produbljivanje poslovne analitike
-- data management, Python/R, ML/statističko modelovanje, BI i data storytelling
+- data management, Python/R, ML/statističko modeliranje, BI i data storytelling
 - marketing/customer analytics, financial/risk analytics, consulting analytics
 - privatnost, bezbednost i etika podataka
 
@@ -1465,7 +1465,7 @@ Primarni dokumenti:
 Očekivani elementi odgovora:
 
 - MBA treba predstaviti kao business analytics profil
-- može uključiti ML i statističko modelovanje, ali nije isto što i čisti data science master
+- može uključiti ML i statističko modeliranje, ali nije isto što i čisti data science master
 - fokus je na poslovnoj odluci, interpretaciji i primeni podataka
 
 ### 15.4 Test pitanje

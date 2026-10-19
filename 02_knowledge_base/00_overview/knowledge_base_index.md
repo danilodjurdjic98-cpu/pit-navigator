@@ -166,7 +166,7 @@ Koristi se za:
 
 Važno pravilo:
 
-Bot treba da predstavi MBA kao prirodan nastavak za studente koji žele poslovnu analitiku, data management, programiranje za analitiku, vizualizaciju, ML/statističko modelovanje, konsultantsku analitiku i etiku podataka, ali ne sme da ga predstavi kao jedini ispravan nastavak posle PIT-a.
+Bot treba da predstavi MBA kao prirodan nastavak za studente koji žele poslovnu analitiku, data management, programiranje za analitiku, vizualizaciju, ML/statističko modeliranje, konsultantsku analitiku i etiku podataka, ali ne sme da ga predstavi kao jedini ispravan nastavak posle PIT-a.
 
 ### 4.5 pit_2027_curriculum_structure.md
 

@@ -91,7 +91,7 @@ keywords:
 
 Razvoj softvera je obavezan predmet na modulu PIT 2027, odnosno Poslovne informacione tehnologije.
 
-Predmet povezuje poslovne procese, modeliranje informacionih sistema, razvoj aplikacija, metodologije razvoja softvera, timski rad i testiranje. Ideja predmeta je da student razume kako se poslovni problem pretvara u softversko rešenje, od analize zahteva i modelovanja, preko implementacije, do testiranja i održavanja.
+Predmet povezuje poslovne procese, modeliranje informacionih sistema, razvoj aplikacija, metodologije razvoja softvera, timski rad i testiranje. Ideja predmeta je da student razume kako se poslovni problem pretvara u softversko rešenje, od analize zahteva i modeliranja, preko implementacije, do testiranja i održavanja.
 
 U studentskom jeziku, ovaj predmet je posebno važan ako te zanimaju:
 

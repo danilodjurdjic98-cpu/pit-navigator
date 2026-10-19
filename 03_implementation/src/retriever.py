@@ -401,6 +401,17 @@ class Retriever:
             boost += 0.20
         if "03_course_plans/2026_2027/razvoj_softvera.md" in path and ("Razvoj softvera" in course_names or "flask" in question_text):
             boost += 1.10
+        current_updates = {
+            "baze_podataka": (["Baze podataka"], ["bazama podataka", "window", "partition by"]),
+            "elektronsko_poslovanje": (["Elektronsko poslovanje", "Elektronsko poslovanje i veštačka inteligencija"], ["elektronskom poslovanju", "agentic", "gemini", "json izlaz"]),
+            "erp_softver": (["ERP softver"], ["erp", "big data", "bigdata", "veliki podaci"]),
+        }
+        for course_slug, (names, terms) in current_updates.items():
+            if (
+                f"03_course_plans/2026_2027/{course_slug}.md" in path
+                and (any(name in course_names for name in names) or any(term in question_text for term in terms))
+            ):
+                boost += 1.10
         if document_type == "historical_reference":
             boost -= 1.0
         if (

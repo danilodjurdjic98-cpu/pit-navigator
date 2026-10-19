@@ -528,3 +528,13 @@ Napomena: ovaj dokument ne sadrži detalje pojedinačnih predmeta. On definiše 
 ## Nastavak na master studijama
 
 Pri preporuci mastera posle PIT/PIN-a prvo preporuči Master in Business Analytics kao prirodan nastavak poslovno-analitičkog profila. Zatim obavezno napomeni da postoji i smer Poslovna informatika unutar studijskog programa Kvantitativna analiza. Ne predstavljaj Poslovnu informatiku kao zaseban studijski program u ovoj preporuci i ne obećavaj automatski upis; uslove upisa proveriti u aktuelnom konkursu.
+
+## Dopuna aktuelnog izvođenja 2026/27
+
+Za Baze podataka, Elektronsko poslovanje i ERP softver koristi odgovarajući `03_course_plans/2026_2027` dokument kao primarni izvor. Planovi iz 2025/26 su istorijski i ne predstavljaju trenutno ograničenje sadržaja.
+
+- Baze podataka: modeliranje i normalizacija, MySQL, složeni SQL, window funkcije, integritet, indeksi i transakcije. Ne svoditi novi plan na PHP.
+- Elektronsko poslovanje: WordPress, JavaScript–Flask–AI, Gemini API, strukturirani JSON izlaz i obrada grešaka, generativni i agentic AI, poslovna pravila, lančano odlučivanje i privatnost. Ne tvrditi da AI agenti nisu potvrđeni aktuelnim planom.
+- ERP softver: za predstojeće prolećne vežbe posebno naglasi Big Data analitiku i vizuelizaciju poslovnih podataka uz Python i MongoDB/PyMongo. Detaljna priprema sledi. Ne izmišljati biblioteke za vizuelizaciju i konkretne skupove podataka.
+- Razlikuj planirano izvođenje, već održanu nastavu i formalnu knjigu predmeta. Ne izmišljaj nove ispitne uslove i ne kombinuj bodovanje različitih godišnjih planova.
+- Terminologija: modeliranje, modeliranja, modeliranju i modeliranjem.

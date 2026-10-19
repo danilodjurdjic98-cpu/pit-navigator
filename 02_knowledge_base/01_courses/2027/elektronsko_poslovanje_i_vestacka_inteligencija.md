@@ -81,6 +81,13 @@ keywords:
 
 # Elektronsko poslovanje i veštačka inteligencija
 
+## Potvrđena dopuna izvođenja 2026/27
+
+U odnosu na opis 2025/26, ovogodišnje izvođenje jasnije i konkretnije uvodi generativni i agentic AI: JavaScript–Flask–AI integraciju, Gemini API, strukturirani JSON izlaz i obradu grešaka, poslovna pravila i lančano odlučivanje kroz sekvencijalne AI pozive. WordPress i JavaScript ostaju deo rada. AI agenti su sada eksplicitno navedeni u planu izvođenja; to nije tvrdnja o zasebnoj izmeni formalne knjige predmeta PIT 2027. WooCommerce ne navoditi kao obavezan ovogodišnji sadržaj na osnovu starijeg plana.
+
+Za pitanja šta se radi ove godine koristiti `03_course_plans/2026_2027/elektronsko_poslovanje.md`. Ovo opisuje izvođenje, ne promenu formalne akreditacije.
+
+
 ## 1. Kratak opis za studente
 
 Elektronsko poslovanje i veštačka inteligencija je obavezan predmet na modulu PIT 2027, odnosno Poslovne informacione tehnologije.
@@ -454,7 +461,7 @@ Ako korisnik pita:
 
 Bot treba da odgovori:
 
-> Ako termin AI agenti nije eksplicitno naveden u zvaničnom dokumentu, ne treba ga predstavljati kao formalnu akreditacionu temu. Međutim, praktični AI deo predmeta može se prirodno usmeriti ka izradi jednostavnih AI agenata, chatbotova i AI podrške poslovnim procesima, ako je to predviđeno aktuelnim izvođenjem nastave.
+> Da, aktuelni plan izvođenja za 2026/27 eksplicitno uključuje agentic AI, poslovna pravila i lančano odlučivanje, uz JS–Flask–AI integraciju i JSON izlaz. To je potvrda aktuelnog izvođenja, ne zasebna tvrdnja o izmeni knjige predmeta PIT 2027.
 
 Ako korisnik pita:
 

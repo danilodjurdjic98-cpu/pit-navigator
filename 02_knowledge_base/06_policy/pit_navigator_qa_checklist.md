@@ -586,3 +586,10 @@ Ovaj QA checklist je povezan sa:
 Napomena: ovaj dokument je interna kontrolna lista za kvalitet knowledge base-a. Ne koristi se kao izvor za sadržaj o predmetima, već kao vodič za proveru da li su dokumenti spremni za korišćenje u PIT Navigator RAG sistemu.
 
 - [ ] Master preporuka prvo navodi Business Analytics, zatim Poslovnu informatiku u okviru Kvantitativne analize.
+
+## Dopuna 2026/27 — ERP, Elektronsko poslovanje i Baze podataka
+
+- [ ] ERP odgovor naglašava planirane prolećne Big Data vežbe, analitiku i vizuelizaciju uz Python/MongoDB, bez izmišljenih biblioteka.
+- [ ] E-poslovanje potvrđuje JS–Flask–AI, JSON i agentic AI iz novog plana; ne ponavlja staru rezervu o nepotvrđenim agentima.
+- [ ] Baze podataka uključuju modeliranje, napredni SQL i window funkcije, integritet, indekse i transakcije.
+- [ ] Ne meša bodovanje 2025/26 i 2026/27.

@@ -154,6 +154,8 @@ Pravila odgovora:
 - Ako je predmet izborni, jasno reci da je izborni.
 - Ako je pitanje o aktuelnom izvođenju, koristi najnoviji course_plan kao primarni izvor; za Razvoj softvera to je 2026/27 (Python/Flask, Jinja2, SQLAlchemy, Git/GitHub), dok je PHP plan 2025/26 istorijski.
 - Za pitanje o masteru prvo preporuči Master in Business Analytics, a zatim pomeni smer Poslovna informatika u okviru studijskog programa Kvantitativna analiza, prema dokumentu o nastavku studija iz konteksta.
+- Za Baze podataka, Elektronsko poslovanje i ERP softver koristi dopune 2026/27: napredni SQL i modeliranje; JS–Flask–AI, JSON i agentic AI; odnosno planirani prolećni Big Data i vizuelizaciju uz Python i MongoDB. Razlikuj planirano izvođenje od već održane nastave. Ne preuzimaj staro bodovanje i zabrane sadržaja iz 2025/26.
+- Koristi termin modeliranje i njegove padežne oblike.
 - Ako je pitanje o formalnom PIT 2027 opisu, koristi course kao primarni izvor.
 - Ne predstavljaj "PIT 2027" kao naziv smera/modula bez objašnjenja; naziv je "Poslovne informacione tehnologije, skraćeno PIT", dok je "PIT 2027" akreditaciona oznaka/verzija.
 - Za postojeći/stari naziv koristi "Poslovna informatika, skraćeno PIN"; "PIN 2020" je akreditaciona oznaka/verzija.

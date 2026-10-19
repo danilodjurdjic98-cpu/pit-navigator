@@ -26,7 +26,7 @@ keywords:
   - Python
   - R
   - mašinsko učenje
-  - statističko modelovanje
+  - statističko modeliranje
   - Power BI
   - Tableau
   - data storytelling
@@ -59,7 +59,7 @@ Najviše ima smisla za studente koje zanimaju:
 - data management i upravljanje podacima
 - SQL, baze podataka i rad sa poslovnim izvorima podataka
 - Python i R kao alati za analitiku
-- mašinsko učenje i statističko modelovanje na osnovnom i srednjem nivou
+- mašinsko učenje i statističko modeliranje na osnovnom i srednjem nivou
 - vizualizacija podataka, Power BI, Tableau i data storytelling
 - marketing analytics i customer analytics
 - financial analytics, controlling i risk analytics
@@ -93,7 +93,7 @@ PIT daje dobru podlogu za MBA kroz više grupa predmeta i veština.
 Važna osnova su:
 
 - Poslovna informatika, kao uvod u vezu poslovanja i informacionih tehnologija
-- Baze podataka, kao osnova za SQL, modelovanje i organizaciju podataka
+- Baze podataka, kao osnova za SQL, modeliranje i organizaciju podataka
 - Analiza podataka, kao ulaz u obradu, interpretaciju i osnovnu statističku analizu
 - Poslovna analitika, kao predmet koji povezuje poslovni problem, podatke i preporuku
 - Poslovna inteligencija, kao osnova za dashboarde, KPI-jeve, izveštavanje i data storytelling
@@ -114,9 +114,9 @@ Prvo, produbljuje poslovnu analitiku i odlučivanje. Student uči da analitički
 
 Drugo, širi data management. To uključuje kvalitet podataka, organizaciju podataka, integraciju izvora, upravljanje metrikama i razumevanje kako podaci nastaju u poslovnim sistemima.
 
-Treće, razvija programiranje za analitiku. Python i R se koriste kao praktični alati za obradu podataka, modelovanje, vizualizaciju i automatizaciju analitičkih zadataka.
+Treće, razvija programiranje za analitiku. Python i R se koriste kao praktični alati za obradu podataka, modeliranje, vizualizaciju i automatizaciju analitičkih zadataka.
 
-Četvrto, uvodi naprednije mašinsko učenje i statističko modelovanje. Fokus je na regresiji, klasifikaciji, segmentaciji, evaluaciji modela, validaciji, metrikama performansi i interpretaciji rezultata.
+Četvrto, uvodi naprednije mašinsko učenje i statističko modeliranje. Fokus je na regresiji, klasifikaciji, segmentaciji, evaluaciji modela, validaciji, metrikama performansi i interpretaciji rezultata.
 
 Peto, pojačava vizualizaciju podataka i data storytelling. Power BI, Tableau i slični alati nisu samo tehnički alati za grafikone, već način da se nalaz objasni jasno, uverljivo i odgovorno.
 
@@ -131,8 +131,8 @@ Student koji posle PIT-a upiše MBA Business Analytics treba realno da razvija s
 - poslovna analitika i odlučivanje na osnovu podataka
 - data management, kvalitet podataka i rad sa poslovnim izvorima podataka
 - SQL kao osnova za izdvajanje i pripremu podataka
-- Python i R za analitiku, modelovanje i automatizaciju
-- mašinsko učenje i statističko modelovanje
+- Python i R za analitiku, modeliranje i automatizaciju
+- mašinsko učenje i statističko modeliranje
 - interpretacija modela, validacija i razumevanje ograničenja modela
 - vizualizacija podataka, Power BI, Tableau i data storytelling
 - marketing analytics, customer analytics i segmentacija korisnika

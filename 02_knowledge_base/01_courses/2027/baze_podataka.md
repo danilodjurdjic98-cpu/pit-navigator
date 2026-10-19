@@ -75,6 +75,13 @@ keywords:
 
 # Baze podataka
 
+## Potvrđena dopuna izvođenja 2026/27
+
+Ovogodišnji plan naglašava projektovanje i normalizaciju relacione baze, praktičan SQL u MySQL-u, složene upite, window funkcije (OVER, PARTITION BY), integritet, indekse i transakcije. PHP ne treba navoditi kao fokus aktuelnog plana samo zato što postoji u starijim materijalima.
+
+Za pitanja šta se radi ove godine koristiti `03_course_plans/2026_2027/baze_podataka.md`. Ovo opisuje izvođenje, ne promenu formalne akreditacije.
+
+
 ## 1. Kratak opis za studente
 
 Baze podataka su obavezan predmet na modulu PIT 2027, odnosno Poslovne informacione tehnologije.

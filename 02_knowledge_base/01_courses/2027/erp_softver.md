@@ -87,6 +87,13 @@ keywords:
 
 # ERP softver
 
+## Potvrđena dopuna izvođenja 2026/27
+
+Za prolećne vežbe 2026/27 potvrđen je naglasak na Big Data analitici i vizuelizaciji poslovnih podataka uz Python i MongoDB/PyMongo: učitavanje i obrada većih skupova podataka, čuvanje, filtriranje, agregacije i analitički prikazi/kontrolne table. SAP procesi ostaju poslovni kontekst; ERP ne predstavljati samo kao SAP predmet niti vežbe prvenstveno kao izradu Tkinter interfejsa. Detaljni zadaci, biblioteke za vizuelizaciju i skupovi podataka tek će biti razrađeni; ne izmišljati ih.
+
+Za pitanja šta se radi ove godine koristiti `03_course_plans/2026_2027/erp_softver.md`. Ovo opisuje izvođenje, ne promenu formalne akreditacije.
+
+
 ## 1. Kratak opis za studente
 
 ERP softver je obavezan predmet na modulu PIT 2027, odnosno Poslovne informacione tehnologije.
