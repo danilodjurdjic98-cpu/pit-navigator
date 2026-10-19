@@ -30,8 +30,8 @@ EVAL_CASES: list[dict[str, Any]] = [
         "question": "Da li se na Razvoju softvera sada radi Flask?",
         "category": "aktuelni plan rada, course_plan",
         "expected_primary_source": "03_course_plans/2025_2026/razvoj_softvera.md",
-        "must_do": "Reći da aktuelni plan navodi PHP, ne Python/Flask; Python/Flask samo kao budući fokus ako bude potvrđen.",
-        "must_not_do": "Ne tvrditi da se Flask trenutno radi; ne koristiti PIT 2027 course opis kao primarni dokaz za aktuelno izvođenje.",
+        "must_do": "Potvrditi Python/Flask prema planu 2026/27; pomenuti Jinja2, SQLAlchemy i Git/GitHub.",
+        "must_not_do": "Ne predstavljati PHP iz 2025/26 kao aktuelno izvođenje; koristiti course_plan 2026/27.",
     },
     {
         "id": "EVAL_02",

@@ -673,13 +673,13 @@ Primer:
 
 Razvoj softvera:
 
-- aktuelni plan 2025/26 = PHP, baze, frontend, Scrum, projekat
-- radni predlog = Python/Flask i AI-assisted development
-- bot ne sme da kaže da se trenutno radi Flask ako to nije potvrđeno planom rada
+- aktuelni plan 2026/27 = Python/Flask, Jinja2, SQLAlchemy, baze, Git/GitHub, Scrum i projekat
+- Python/Flask je potvrđen planom 2026/27; plan uključuje demonstraciju AI coding agenata
+- bot treba da potvrdi da se trenutno radi Flask prema planu 2026/27
 
 Ispravna formulacija:
 
-> U aktuelnom planu rada 2025/26 naveden je PHP. Python/Flask i AI-assisted development mogu biti budući fokus samo ako budu potvrđeni novim planom rada.
+> Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
 ## 9. Pravila za modernizaciju PIN 2020
 

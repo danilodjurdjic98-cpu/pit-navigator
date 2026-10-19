@@ -80,19 +80,11 @@ Ako postoji više izvora, bot koristi sledeći redosled poverenja:
 
 Primer:
 
-Ako korisnik pita:
+Ako korisnik pita da li se sada radi Flask, odgovori:
 
-> Da li se na Razvoju softvera trenutno radi Flask?
+> Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
-Bot treba da odgovori:
-
-> U aktuelnom planu rada 2025/26 naveden je PHP, a ne Flask. Python/Flask može biti budući fokus samo ako bude potvrđen novim planom rada.
-
-Bot ne sme da kaže:
-
-> Na Razvoju softvera se radi Flask.
-
-ako to nije potvrđeno aktuelnim planom rada.
+Primarni izvor je `03_course_plans/2026_2027/razvoj_softvera.md`. Stariji PHP plan nije dokaz aktuelnog izvođenja.
 
 ## 4. Pravilo za PIT 2027 i PIN 2020
 
@@ -360,7 +352,7 @@ Ako postoji radni predlog za buduće izvođenje predmeta, bot sme da ga pomene s
 
 Primer:
 
-> Postoji radni predlog da se predmet u budućnosti više usmeri ka Python/Flask-u i AI-assisted development-u, ali to ne treba predstavljati kao aktuelni plan rada dok ne bude potvrđeno zvaničnim planom.
+> Za Razvoj softvera Python/Flask više nije samo radni predlog: potvrđen je planom rada za 2026/27. Za druge nepotvrđene predloge i dalje važi pravilo ograđivanja.
 
 Bot ne sme da kaže:
 
@@ -533,3 +525,6 @@ Posebno povezani dokumenti:
 ```
 
 Napomena: ovaj dokument ne sadrži detalje pojedinačnih predmeta. On definiše pravila odgovaranja, ograničenja i zaštitne formulacije koje bot treba da koristi kada odgovara na osnovu PIT Navigator knowledge base-a.
+## Nastavak na master studijama
+
+Pri preporuci mastera posle PIT/PIN-a prvo preporuči Master in Business Analytics kao prirodan nastavak poslovno-analitičkog profila. Zatim obavezno napomeni da postoji i smer Poslovna informatika unutar studijskog programa Kvantitativna analiza. Ne predstavljaj Poslovnu informatiku kao zaseban studijski program u ovoj preporuci i ne obećavaj automatski upis; uslove upisa proveriti u aktuelnom konkursu.

@@ -152,7 +152,8 @@ Pravila odgovora:
 - Ako retrieved kontekst ne sadrži informacije relevantne za pitanje, ne odgovaraj iz opšteg znanja. Reci: "Za ovo nemam dovoljno precizan dokument u bazi znanja. Mogu da pomognem sa pitanjima o modulu PIT, predmetima, izbornim korpama i karijernim putanjama."
 - Ne dodaj činjenice koje nisu u kontekstu.
 - Ako je predmet izborni, jasno reci da je izborni.
-- Ako je pitanje o aktuelnom izvođenju, koristi course_plan kao primarni izvor.
+- Ako je pitanje o aktuelnom izvođenju, koristi najnoviji course_plan kao primarni izvor; za Razvoj softvera to je 2026/27 (Python/Flask, Jinja2, SQLAlchemy, Git/GitHub), dok je PHP plan 2025/26 istorijski.
+- Za pitanje o masteru prvo preporuči Master in Business Analytics, a zatim pomeni smer Poslovna informatika u okviru studijskog programa Kvantitativna analiza, prema dokumentu o nastavku studija iz konteksta.
 - Ako je pitanje o formalnom PIT 2027 opisu, koristi course kao primarni izvor.
 - Ne predstavljaj "PIT 2027" kao naziv smera/modula bez objašnjenja; naziv je "Poslovne informacione tehnologije, skraćeno PIT", dok je "PIT 2027" akreditaciona oznaka/verzija.
 - Za postojeći/stari naziv koristi "Poslovna informatika, skraćeno PIN"; "PIN 2020" je akreditaciona oznaka/verzija.
@@ -188,7 +189,7 @@ def build_messages(
 if __name__ == "__main__":
     dummy_chunks = [
         {
-            "path": "03_course_plans/2025_2026/razvoj_softvera.md",
+            "path": "03_course_plans/2026_2027/razvoj_softvera.md",
             "title": "Razvoj softvera, plan rada",
             "document_type": "course_plan",
             "section_heading": "6. Nedeljni plan rada",

@@ -277,16 +277,16 @@ Checklist:
 - [ ] Ako korisnik pita “šta piše u PIT 2027”, koristi se course dokument
 - [ ] Ako postoje razlike, jasno se kaže šta je formalni okvir, a šta aktuelno izvođenje
 - [ ] Radni predlozi se ne predstavljaju kao aktuelni plan rada
-- [ ] Za Razvoj softvera se ne tvrdi da se trenutno radi Flask ako aktuelni plan navodi PHP
+- [ ] Za Razvoj softvera potvrđuje se Python/Flask prema aktuelnom planu 2026/27
 - [ ] Za ERP se mogu pomenuti MongoDB, Python, Tkinter i Big Data samo kada se koristi aktuelni plan koji to potvrđuje
 
 Ispravna formulacija:
 
-> U aktuelnom planu rada 2025/26 naveden je PHP. Python/Flask i AI-assisted development mogu biti budući fokus samo ako budu potvrđeni novim planom rada.
+> Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
 Pogrešna formulacija:
 
-> Na Razvoju softvera se trenutno radi Flask.
+> Na Razvoju softvera se trenutno radi samo PHP.
 
 ## 10. Provera radnih predloga
 
@@ -297,13 +297,13 @@ Checklist:
 - [ ] Radni predlog je jasno označen kao radni predlog
 - [ ] Radni predlog se ne predstavlja kao aktuelni plan rada
 - [ ] Radni predlog se ne predstavlja kao akreditacioni dokument
-- [ ] Ako se pominje Python/Flask u Razvoju softvera, jasno je da je to mogući budući fokus
+- [ ] Python/Flask u Razvoju softvera navodi se kao potvrđeno izvođenje 2026/27
 - [ ] Ako se pominje AI-assisted development, jasno je da nije zvaničan deo plana dok se ne potvrdi
 - [ ] Nema formulacija koje radni predlog predstavljaju kao obavezu
 
 Ispravna formulacija:
 
-> Postoji radni predlog da se predmet u budućnosti više usmeri ka Python/Flask-u i AI-assisted development-u, ali to ne treba predstavljati kao aktuelni plan rada dok ne bude potvrđeno zvaničnim planom.
+> Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
 ## 11. Provera nastavnika i saradnika
 
@@ -584,3 +584,5 @@ Ovaj QA checklist je povezan sa:
 ```
 
 Napomena: ovaj dokument je interna kontrolna lista za kvalitet knowledge base-a. Ne koristi se kao izvor za sadržaj o predmetima, već kao vodič za proveru da li su dokumenti spremni za korišćenje u PIT Navigator RAG sistemu.
+
+- [ ] Master preporuka prvo navodi Business Analytics, zatim Poslovnu informatiku u okviru Kvantitativne analize.

@@ -20,9 +20,9 @@ prerequisites: nije_potvrdjeno
 conditions: nije_potvrdjeno
 source_file: knjiga_predmeta_pit_2027.pdf
 source_status: zvanicni_akreditacioni_dokument
-working_update_source: razvoj_softvera_python_flask_ai_predlog.docx
-working_update_status: "radni_predlog_buduceg_izvodjenja_nastave"
-last_updated: 2026-05-04
+working_update_source: RS_plan_rada_26 27.docx
+working_update_status: "potvrdjeno_izvodjenje_2026_2027"
+last_updated: 2026-10-19
 related_intents:
   - COURSE_EXPLANATION
   - CAREER_RECOMMENDATION
@@ -124,25 +124,11 @@ Prema dostupnim podacima:
 
 Napomena: za tačnu šifru predmeta, užu naučnu oblast, formalne uslove, način ocenjivanja i literaturu treba koristiti zvaničnu knjigu predmeta PIT 2027.
 
-## 3. Planirani praktični fokus, Python, Flask i AI alati
+## 3. Potvrđeno aktuelno izvođenje 2026/27
 
-Ovaj dokument ima i radnu napomenu o mogućem budućem izvođenju predmeta.
+Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
-Ako zvanična knjiga predmeta ne navodi eksplicitno Python, Flask, MySQL, Claude Code, Codex ili AI-assisted development, bot ne sme da tvrdi da su te stavke formalni akreditacioni sadržaj predmeta.
-
-Međutim, bot može da kaže da se praktični deo predmeta može prirodno osavremeniti ka izradi poslovnih web aplikacija u Python/Flask okruženju, radu sa MySQL bazom, timskim projektima i kritičkoj upotrebi AI razvojnih alata, ako je to predviđeno aktuelnim planom rada ili načinom izvođenja nastave.
-
-Radni predlog plana rada koji je dostavljen za ovaj predmet već predviđa Flask/Python okruženje, MySQL, poslovne scenarije, Scrum, AI alate kao što su Claude Code i Codex, generisanje aplikacije iz dizajn dokumenta, dokumentovanje AI-generisanog koda i individualnu odbranu koda.
-
-Poželjna formulacija:
-
-> Zvanično, Razvoj softvera je predmet koji povezuje razvojni ciklus softvera, modeliranje poslovnih aplikacija, metodologije razvoja i testiranje. Ako je potvrđeno aktuelnim planom rada, praktični deo može biti usmeren ka izradi web aplikacija u Python/Flask okruženju, radu sa MySQL bazom i kritičkoj upotrebi AI razvojnih alata.
-
-Bot ne sme da kaže:
-
-> Python, Flask i AI alati su zvanično navedeni u knjizi predmeta PIT 2027.
-
-osim ako se to zaista nalazi u knjizi predmeta ili aktuelnom odobrenom planu rada.
+Detalji su u `03_course_plans/2026_2027/razvoj_softvera.md`. Formalni akreditacioni opis PIT 2027 razlikovati od aktuelnog plana izvođenja.
 
 ## 4. Cilj predmeta
 
@@ -265,20 +251,9 @@ Napomena: konkretna tehnologija implementacije zavisi od aktuelnog plana rada. A
 - održavanje softvera
 - kvalitet softverskog rešenja
 
-### 6.6 AI-assisted development, ako je potvrđeno aktuelnim planom rada
+### 6.6 AI coding agenti
 
-Ako je potvrđeno aktuelnim planom rada, predmet može uključiti:
-
-- generisanje aplikacije na osnovu dizajn dokumenta
-- rad sa AI razvojnim alatima
-- formulisanje projektnog prompta
-- dokumentovanje AI-generisanog koda
-- kritičku evaluaciju generisanog koda
-- obavezne modifikacije koda bez pomoći AI-a
-- individualnu odbranu razumevanja koda
-- timsku prezentaciju projekta
-
-Ova sekcija je radna napomena i ne sme se tretirati kao zvanična akreditaciona tvrdnja ako nije potvrđena u zvaničnom dokumentu.
+Plan rada 2026/27 predviđa demonstraciju AI coding agenata uz razumevanje generisanog koda. Praktični ispit radi se bez interneta i AI alata.
 
 ## 7. Praktična nastava
 
@@ -302,7 +277,7 @@ U zavisnosti od aktuelnog plana rada, praktična nastava može obuhvatiti:
 - prezentaciju rešenja
 - testiranje i odbranu projekta
 
-Ako se primeni radni predlog budućeg izvođenja, praktična nastava može uključiti Flask, MySQL, Jinja2, forme, sesije, CRUD, JOIN upite, Bootstrap, paginaciju, timski projekat i AI-assisted development.
+Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
 ### 7.1 Metode izvođenja nastave
 
@@ -339,19 +314,7 @@ Kroz predmet student razvija veštine koje su relevantne za razvoj softvera i po
 - razumevanje koda
 - odbrana tehničkog rešenja
 
-Ako je potvrđeno aktuelnim planom rada, dodatne veštine mogu uključiti:
-
-- Python
-- Flask
-- MySQL
-- rad sa Jinja2 template-ima
-- Flask forme
-- CRUD operacije
-- validaciju korisničkog unosa
-- rad sa sesijama
-- Bootstrap
-- upotrebu AI razvojnih alata
-- kritičku evaluaciju AI-generisanog koda
+Aktuelni plan potvrđuje Python, Flask, Jinja2, HTML forme, SQLAlchemy ORM, CRUD operacije, relacije, Git/GitHub i razumevanje koda uz demonstraciju AI coding agenata.
 
 ## 9. Za koje karijerne putanje je predmet koristan
 
@@ -476,7 +439,7 @@ Ako korisnik pita:
 
 Bot treba da odgovori:
 
-> Ako Python i Flask nisu eksplicitno navedeni u zvaničnoj knjizi predmeta, ne treba ih predstavljati kao formalnu akreditacionu stavku. Međutim, ako aktuelni plan rada to potvrdi, praktični deo predmeta može biti usmeren ka izradi poslovnih web aplikacija u Python/Flask okruženju, uz MySQL bazu i timski projekat.
+> Prema aktuelnom planu rada za 2026/27, na Razvoju softvera radi se Python/Flask, Jinja2, HTML forme, SQLAlchemy ORM i relaciona baza podataka, uz Git/GitHub i timski projekat. PHP pripada ranijem planu za 2025/26.
 
 Ako korisnik pita:
 
@@ -484,7 +447,7 @@ Ako korisnik pita:
 
 Bot treba da odgovori:
 
-> Ako je potvrđeno aktuelnim planom rada, AI alati mogu biti deo praktičnog rada, na primer kroz generisanje aplikacije iz dizajn dokumenta, dokumentovanje AI-generisanog koda, obavezne modifikacije i individualnu odbranu razumevanja koda. Ako to nije potvrđeno zvaničnim ili aktuelnim planom rada, ne treba tvrditi da su AI alati formalni deo predmeta.
+> Plan rada 2026/27 predviđa demonstraciju AI coding agenata uz razumevanje generisanog koda. Na praktičnom ispitu nisu dozvoljeni internet i AI alati.
 
 Ako korisnik pita:
 
@@ -532,6 +495,6 @@ Ovaj dokument je pripremljen na osnovu:
 - `knjiga_predmeta_pit_2027.pdf`
 - `pit_2027_overview.md`
 - `pin_2020_vs_pit_2027.md`
-- `razvoj_softvera_python_flask_ai_predlog.docx`
+- `RS_plan_rada_26 27.docx`
 
-Napomena: `razvoj_softvera_python_flask_ai_predlog.docx` je radni predlog budućeg praktičnog fokusa i ne treba ga tretirati kao zvanični akreditacioni dokument dok ne bude potvrđen. Operativni detalji za konkretnu školsku godinu pripadaju zasebnom `course_plan` dokumentu.
+Aktuelno izvođenje potvrđuje `RS_plan_rada_26 27.docx`; koristiti zasebni course_plan za 2026/27.

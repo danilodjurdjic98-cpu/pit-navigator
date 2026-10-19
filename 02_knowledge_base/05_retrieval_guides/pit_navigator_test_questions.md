@@ -500,13 +500,13 @@ Sekundarni dokumenti:
 
 Očekivani elementi odgovora:
 
-- u aktuelnom planu rada 2025/26 naveden je PHP, ako je to potvrđeno planom
-- Flask može biti budući fokus samo ako se potvrdi novim planom rada
+- aktuelni plan 2026/27 potvrđuje Python/Flask, Jinja2 i SQLAlchemy
+- Flask je potvrđen aktuelnim planom 2026/27
 - ne predstavljati radni predlog kao zvanični aktuelni plan
 
 Policy rizici:
 
-- ne reći da se trenutno radi Flask
+- ne predstavljati PHP iz plana 2025/26 kao aktuelno izvođenje
 - ne mešati radni predlog i plan rada
 
 ### 6.4 Test pitanje
@@ -1212,8 +1212,8 @@ Primarni dokumenti:
 Očekivani elementi odgovora:
 
 - razlikovati formalni PIT 2027 opis od aktuelnog plana rada
-- reći da se u aktuelnom planu 2025/26 radi PHP ako je to potvrđeno
-- Flask može biti radni budući predlog samo ako se potvrdi novim planom
+- reći da se u aktuelnom planu 2026/27 radi Python/Flask
+- Flask je potvrđen planom rada 2026/27
 - ne potvrditi pogrešnu pretpostavku korisnika
 
 Policy rizici:

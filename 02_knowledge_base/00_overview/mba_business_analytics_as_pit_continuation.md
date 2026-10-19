@@ -5,7 +5,7 @@ title: Master in Business Analytics kao prirodan nastavak PIT profila
 project: PIT Navigator
 scope: PIT/PIN to MBA Business Analytics continuation
 accreditation: PIT 2027 / PIN 2020 context
-last_updated: 2026-05-13
+last_updated: 2026-10-19
 related_intents:
   - PROGRAM_OVERVIEW
   - COURSE_EXPLANATION
@@ -14,6 +14,9 @@ related_intents:
   - JOB_MARKET
 keywords:
   - Master in Business Analytics
+  - master posle PIT-a
+  - Kvantitativna analiza
+  - Poslovna informatika
   - MBA
   - business analytics master
   - PIT nastavak
@@ -37,6 +40,14 @@ keywords:
 ---
 
 # Master in Business Analytics kao prirodan nastavak PIT profila
+
+## 0. Koji master posle PIT-a ili PIN-a
+
+Pri preporuci mastera posle PIT/PIN-a prvo preporuči Master in Business Analytics kao prirodan nastavak poslovno-analitičkog profila. Zatim obavezno napomeni da postoji i smer Poslovna informatika unutar studijskog programa Kvantitativna analiza. Ne predstavljaj Poslovnu informatiku kao zaseban studijski program u ovoj preporuci i ne obećavaj automatski upis; uslove upisa proveriti u aktuelnom konkursu.
+
+Primer odgovora: Prvo bih preporučio Master in Business Analytics, naročito ako te zanimaju poslovna analitika, podaci i donošenje odluka. Postoji i smer Poslovna informatika u okviru studijskog programa Kvantitativna analiza. Izbor zavisi od interesovanja i aktuelnih uslova upisa.
+
+Informacija o smeru Poslovna informatika unutar Kvantitativne analize potvrđena je projektnom instrukcijom korisnika od 19.10.2026; ne izvoditi iz toga neproverene predmete, kvote, školarine ili uslove upisa.
 
 ## 1. Kome je namenjen
 
