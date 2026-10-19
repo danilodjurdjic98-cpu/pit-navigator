@@ -465,6 +465,14 @@ class Retriever:
             and Retriever._matches_detected_course(chunk, course_names)
         ):
             boost += 0.50
+            # Prefer affirmative status evidence over general warnings or topic sections.
+            normalized_section = Retriever._normalize_for_match(section_heading)
+            normalized_content = Retriever._normalize_for_match(original_chunk_text)
+            if any(term in normalized_content for term in ("izborni", "izborna", "obavezan", "obavezna")):
+                if "formalni opis predmeta" in normalized_section:
+                    boost += 1.20
+                elif "kratak opis za studente" in normalized_section:
+                    boost += 0.80
         if (
             any(
                 intent in intents
